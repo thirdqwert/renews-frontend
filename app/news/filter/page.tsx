@@ -1,13 +1,20 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { getCategories, getNews } from "../../utils/utilis"
-import { ICategory, INewsObject } from "@/app/utils/types"
+import { getCategories, getNews, updateData } from "../../utils/utilis"
+import { ICategory, INews } from "@/app/utils/types"
 import NewsCard from "@/app/components/NewsCard"
+import InfiniteScroll from "react-infinite-scroll-component"
 
 export default function NewsFilter() {
     const [categories, setCategories] = useState<ICategory[] | null>([])
-    const [news, setNews] = useState<INewsObject | null>(null)
+    const [news, setNews] = useState<INews[]>([])
+    const [pageCount, setPageCount] = useState(2    )
+    const [hasMore, setHasMore] = useState(true)
+
+    const updateNews = async () => {
+        updateData(getNews, pageCount, news, setNews, setPageCount, setHasMore)
+    }
 
     useEffect(() => {
         const getData = async () => {
@@ -17,7 +24,7 @@ export default function NewsFilter() {
                     getNews()
                 ])
                 setCategories(categories_data)
-                setNews(news_data)
+                setNews(news_data.results)
             } catch (error) {
                 console.log(error)
             }
@@ -34,11 +41,16 @@ export default function NewsFilter() {
                 <div>Применить</div>
             </ul>
             <div>
-                {news ? (
-                    news.results.map(item => (
+                <InfiniteScroll
+                    dataLength={news.length}
+                    hasMore={hasMore}
+                    next={updateNews}
+                    loader={<div>Загрузка</div>}
+                >
+                    {news && news.map(item => (
                         <NewsCard key={item.id} news={item} />
-                    ))
-                ) : <div>Loading</div>}
+                    ))}
+                </InfiniteScroll>
             </div>
         </div>
     )

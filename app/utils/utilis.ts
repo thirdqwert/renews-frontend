@@ -64,7 +64,6 @@ export const getArticlesAdmin = async (access: string) => {
 
 
 export const updateData = async (fetchNew: any, pageCount: any, prevData: any, setData: any, setPageCount: any, setHasMore: any) => {
-
     try {
         const data = await fetchNew(pageCount)
         setData([...prevData, ...data.results])
