@@ -1,5 +1,8 @@
-import { IToken } from "./types"
-
+import { INews, INewsObject, IToken } from "./types"
+// // добавть обработчкие ошибок 
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch news")
+//   }
 export const getAdmin = async () => {
     console.log(`${process.env.NEXT_PUBLIC_API}/login/`);
 
@@ -22,9 +25,15 @@ export const getCategories = async () => {
     return categories
 }
 
-export const getNews = async (pageCount: number = 1) => {
+export const getNews = async (pageCount: number = 1): Promise<INewsObject> => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}`)
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch news")
+    }
+    
     const news = await res.json()
+
     return news
 }
 
@@ -60,16 +69,4 @@ export const getArticlesAdmin = async (access: string) => {
     )
     const articles = await res.json()
     return articles
-}
-
-
-export const updateData = async (fetchNew: any, pageCount: any, prevData: any, setData: any, setPageCount: any, setHasMore: any) => {
-    try {
-        const data = await fetchNew(pageCount)
-        setData([...prevData, ...data.results])
-        setPageCount(pageCount + 1)
-    } catch (error) {
-        setHasMore(false)
-        console.log(error)
-    }
 }

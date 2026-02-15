@@ -9,7 +9,7 @@ export default async function News() {
     const news: INewsObject | null = await getNews()
 
     return (
-        <div>
+        <div className="grid grid-cols-3">
             {news && news.results.map(item => (
                 <NewsCard key={item.id} news={item} />
             ))}

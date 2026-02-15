@@ -1,37 +1,41 @@
 "use client"
 
-import { INews, INewsObject } from "@/app/utils/types";
-import { useState } from "react";
-import { getNews, updateData } from "../../utils/utilis";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { INews } from "@/app/utils/types";
+import { useEffect, useState } from "react";
+import { getNews } from "../../utils/utilis";
 import NewsCard from "@/app/components/NewsCard";
-
-
+import { useInView } from "react-intersection-observer";
 
 export default function NewsInfiniteScroll() {
     const [news, setNews] = useState<INews[]>([])
     const [pageCount, setPageCount] = useState(2)
     const [hasMore, setHasMore] = useState(true)
+    const { ref, inView } = useInView({})
 
-    const updateNews = () => {
-        updateData(getNews, pageCount, news, setNews, setPageCount, setHasMore)
-    }
+    useEffect(() => {
+        if (inView && hasMore) {
+            const getData = async () => {
+                try {
+                    const data = await getNews(pageCount)
+                    setPageCount(pageCount + 1)
+                    setNews([...news, ...data.results])
+                } catch (error) {
+                    setHasMore(false)
+                    console.log(error)
+                }
+            }
+
+            getData()
+        }
+
+    }, [inView, news])
 
     return (
-        <div>
-            {<InfiniteScroll
-                dataLength={news.length}
-                next={updateNews}
-                hasMore={hasMore}
-                loader={<div>Загрузка</div>}
-            >
-
-                {news && news.map(item => (
-                    <NewsCard key={item.id} news={item} />
-                ))}
-            </InfiniteScroll>}
-
-
-        </div>
+        <>
+            {news && news.map(item => (
+                <NewsCard key={item.id} news={item} />
+            ))}
+            {hasMore && <div ref={ref}>Загрузка</div>}
+        </>
     )
 }

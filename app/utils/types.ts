@@ -6,7 +6,7 @@ export interface INews {
     content: string,
     preview: string,
     created_at: string,
-    news_views: number,
+    views: number,
     category: string[]
 }
 
@@ -18,7 +18,7 @@ export interface IArticle {
     content: string,
     preview: string,
     created_at: string,
-    articles_views: number,
+    views: number,
     category: string[]
 }
 
