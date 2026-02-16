@@ -20,6 +20,8 @@ export const getAdmin = async () => {
 }
 
 export const getCategories = async () => {
+    console.log(`${process.env.NEXT_PUBLIC_API}/categories/`);
+    
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories/`)
     const categories = await res.json()
     return categories
