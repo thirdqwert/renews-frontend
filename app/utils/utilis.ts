@@ -21,19 +21,24 @@ export const getAdmin = async () => {
 
 export const getCategories = async () => {
     console.log(`${process.env.NEXT_PUBLIC_API}/categories/`);
-    
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories/`)
     const categories = await res.json()
     return categories
 }
 
-export const getNews = async (pageCount: number = 1): Promise<INewsObject> => {
+export const getNews = async (pageCount: number = 1): Promise<INewsObject | any> => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}`)
 
     if (!res.ok) {
-        throw new Error("Failed to fetch news")
+        return {
+            success: false,
+            status: res.status,
+            statusText: res.statusText,
+            message: ``
+        }
     }
-    
+
     const news = await res.json()
 
     return news
@@ -71,4 +76,26 @@ export const getArticlesAdmin = async (access: string) => {
     )
     const articles = await res.json()
     return articles
+}
+
+export const getDateString = (created_at: string) => {
+    const months: { [key: string]: string } = {
+        "01": "январь",
+        "02": "февраль",
+        "03": "март",
+        "04": "апрель",
+        "05": "май",
+        "06": "июнь",
+        "07": "июль",
+        "08": "август",
+        "09": "сентябрь",
+        "10": "октябрь",
+        "11": "ноябрь",
+        "12": "декабрь"
+    }
+
+    const YMD = created_at.split('T')[0]
+    const time = created_at.split('T')[1]
+    const date = `${YMD.split('-')[2]} ${months[YMD.split('-')[1]]} ${time.split(':').slice(0, 2).join(':')}`
+    return date
 }

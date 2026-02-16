@@ -7,7 +7,8 @@ export interface INews {
     preview: string,
     created_at: string,
     views: number,
-    category: string[]
+    category: string,
+    subcategory: string
 }
 
 export interface IArticle {
@@ -19,7 +20,8 @@ export interface IArticle {
     preview: string,
     created_at: string,
     views: number,
-    category: string[]
+    category: string,
+    subcategory: string
 }
 
 export interface ICategory {
