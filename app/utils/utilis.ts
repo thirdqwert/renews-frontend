@@ -1,4 +1,4 @@
-import { INews, INewsObject, IToken } from "./types"
+import { ICategory, INews, INewsObject, IToken } from "./types"
 // // добавть обработчкие ошибок 
 //   if (!res.ok) {
 //     throw new Error("Failed to fetch news")
@@ -19,16 +19,19 @@ export const getAdmin = async () => {
     return data.access
 }
 
-export const getCategories = async () => {
-    console.log(`${process.env.NEXT_PUBLIC_API}/categories/`);
-
+export const getCategories = async (): Promise<ICategory[]> => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories/`)
     const categories = await res.json()
     return categories
 }
 
-export const getNews = async (pageCount: number = 1): Promise<INewsObject | any> => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}`)
+export const getNews = async (pageCount: number = 1, categoryBy: string | undefined, subcategoryBy: string | undefined): Promise<INewsObject | any> => {
+    const params = new URLSearchParams()
+
+    if (categoryBy) params.append("categoryBy", categoryBy)
+    if (subcategoryBy) params.append("subcategoryBy", subcategoryBy)
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}&${params.toString()}`)
 
     if (!res.ok) {
         return {

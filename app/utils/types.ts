@@ -8,7 +8,7 @@ export interface INews {
     created_at: string,
     views: number,
     category: string,
-    subcategory: string
+    subcategory: string | null
 }
 
 export interface IArticle {
@@ -21,12 +21,22 @@ export interface IArticle {
     created_at: string,
     views: number,
     category: string,
-    subcategory: string
+    subcategory: string | null
+}
+
+
+export interface ISubcategory {
+    id: number,
+    category: string,
+    title: string,
+    slug: string
 }
 
 export interface ICategory {
     id: number,
-    title: string
+    title: string,
+    slug: string,
+    subcategories: ISubcategory[]
 }
 
 export interface INewsObject {

@@ -14,6 +14,13 @@ body {
     -webkit-box-orient: vertical;
 }
 
+.long_desc {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
 .short_title {
     overflow: hidden;
     display: -webkit-box;
@@ -64,4 +71,8 @@ body {
 
 .news__2_div3 {
     grid-column-start: 4;
+}
+
+.red_background {
+    background: red;
 }
