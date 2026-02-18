@@ -2,15 +2,16 @@ import { getNews } from "../utils/utilis"
 import CardList from "../components/CardList"
 import InfiniteScroll from "../components/InfiniteScroll"
 import Header from "../components/Header"
+import { INewsObject } from "../utils/types"
 
 export const revalidate = 180
 
 export default async function News() {
-    const news = await getNews(1, '', '')
+    const news: INewsObject = await getNews(1, '', '', { next: { revalidate: 180 } })
 
     return (
         <>
-            <Header params={{}}/>
+            <Header params={{}} />
             <div className="container">
                 <CardList list={news.results} />
                 <InfiniteScroll params={{}} />

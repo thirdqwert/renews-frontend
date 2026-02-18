@@ -17,7 +17,7 @@ body {
 .long_desc {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 
@@ -75,4 +75,33 @@ body {
 
 .red_background {
     background: red;
+}
+
+.swiper-pagination-bullet {
+    height: 15px !important;
+    width: 15px !important;
+    background: rgba(178, 178, 178, 0.5) !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: white !important;
+}
+
+.swiper-button-prev svg {
+    color: rgba(178, 178, 178, 0.5) !important;
+}
+
+.swiper-button-next svg {
+    color: rgba(178, 178, 178, 0.5) !important;
+}
+
+.vertical_line::before {
+    content: '';
+    position: absolute;
+    background: #343a40;
+    height: 60%;
+    width: 1px;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 0;
 }

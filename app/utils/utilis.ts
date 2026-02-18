@@ -25,61 +25,89 @@ export const getCategories = async (): Promise<ICategory[]> => {
     return categories
 }
 
-export const getNews = async (pageCount: number = 1, categoryBy: string | undefined, subcategoryBy: string | undefined): Promise<INewsObject | any> => {
-    const params = new URLSearchParams()
+export const getNews = async (
+    pageCount: number = 1,
+    categoryBy: string | undefined,
+    subcategoryBy: string | undefined,
+    fetchParams: any | undefined): Promise<INewsObject | any> => {
+    try {
+        const params = new URLSearchParams()
 
-    if (categoryBy) params.append("categoryBy", categoryBy)
-    if (subcategoryBy) params.append("subcategoryBy", subcategoryBy)
+        if (categoryBy) params.append("categoryBy", categoryBy)
+        if (subcategoryBy) params.append("subcategoryBy", subcategoryBy)
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}&${params.toString()}`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}&${params.toString()}`, fetchParams)
 
-    if (!res.ok) {
-        return {
-            success: false,
-            status: res.status,
-            statusText: res.statusText,
-            message: ``
+        if (!res.ok) {
+            return res
         }
+
+        const news = await res.json()
+
+        return news
+    } catch (error) {
+        throw error
     }
-
-    const news = await res.json()
-
-    return news
 }
 
-export const getArticles = async (pageCount: number = 1) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/articles?page=${pageCount}`)
-    const articles = await res.json()
-    return articles
-}
-
-export const getNewsAdmin = async (access: string) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/`,
-        {
-            method: "get",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${access}`
-            }
+export const getNewsDetail = async (id: number, fetchParams: any | undefined): Promise<INews | any> => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}`, fetchParams)
+        
+        if (!res.ok) {
+            return res
         }
-    )
-    const news = await res.json()
-    return news
+        const news = await res.json()
+
+        return news
+    } catch (error) {
+        throw error
+    }
 }
 
-export const getArticlesAdmin = async (access: string) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/articles/`,
-        {
-            method: "get",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${access}`
+// export const getArticles = async (pageCount: number = 1) => {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/articles?page=${pageCount}`)
+//     const articles = await res.json()
+//     return articles
+// }
+
+export const getNewsAdmin = async (access: string | undefined) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/`,
+            {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${access}`
+                }
             }
+        )
+
+        if (!res.ok) {
+            return res
         }
-    )
-    const articles = await res.json()
-    return articles
+
+        const news = await res.json()
+
+        return news
+    } catch (error) {
+        throw error
+    }
 }
+
+// export const getArticlesAdmin = async (access: string) => {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/articles/`,
+//         {
+//             method: "get",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${access}`
+//             }
+//         }
+//     )
+//     const articles = await res.json()
+//     return articles
+// }
 
 export const getDateString = (created_at: string) => {
     const months: { [key: string]: string } = {

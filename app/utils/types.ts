@@ -11,18 +11,18 @@ export interface INews {
     subcategory: string | null
 }
 
-export interface IArticle {
-    id: number,
-    title: string,
-    short_title: string,
-    desc: string,
-    content: string,
-    preview: string,
-    created_at: string,
-    views: number,
-    category: string,
-    subcategory: string | null
-}
+// export interface IArticle {
+//     id: number,
+//     title: string,
+//     short_title: string,
+//     desc: string,
+//     content: string,
+//     preview: string,
+//     created_at: string,
+//     views: number,
+//     category: string,
+//     subcategory: string | null
+// }
 
 
 export interface ISubcategory {
@@ -46,12 +46,12 @@ export interface INewsObject {
     results: INews[]
 }
 
-export interface IArticlesObject {
-    count: number,
-    next: null | number,
-    previous: null | number,
-    results: IArticle[]
-}
+// export interface IArticlesObject {
+//     count: number,
+//     next: null | number,
+//     previous: null | number,
+//     results: IArticle[]
+// }
 
 export interface IToken {
     access: string

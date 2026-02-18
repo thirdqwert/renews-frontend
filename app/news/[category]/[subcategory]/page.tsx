@@ -14,7 +14,7 @@ interface IProps {
 
 export default async function NewsSubcategory({ params }: IProps) {
     const { category, subcategory } = await params
-    const news = await getNews(1, category, subcategory)
+    const news = await getNews(1, category, subcategory, { next: { revalidate: 180 } })
 
     return (
         <>

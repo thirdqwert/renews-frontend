@@ -25,7 +25,8 @@ export default function InfiniteScroll({ params }: IProps) {
         const getData = async () => {
             if (inView && hasMore) {
                 try {
-                    const data = await getNews(page, category, subcategory)
+                    const data = await getNews(page, category, subcategory, undefined )
+
                     if (data.statusText == "Not Found") {
                         setHasMore(false)
                         setIsLoading(false)
@@ -36,7 +37,7 @@ export default function InfiniteScroll({ params }: IProps) {
                     setList([...list, ...data.results])
                     setIsLoading(false)
                 } catch (error) {
-
+                    throw error
                 }
             }
         }
