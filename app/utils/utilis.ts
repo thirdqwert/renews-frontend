@@ -37,13 +37,13 @@ export const getNews = async (
         if (subcategoryBy) params.append("subcategoryBy", subcategoryBy)
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}&${params.toString()}`, fetchParams)
-
+        
         if (!res.ok) {
             return res
         }
 
         const news = await res.json()
-
+        
         return news
     } catch (error) {
         throw error

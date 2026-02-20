@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Views from "../../../../public/images/views.svg"
 import { getDateString, getNews, getNewsDetail } from "@/app/utils/utilis"
 import { INews, INewsObject } from "@/app/utils/types"
 import Link from "next/link"
@@ -26,19 +25,13 @@ export default async function NewsDetail({ params }: IProps) {
             <div className="container">
                 <article className="pb-[200px]">
                     <BackButton />
-                    <div className="flex flex-row justify-between">
-                        <div className="flex flex-row gap-[20px]">
-                            <Link href={`/news/${news.category}`}><span className="text-[24px] text-[#295480] font-medium">{news.category}</span></Link>
-                            <time
-                                dateTime={news.created_at.split('T')[0]}
-                                className="text-[#6c757d] text-[24px] font-medium">
-                                {getDateString(news.created_at)}
-                            </time>
-                        </div>
-                        <div className="flex flex-row gap-[15px] items-center">
-                            <Image src={Views} alt="Просмотры" />
-                            <span className="text-[24px] text-[#6c757d] font-medium">{news.views}</span>
-                        </div>
+                    <div className="flex flex-row gap-[20px]">
+                        <Link href={`/news/${news.categery_slug}`}><span className="text-[24px] text-[#295480] font-medium">{news.category}</span></Link>
+                        <time
+                            dateTime={news.created_at.split('T')[0]}
+                            className="text-[#6c757d] text-[24px] font-medium">
+                            {getDateString(news.created_at)}
+                        </time>
                     </div>
                     <h2
                         className="text-[32px] text-[#212529] relative font-bold my-[20px] px-[20px] flex flex-row items-center leading-normal vertical_line">

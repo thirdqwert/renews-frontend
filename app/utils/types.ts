@@ -8,22 +8,17 @@ export interface INews {
     created_at: string,
     views: number,
     category: string,
-    subcategory: string | null
+    subcategory: string | null,
+    categery_slug: string,
+    subcategory_slug: string | null
 }
 
-// export interface IArticle {
-//     id: number,
-//     title: string,
-//     short_title: string,
-//     desc: string,
-//     content: string,
-//     preview: string,
-//     created_at: string,
-//     views: number,
-//     category: string,
-//     subcategory: string | null
-// }
-
+export interface INewsObject {
+    count: number,
+    next: null | number,
+    previous: null | number,
+    results: INews[]
+}
 
 export interface ISubcategory {
     id: number,
@@ -39,20 +34,34 @@ export interface ICategory {
     subcategories: ISubcategory[]
 }
 
-export interface INewsObject {
-    count: number,
-    next: null | number,
-    previous: null | number,
-    results: INews[]
+export interface IToken {
+    access: string
 }
 
+export interface IExchange {
+    id: number,
+    Rate: string,
+    Diff: string
+}
+
+
 // export interface IArticlesObject {
-//     count: number,
+    //     count: number,
 //     next: null | number,
 //     previous: null | number,
 //     results: IArticle[]
 // }
 
-export interface IToken {
-    access: string
-}
+
+// export interface IArticle {
+    //     id: number,
+    //     title: string,
+    //     short_title: string,
+    //     desc: string,
+    //     content: string,
+    //     preview: string,
+    //     created_at: string,
+    //     views: number,
+    //     category: string,
+    //     subcategory: string | null
+    // }

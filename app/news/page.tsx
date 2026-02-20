@@ -1,8 +1,8 @@
 import { getNews } from "../utils/utilis"
 import CardList from "../components/CardList"
 import InfiniteScroll from "../components/InfiniteScroll"
-import Header from "../components/Header"
 import { INewsObject } from "../utils/types"
+import CatSubList from "../components/CatSubList"
 
 export const revalidate = 180
 
@@ -11,7 +11,7 @@ export default async function News() {
 
     return (
         <>
-            <Header params={{}} />
+            <CatSubList params={{}} />
             <div className="container">
                 <CardList list={news.results} />
                 <InfiniteScroll params={{}} />

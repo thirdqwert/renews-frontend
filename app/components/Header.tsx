@@ -1,42 +1,28 @@
-import Link from "next/link"
-import { getCategories } from "../utils/utilis"
-
-export const revalidate = 180
-
-interface IProps {
-    params: {
-        categoryBy?: string,
-        subcategoryBy?: string
-    }
-}
-
-export default async function Header({ params }: IProps) {
-    const { categoryBy, subcategoryBy } = params
-    const categories = await getCategories()
-    console.log(categoryBy, subcategoryBy);
+import Link from "next/link";
+import SearchIcon from "../../public/images/search.svg"
+import Image from "next/image";
+import ExchangeRate from "./ExchangeRate";
+export default async function Header() {
 
     return (
-        <header>
-            <div className="flex flex-col gap-[20px]">
-                <div >
-                    <Link href={`/news/`}><h2 className={categoryBy == undefined ? "red_background" : ""}>Всё</h2></Link>
+        <header className="px-[50px] py-[30px] bg-[#343a40]">
+            <nav className="flex flex-row justify-between items-center">
+                <Link href={"/"}>
+                    <h1 className="text-[36px] font-bold">
+                        <span className="text-white">RE</span><span className="text-[#92a8e0]">NEWS</span>
+                    </h1>
+                </Link>
+                <ul className="flex flex-row gap-[50px]">
+                    <li><Link className="text-[24px] text-white font-bold" href={"/"} >Главная</Link></li>
+                    <li><Link className="text-[24px] text-white font-bold" href={"/news/"} >Новости</Link></li>
+                    <li><Link className="text-[24px] text-white font-bold" href={"/contacts/"} >Контакты</Link></li>
+                    <li><Link className="text-[24px] text-white font-bold" href={"/news/"} >Категории</Link></li>            
+                </ul>
+                <div className="flex flex-row items-center gap-[10px]">
+                    <Link href={"/news/search/"} className="pr-[10px] border-r border-white w-[30px] h-[20px]"><Image width={20} height={20} src={SearchIcon} alt="Поиск"/></Link>
+                    <ExchangeRate />
                 </div>
-                {categories.map(category => (
-                    <div key={category.id}>
-                        <Link href={`/news/${category.slug}`}><h2 className={category.slug == categoryBy ? "red_background" : ""}>{category.title}</h2></Link>
-                        <div className="flex flex-row gap-[10px]">
-                            {category.subcategories.map(subcategory => (
-                                <Link
-                                    key={subcategory.id}
-                                    href={`/news/${category.slug}/${subcategory.slug}/`}
-                                    className={"border border-gray-400 py-[3px] px-[10px] " + (subcategory.slug == subcategoryBy ? "red_background" : "")}>
-                                    <h3>{subcategory.title}</h3>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
+            </nav>
         </header>
     )
 }

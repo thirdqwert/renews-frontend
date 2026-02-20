@@ -6,7 +6,6 @@ import HeadingLine from "./components/HeadingLine"
 import Card from "./components/Card"
 import Image from "next/image"
 import HorizontalCardList from "./components/HorizontalCardList"
-import Header from "./components/Header"
 import SwipperList from "./components/SwipperList"
 
 export const revalidate = 180
@@ -15,8 +14,7 @@ export default async function Home() {
     let data: INews[] | null = null
 
     data = await getNewsAdmin(process.env.TOKEN)
-
-
+    
     const hot_news = data ? data.slice(0, 3) : []
     const news = data ? data.slice(0, 6) : []
     const culture_news = data ? data.filter(item => item.category == "Культура").slice(0, 3) : []
@@ -25,12 +23,19 @@ export default async function Home() {
     const popular_news = data ? data.sort((a, b) => b.views - a.views).slice(0, 3) : []
 
 
+    if (data?.length == 0
+        || hot_news.length == 0
+        || news.length == 0
+        || culture_news.length == 0
+        || politics_news.length < 3
+        || sport_news.length < 3
+        || popular_news.length ==0 ) return <div>Нету данных</div>
+    
     return (
-        <>
-            <Header params={{}} />
-            <main>
+            <>
+            <main className="pt-[120px]">
                 <div className="container">
-                    <section className="pb-[30px]">
+                    <section className="pb-[30px] h-[600px]">
                         <SwipperList list={culture_news} />
                     </section>
                     <section className="pb-[70px]">
