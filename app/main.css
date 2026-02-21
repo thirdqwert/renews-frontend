@@ -73,8 +73,9 @@ body {
     grid-column-start: 4;
 }
 
-.red_background {
-    background: red;
+.active_button {
+    background: #295480;
+    color: #f4f6f9;
 }
 
 .swiper-pagination-bullet {
@@ -104,4 +105,20 @@ body {
     transform: translateY(-50%);
     top: 50%;
     left: 0;
+}
+
+.category_title_line::before {
+    content: '';
+    position: absolute;
+    background: white;
+    height: 50%;
+    width: 2px;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 0;
+}
+
+.category_list_open {
+    transform: translateY(100%) !important;
+    z-index: 10 !important;
 }

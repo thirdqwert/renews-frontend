@@ -35,7 +35,7 @@ export default async function Home() {
             <>
             <main className="pt-[120px]">
                 <div className="container">
-                    <section className="pb-[30px] h-[600px]">
+                    <section className="mb-[30px] h-[600px]">
                         <SwipperList list={culture_news} />
                     </section>
                     <section className="pb-[70px]">
