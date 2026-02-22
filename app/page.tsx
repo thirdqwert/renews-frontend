@@ -14,7 +14,7 @@ export default async function Home() {
     let data: INews[] | null = null
 
     data = await getNewsAdmin(process.env.TOKEN)
-    
+
     const hot_news = data ? data.slice(0, 3) : []
     const news = data ? data.slice(0, 6) : []
     const culture_news = data ? data.filter(item => item.category == "Культура").slice(0, 3) : []
@@ -29,13 +29,14 @@ export default async function Home() {
         || culture_news.length == 0
         || politics_news.length < 3
         || sport_news.length < 3
-        || popular_news.length ==0 ) return <div>Нету данных</div>
-    
+        || popular_news.length == 0) return <div>Нету данных</div>
+
     return (
-            <>
-            <main className="pt-[120px]">
+        <>
+            <main className="pt-[30ox]">
                 <div className="container">
                     <section className="mb-[30px] h-[600px]">
+                        <h2 className="text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">Горячие Новости</h2>
                         <SwipperList list={culture_news} />
                     </section>
                     <section className="pb-[70px]">

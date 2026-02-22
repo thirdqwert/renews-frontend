@@ -34,7 +34,7 @@ export default async function NewsDetail({ params }: IProps) {
                         </time>
                     </div>
                     <h2
-                        className="text-[32px] text-[#212529] relative font-bold my-[20px] px-[20px] flex flex-row items-center leading-normal vertical_line">
+                        className="text-[32px] text-[#212529] font-bold my-[20px] px-[20px] leading-normal vertical_line">
                         {news.title}
                     </h2>
                     <Image

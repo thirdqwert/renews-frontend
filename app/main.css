@@ -96,11 +96,17 @@ body {
     color: rgba(178, 178, 178, 0.5) !important;
 }
 
+.vertical_line {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
 .vertical_line::before {
     content: '';
     position: absolute;
     background: #343a40;
-    height: 60%;
+    height: 50%;
     width: 1px;
     transform: translateY(-50%);
     top: 50%;

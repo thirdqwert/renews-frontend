@@ -22,7 +22,6 @@ export default function Header() {
     const pathname = usePathname()
     const news = pathname.split("/")[1]
     const categoryBy = params.category
-    const subcategoryBy = params.subcategory // удали потом систему подкатегорий
 
 
 
@@ -42,7 +41,7 @@ export default function Header() {
 
     return (
         <div className="relative">
-            <header className="px-[50px] py-[30px] bg-[#343a40] relative z-20">
+            <header className="px-[50px] py-[10px] bg-[#343a40] relative z-20">
                 <nav className="flex flex-row justify-between items-center">
                     <Link href={"/"}>
                         <h1 className="text-[36px] font-bold">
@@ -71,17 +70,17 @@ export default function Header() {
             </header>
             <div
                 onMouseLeave={handleLeave}
-                className="flex flex-col absolute bottom-0 right-1/2 translate-x-1/2 max-w-[1070px] w-full bg-[#343a40] py-[30px] px-[70px] rounded-b-[50px]"
+                className="flex flex-col absolute bottom-0 right-1/2 translate-x-1/2 max-w-[1070px] w-full bg-[#343a40] py-[10px] px-[70px] rounded-b-[50px]"
                 style={{
                     transition: "all 0.1s",
                     zIndex: "2",
                     transform: isOpen ? "translateY(100%)" : ""
                 }}
             >
-                <button className="prev p-5 absolute z-10 left-5 *:rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
+                <button className="prev_header p-5 absolute z-10 left-5 *:rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
                     <Image src={arrowDown} alt="" />
                 </button>
-                <button className="next p-5 absolute z-10 right-5 -rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
+                <button className="next_header p-5 absolute z-10 right-5 -rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
                     <Image src={arrowDown} alt="" />
                 </button>
                 <Swiper
@@ -90,8 +89,8 @@ export default function Header() {
                     slidesPerView={4}
                     spaceBetween={20}
                     navigation={{
-                        prevEl: '.prev',
-                        nextEl: '.next',
+                        prevEl: '.prev_header',
+                        nextEl: '.next_header',
                     }}
                     modules={[Navigation]}
                 >
@@ -99,7 +98,7 @@ export default function Header() {
                         <Link
                             href={`/news/`}>
                             <h2
-                                className={"block py-[6px] px-[20px] bg-white rounded-[20px] " + (news == "news" && categoryBy == undefined && "active_button")}>
+                                className={"block py-[6px] px-[20px] bg-white text-[20px] rounded-[20px] " + (news == "news" && categoryBy == undefined && "active_button")}>
                                 Всё
                             </h2>
                         </Link>
@@ -108,33 +107,13 @@ export default function Header() {
                         <SwiperSlide key={category.id}>
                             <Link
                                 href={`/news/${category.slug}`}
-                                className={"block py-[6px] px-[20px] bg-white rounded-[20px] " + (categoryBy == category.slug && "active_button")}
+                                className={"block py-[6px] px-[20px] bg-white text-[#343A40] text-[20px] rounded-[20px] " + (categoryBy == category.slug && "active_button")}
                             >
                                 {category.title}
                             </Link>
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                {/* {categoryBy && (
-                    <div className="pt-[30px]">
-                        <h4 className="text-[30px] font-bold relative flex flex-row text-white category_title_line my-[20px] px-[20px]">Все по теме</h4>
-                        <div className="flex flex-row gap-[10px]">
-                            {categories.map(category => {
-                                if (category.slug == categoryBy) {
-                                    return category.subcategories.map(subcategory => (
-                                        <Link
-                                            href={`/news/${category.slug}/${subcategory.slug}`}
-                                            key={subcategory.id}
-                                            className={"block py-[6px] px-[20px] bg-white rounded-[20px] " + (subcategoryBy == subcategory.slug && "active_button")}
-                                        >
-                                            {subcategory.title}
-                                        </Link>
-                                    ))
-                                }
-                            })}
-                        </div>
-                    </div>
-                )} */}
             </div>
         </div>
     )
