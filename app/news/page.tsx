@@ -8,14 +8,14 @@ export const revalidate = 180
 
 export default async function News() {
     const news: INewsObject = await getNews(1, '', '', { next: { revalidate: 180 } })
-    const categories: ICategory[] = await getCategories()
+    const categories: ICategory[] = await getCategories({ next: { revalidate: 180 } })
 
     if (news.results.length == 0) return <div>Нету данных</div>
 
 
     return (
         <>
-            <main className="pt-[30px]">
+            <main className="py-[30px]">
                 <div className="container">
                     <CatSub categories={categories} params={{}} />
                     <CardList list={news.results} />

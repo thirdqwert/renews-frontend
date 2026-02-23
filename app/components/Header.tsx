@@ -33,7 +33,7 @@ export default function Header() {
 
     useEffect(() => {
         const getData = async () => {
-            const data = await getCategories()
+            const data = await getCategories(undefined)
             setCategories(data)
         }
         getData()
@@ -49,13 +49,13 @@ export default function Header() {
                         </h1>
                     </Link>
                     <ul className="flex flex-row gap-[50px]">
-                        <li><Link className="text-[24px] text-white font-bold" href={"/"} >Главная</Link></li>
-                        <li><Link className="text-[24px] text-white font-bold" href={"/news/"} >Новости</Link></li>
-                        <li><Link className="text-[24px] text-white font-bold" href={"/contacts/"} >Контакты</Link></li>
+                        <li><Link className="text-[24px] text-white font-medium" href={"/"} >Главная</Link></li>
+                        <li><Link className="text-[24px] text-white font-medium" href={"/news/"} >Новости</Link></li>
+                        <li><Link className="text-[24px] text-white font-medium" href={"/contacts/"} >Контакты</Link></li>
                         <li
                             onClick={() => setIsOpen(!isOpen)}
                             onMouseEnter={() => setIsOpen(true)}
-                            className="text-[24px] text-white font-bold flex flex-row items-center gap-[10px] cursor-pointer select-none">
+                            className="text-[24px] text-white font-medium flex flex-row items-center gap-[10px] cursor-pointer select-none">
                             <span>Категории</span>
                             <Image src={arrowDown} alt="" />
                         </li>

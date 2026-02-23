@@ -31,9 +31,9 @@ export default function ExchangeRate() {
         <div className="flex flex-row gap-[20px] w-[378px]">
             <div className="flex flex-row gap-[5px]">
                 <Image src={USDIcon} alt="USD"/>
-                <span className="text-[24px] text-white font-medium">USD</span>
+                <span className="text-[24px] text-white font-normal">USD</span>
                 <span 
-                    className="text-[24px] text-white font-medium">
+                    className="text-[24px] text-white font-normal">
                     {uzbUsd ? uzbUsd.Rate : 0}
                 </span>
                 <Image 
@@ -46,9 +46,9 @@ export default function ExchangeRate() {
             </div>
             <div className="flex flex-row gap-[5px]">
                 <Image src={RUBIcon} alt="RUB"/>
-                <span className="text-[24px] text-white font-medium">RUB</span>
+                <span className="text-[24px] text-white font-normal">RUB</span>
                 <span 
-                    className="text-[24px] text-white font-medium">
+                    className="text-[24px] text-white font-normal">
                     {uzbRub ? uzbRub.Rate : 0}
                 </span>
                 <Image 

@@ -5,6 +5,7 @@ import CardList from "./CardList"
 import { useInView } from "react-intersection-observer"
 import { getNews } from "../utils/utilis"
 import { INews } from "../utils/types"
+import Loader from "./Loader"
 
 interface IProps {
     params: {
@@ -22,12 +23,13 @@ export default function InfiniteScroll({ params }: IProps) {
     const { ref, inView } = useInView({})
 
     useEffect(() => {
-        
+
         const getData = async () => {
             if (inView && hasMore) {
                 try {
-                    const data = await getNews(page, category, subcategory, undefined )
-                    
+                    setIsLoading(true)
+                    const data = await getNews(page, category, subcategory, undefined)
+
                     if (data.statusText == "Not Found") {
                         setHasMore(false)
                         setIsLoading(false)
@@ -48,7 +50,9 @@ export default function InfiniteScroll({ params }: IProps) {
     return (
         <div>
             {list && <CardList list={list} />}
-            {isLoading && <div className="bg-red-400">Загрузка</div>}
+            {<div className={"flex flex-row justify-center py-[30px] " + (isLoading ? "" : "hidden")}>
+                <Loader />
+            </div>}
             {hasMore && <div ref={ref} />}
         </div>
     )

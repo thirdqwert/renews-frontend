@@ -16,13 +16,13 @@ interface IProps {
 export default async function NewsSubcategory({ params }: IProps) {
     const { category, subcategory } = await params
     const news: INewsObject = await getNews(1, category, subcategory, { next: { revalidate: 180 } })
-    const categories: ICategory[] = await getCategories()
+    const categories: ICategory[] = await getCategories({ next: { revalidate: 180 } })
 
     if (news.results.length == 0) return <div>Нету данных</div>
 
     return (
         <>
-            <main className="pt-[c]">
+            <main className="py-[30px]">
                 <div className="container">
                     <CatSub categories={categories} params={{ categoryBy: category, subcategoryBy: subcategory }} />
                     <CardList list={news.results} />

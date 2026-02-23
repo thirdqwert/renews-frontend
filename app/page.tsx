@@ -33,7 +33,7 @@ export default async function Home() {
 
     return (
         <>
-            <main className="pt-[30ox]">
+            <main className="py-[30px]">
                 <div className="container">
                     <section className="mb-[30px] h-[600px]">
                         <h2 className="text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">Горячие Новости</h2>

@@ -21,7 +21,7 @@ export default async function NewsDetail({ params }: IProps) {
     const footer_news: INewsObject = await getNews(1, '', '', { next: { revalidate: 180 } })
     const news: INews = await getNewsDetail(id, { next: { revalidate: 180 } })
     return (
-        <main className="py-[70px]">
+        <main className="py-[30px]">
             <div className="container">
                 <article className="pb-[200px]">
                     <BackButton />

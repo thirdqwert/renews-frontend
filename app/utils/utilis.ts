@@ -19,8 +19,8 @@ export const getAdmin = async () => {
     return data.access
 }
 
-export const getCategories = async (): Promise<ICategory[]> => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories/`)
+export const getCategories = async (fetchParams: any | undefined): Promise<ICategory[]> => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories/`, fetchParams)
     const categories = await res.json()
     return categories
 }
@@ -37,13 +37,13 @@ export const getNews = async (
         if (subcategoryBy) params.append("subcategoryBy", subcategoryBy)
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}&${params.toString()}`, fetchParams)
-        
+
         if (!res.ok) {
             return res
         }
 
         const news = await res.json()
-        
+
         return news
     } catch (error) {
         throw error
@@ -53,7 +53,7 @@ export const getNews = async (
 export const getNewsDetail = async (id: number, fetchParams: any | undefined): Promise<INews | any> => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}`, fetchParams)
-        
+
         if (!res.ok) {
             return res
         }
