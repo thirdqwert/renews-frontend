@@ -43,30 +43,30 @@ export default function Header() {
         <div className="relative">
             <header className="px-[50px] py-[10px] bg-[#343a40] relative z-20">
                 <nav className="flex flex-row justify-between items-center">
-                    <Link href={"/"}>
-                        <h1 className="text-[36px] font-bold">
-                            <span className="text-white">RE</span><span className="text-[#92a8e0]">NEWS</span>
-                        </h1>
-                    </Link>
-                    <ul className="flex flex-row gap-[50px]">
-                        <li><Link className="text-[24px] text-white font-medium" href={"/"} >Главная</Link></li>
-                        <li><Link className="text-[24px] text-white font-medium" href={"/news/"} >Новости</Link></li>
-                        <li><Link className="text-[24px] text-white font-medium" href={"/contacts/"} >Контакты</Link></li>
-                        <li
-                            onClick={() => setIsOpen(!isOpen)}
-                            onMouseEnter={() => setIsOpen(true)}
-                            className="text-[24px] text-white font-medium flex flex-row items-center gap-[10px] cursor-pointer select-none">
-                            <span>Категории</span>
-                            <Image src={arrowDown} alt="" />
-                        </li>
-
-                    </ul>
+                    <div className="flex flex-row items-center gap-[40px] xl:gap-[100px]">
+                        <Link href={"/"}>
+                            <h1 className="md:text-[20px] xl:text-[36px] font-bold">
+                                <span className="text-white">RE</span><span className="text-[#92a8e0]">NEWS</span>
+                            </h1>
+                        </Link>
+                        <ul className="hidden lg:flex flex-row gap-[50px]">
+                            <li><Link className="md:text-[18px] xl:text-[24px] text-white font-medium" href={"/"} >Главная</Link></li>
+                            <li><Link className="md:text-[18px] xl:text-[24px] text-white font-medium" href={"/news/"} >Новости</Link></li>
+                            <li><Link className="md:text-[18px] xl:text-[24px] text-white font-medium" href={"/contacts/"} >Контакты</Link></li>
+                            <li
+                                onClick={() => setIsOpen(!isOpen)}
+                                onMouseEnter={() => setIsOpen(true)}
+                                className="md:text-[18px] xl:text-[24px] text-white font-medium flex flex-row items-center gap-[10px] cursor-pointer select-none">
+                                <span>Категории</span>
+                                <Image src={arrowDown} alt="" />
+                            </li>
+                        </ul>
+                    </div>
                     <div className="flex flex-row items-center gap-[10px]">
                         <Link href={"/news/search/"} className="pr-[10px] border-r border-white w-[30px] h-[20px]"><Image width={20} height={20} src={SearchIcon} alt="Поиск" /></Link>
                         <ExchangeRate />
                     </div>
                 </nav>
-
             </header>
             <div
                 onMouseLeave={handleLeave}
@@ -77,10 +77,10 @@ export default function Header() {
                     transform: isOpen ? "translateY(100%)" : ""
                 }}
             >
-                <button className="prev_header p-5 absolute z-10 left-5 *:rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
+                <button className="prev_header p-[20px] absolute z-10 left-[20px] rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
                     <Image src={arrowDown} alt="" />
                 </button>
-                <button className="next_header p-5 absolute z-10 right-5 -rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
+                <button className="next_header p-[20px] absolute z-10 right-[20px] -rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
                     <Image src={arrowDown} alt="" />
                 </button>
                 <Swiper
@@ -96,6 +96,7 @@ export default function Header() {
                 >
                     <SwiperSlide>
                         <Link
+                            onClick={() => setIsOpen(false)}
                             href={`/news/`}>
                             <h2
                                 className={"block py-[6px] px-[20px] bg-white text-[20px] rounded-[20px] " + (news == "news" && categoryBy == undefined && "active_button")}>
@@ -106,6 +107,7 @@ export default function Header() {
                     {categories && categories.map(category => (
                         <SwiperSlide key={category.id}>
                             <Link
+                                onClick={() => setIsOpen(false)}
                                 href={`/news/${category.slug}`}
                                 className={"block py-[6px] px-[20px] bg-white text-[#343A40] text-[20px] rounded-[20px] " + (categoryBy == category.slug && "active_button")}
                             >

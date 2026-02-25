@@ -12,21 +12,20 @@ export default async function Footer() {
     return (
         <footer className="bg-[#343a40] py-[30px]">
             <div className="container">
-                <nav className="flex flex-row justify-between border-y-[2px] border-b-[rgba(168,153,153,0.7)] border-t-white py-[30px] px-[50px]">
-                    <div className="flex flex-col gap-[30px]">
+                <nav className="flex flex-col md:flex-row justify-between gap-[60px] border-y-[2px] border-b-[rgba(168,153,153,0.7)] border-t-white py-[20px] md:py-[30px] px-[20px] md:px-[50px]">
+                    <div className="flex flex-col gap-[20px] md:gap-[30px]">
                         <Link href={"/"}>
-                            <h3 className="text-[36px] font-bold">
+                            <h3 className="text-[30px] md:text-[36px] font-bold">
                                 <span className="text-white">RE</span><span className="text-[#92a8e0]">NEWS</span>
                             </h3>
                         </Link>
-                        <ul className="flex flex-row gap-[50px]">
-                            <li><Link className="text-[24px] text-white font-medium" href={"/"} >Главная</Link></li>
-                            <li><Link className="text-[24px] text-white font-medium" href={"/news/"} >Новости</Link></li>
-                            <li><Link className="text-[24px] text-white font-medium" href={"/contacts/"} >Контакты</Link></li>
+                        <ul className="flex flex-row gap-[20px] md:gap-[50px]">
+                            <li><Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/"} >Главная</Link></li>
+                            <li><Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/news/"} >Новости</Link></li>
+                            <li><Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/contacts/"} >Контакты</Link></li>
                         </ul>
-
                     </div>
-                    <div className="flex flex-col gap-[25px]">
+                    <div className="flex flex-col gap-[25px] mx-auto text-[14px] font-medium">
                         <div className="flex flex-row items-center gap-[10px] text-white">
                             <Image src={mail} alt="" />
                             <p>renews@gmail.com</p>

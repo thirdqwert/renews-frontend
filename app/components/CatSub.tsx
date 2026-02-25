@@ -24,8 +24,8 @@ export default function CatSub({ categories, params }: IProps) {
     const news = pathname.split("/")[1]
     return (
         <>
-            <h3 className="font-bold text-[30px] text-[#222] mb-[15px] vertical_line px-[20px] leading-normal">Категории</h3>
-            <div className="relative px-[50px]">
+            <h3 className="font-bold text-[30px] text-[#222] mb-[15px] vertical_line px-[20px]">Категории</h3>
+            <div className="relative px-[50px] hidden md:block">
                 <button className="prev p-5 absolute z-10 left-0 rotate-180 top-1/2 -translate-y-1/2 cursor-pointer">
                     <Image src={arrowDown} alt="" />
                 </button>
@@ -42,6 +42,12 @@ export default function CatSub({ categories, params }: IProps) {
                         nextEl: '.next',
                     }}
                     modules={[Navigation]}
+                    breakpoints={{
+                        320: { slidesPerView: 2.5, spaceBetween: 20 },
+                        640: { slidesPerView: 3.5, spaceBetween: 20 },
+                        1024: { slidesPerView: 4.5, spaceBetween: 20 },
+                        1536: { slidesPerView: 5.5, spaceBetween: 20 },
+                    }}
                 >
                     <SwiperSlide>
                         <Link
@@ -67,7 +73,7 @@ export default function CatSub({ categories, params }: IProps) {
             {categoryBy && (
                 <div className="pt-[15px]">
                     <h4 className="text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">Все по теме</h4>
-                    <div className="flex flex-row gap-[10px]">
+                    <div className="hidden md:flex flex-row gap-[10px]">
                         <Link
                             href={`/news/${categoryBy}/`}
                             className={"block py-[6px] px-[20px] bg-[#343a40] text-white rounded-[20px] " + (subcategoryBy == undefined && "active_button")}

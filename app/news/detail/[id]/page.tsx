@@ -26,15 +26,15 @@ export default async function NewsDetail({ params }: IProps) {
                 <article className="pb-[200px]">
                     <BackButton />
                     <div className="flex flex-row gap-[20px]">
-                        <Link href={`/news/${news.categery_slug}`}><span className="text-[24px] text-[#295480] font-medium">{news.category}</span></Link>
+                        <Link href={`/news/${news.categery_slug}`}><span className="md:text-[19px] lg:text-[24px] text-[#295480] font-medium">{news.category}</span></Link>
                         <time
                             dateTime={news.created_at.split('T')[0]}
-                            className="text-[#6c757d] text-[24px] font-medium">
+                            className="text-[#6c757d] md:text-[19px] lg:text-[24px] font-medium">
                             {getDateString(news.created_at)}
                         </time>
                     </div>
                     <h2
-                        className="text-[32px] text-[#212529] font-bold my-[20px] px-[20px] leading-normal vertical_line">
+                        className="md:text-[22px] lg:text-[32px] text-[#212529] font-bold my-[20px] px-[20px] vertical_line">
                         {news.title}
                     </h2>
                     <Image
@@ -45,7 +45,7 @@ export default async function NewsDetail({ params }: IProps) {
                         alt={news.short_title}
                         className="w-full h-[600px] rounded-[20px] object-cover mb-[30px]"
                     />
-                    <p className="text-[25px] text-[#495057] font-medium">{news.desc}</p>
+                    <p className="md:text-[20px] lg:text-[25px] text-[#495057] font-medium">{news.desc}</p>
                     <div dangerouslySetInnerHTML={{ __html: news.content }} />
                 </article>
                 <HeadingLine title="Лента новостей" link="/news/" />

@@ -1,3 +1,10 @@
+interface IPagination {
+    count: number,
+    next: null | number,
+    previous: null | number,
+}
+
+
 export interface INews {
     id: number,
     title: string,
@@ -13,10 +20,7 @@ export interface INews {
     subcategory_slug: string | null
 }
 
-export interface INewsObject {
-    count: number,
-    next: null | number,
-    previous: null | number,
+export interface INewsObject extends IPagination {
     results: INews[]
 }
 
@@ -44,9 +48,34 @@ export interface IExchange {
     Diff: string
 }
 
+export interface IReel {
+    id: number,
+    title: string,
+    image: string,
+    content: string,
+    created_at: string
+}
+
+export interface IReelsObject extends IPagination {
+    results: IReel[]
+}
+
+export interface IVids {
+    id: number,
+    title: string,
+    image: string,
+    link: string,
+    created_at: string
+}
+
+export interface IVidsObject extends IPagination {
+    results: IVids[]
+}
+
+
 
 // export interface IArticlesObject {
-    //     count: number,
+//     count: number,
 //     next: null | number,
 //     previous: null | number,
 //     results: IArticle[]
@@ -54,14 +83,14 @@ export interface IExchange {
 
 
 // export interface IArticle {
-    //     id: number,
-    //     title: string,
-    //     short_title: string,
-    //     desc: string,
-    //     content: string,
-    //     preview: string,
-    //     created_at: string,
-    //     views: number,
-    //     category: string,
-    //     subcategory: string | null
-    // }
+//     id: number,
+//     title: string,
+//     short_title: string,
+//     desc: string,
+//     content: string,
+//     preview: string,
+//     created_at: string,
+//     views: number,
+//     category: string,
+//     subcategory: string | null
+// }

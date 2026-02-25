@@ -1,28 +1,34 @@
-import { ICategory, INews, INewsObject, IToken } from "./types"
+import { ICategory, INews, INewsObject, IReelsObject, IToken, IVidsObject } from "./types"
 // // добавть обработчкие ошибок 
 //   if (!res.ok) {
 //     throw new Error("Failed to fetch news")
 //   }
 export const getAdmin = async () => {
-    console.log(`${process.env.NEXT_PUBLIC_API}/login/`);
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/login/`,
-        {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username: `${process.env.ADMIN_LOGIN}`, password: `${process.env.ADMIN_PASSWORD}` })
-        }
-    )
-    const data: IToken = await res.json()
-    return data.access
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/login/`,
+            {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username: `${process.env.ADMIN_LOGIN}`, password: `${process.env.ADMIN_PASSWORD}` })
+            }
+        )
+        const data: IToken = await res.json()
+        return data.access
+    } catch (error) {
+        throw error
+    }
 }
 
 export const getCategories = async (fetchParams: any | undefined): Promise<ICategory[]> => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories/`, fetchParams)
-    const categories = await res.json()
-    return categories
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories/`, fetchParams)
+        const categories = await res.json()
+        return categories
+    } catch (error) {
+        throw error
+    }
 }
 
 export const getNews = async (
@@ -129,4 +135,26 @@ export const getDateString = (created_at: string) => {
     const time = created_at.split('T')[1]
     const date = `${YMD.split('-')[2]} ${months[YMD.split('-')[1]]} ${time.split(':').slice(0, 2).join(':')}`
     return date
+}
+
+export const getReels = async (fetchParams: any | undefined): Promise<IReelsObject> => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/reels/`, fetchParams)
+        const data = await res.json()
+        return data
+    } catch (error) {
+        throw error
+    }
+
+}
+
+export const getVids = async (fetchParams: any | undefined): Promise<IVidsObject> => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youbevids/`, fetchParams)
+        const data = await res.json()
+        return data
+    } catch (error) {
+        throw error
+    }
+
 }

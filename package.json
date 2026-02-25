@@ -13,6 +13,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-intersection-observer": "^10.0.2",
+    "react-social-media-embed": "^2.5.18",
     "swiper": "^12.1.1",
     "swr": "^2.4.0"
   },
