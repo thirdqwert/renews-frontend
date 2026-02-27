@@ -4,6 +4,9 @@ interface IPagination {
     previous: null | number,
 }
 
+export interface ErrorRes {
+    statusText: string
+}
 
 export interface INews {
     id: number,
@@ -72,7 +75,27 @@ export interface IVidsObject extends IPagination {
     results: IVids[]
 }
 
+export interface IImage {
+    id: number,
+    title: string,
+    image: string,
+    created_at: string
+}
 
+export interface IImageObject extends IPagination {
+    results: IImage[]
+}
+
+export interface IAudio {
+    id: number,
+    title: string,
+    audio: string,
+    created_at: string
+}
+
+export interface IAudioObject extends IPagination {
+    results: IAudio[]
+}
 
 // export interface IArticlesObject {
 //     count: number,

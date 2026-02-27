@@ -1,8 +1,8 @@
 "use client"
 
+import { useRouter } from 'next/navigation'
 import Image from "next/image"
 import Arrow from "../../public/images/Arrow 10.svg"
-import { useRouter } from 'next/navigation'
 
 export default function BackButton() {
     const router = useRouter()

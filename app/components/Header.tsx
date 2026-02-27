@@ -1,15 +1,15 @@
 "use client"
-import Link from "next/link"
-import Image from "next/image"
-import arrowDown from "../../public/images/downArrow.svg"
-import ExchangeRate from "./ExchangeRate";
-import SearchIcon from "../../public/images/search.svg"
 import { useParams, usePathname } from "next/navigation"
 import { getCategories } from "../utils/utilis"
 import { useEffect, useState } from "react"
 import { ICategory } from "../utils/types"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules";
+import Link from "next/link"
+import Image from "next/image"
+import arrowDown from "../../public/images/downArrow.svg"
+import ExchangeRate from "./ExchangeRate";
+import SearchIcon from "../../public/images/search.svg"
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -41,7 +41,7 @@ export default function Header() {
 
     return (
         <div className="relative">
-            <header className="px-[50px] py-[10px] bg-[#343a40] relative z-20">
+            <header className="px-[20px] md:px-[50px] py-[10px] bg-[#343a40] relative z-20">
                 <nav className="flex flex-row justify-between items-center">
                     <div className="flex flex-row items-center gap-[40px] xl:gap-[100px]">
                         <Link href={"/"}>

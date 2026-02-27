@@ -1,4 +1,4 @@
-import { ICategory, INews, INewsObject, IReelsObject, IToken, IVidsObject } from "./types"
+import { ErrorRes, ICategory, INews, INewsObject, IReelsObject, IToken, IVidsObject } from "./types"
 // // добавть обработчкие ошибок 
 //   if (!res.ok) {
 //     throw new Error("Failed to fetch news")
@@ -11,7 +11,7 @@ export const getAdmin = async () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ username: `${process.env.ADMIN_LOGIN}`, password: `${process.env.ADMIN_PASSWORD}` })
+                body: JSON.stringify({ username: process.env.ADMIN_LOGIN, password: process.env.ADMIN_PASSWORD })
             }
         )
         const data: IToken = await res.json()
@@ -32,15 +32,17 @@ export const getCategories = async (fetchParams: any | undefined): Promise<ICate
 }
 
 export const getNews = async (
-    pageCount: number = 1,
+    pageCount: number | undefined = 1,
     categoryBy: string | undefined,
     subcategoryBy: string | undefined,
-    fetchParams: any | undefined): Promise<INewsObject | any> => {
+    fetchParams: any | undefined,
+    searchBy: string | undefined): Promise<INewsObject | any> => {
     try {
         const params = new URLSearchParams()
-
+        if (categoryBy) params.append("categoryBy", categoryBy)
         if (categoryBy) params.append("categoryBy", categoryBy)
         if (subcategoryBy) params.append("subcategoryBy", subcategoryBy)
+        if (searchBy) params.append("searchBy", searchBy)
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}&${params.toString()}`, fetchParams)
 

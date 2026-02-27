@@ -2,10 +2,10 @@
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination } from "swiper/modules";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getDateString, getVids } from "../utils/utilis";
 import { IVidsObject } from "../utils/types";
+import Image from "next/image";
 import swipperArrow from "../../public/images/swipperArrow.svg"
 import play from "../../public/images/play.svg"
 import 'swiper/css';

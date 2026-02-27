@@ -1,14 +1,14 @@
 "use client"
+import { useEffect, useState } from "react";
+import { IExchange } from "../utils/types";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import Image from "next/image";
 import USDIcon from "../../public/images/usd.svg"
 import RUBIcon from "../../public/images/rub.svg"
 import redDown from "../../public/images/redDown.svg"
 import greenTop from "../../public/images/greenTop.svg"
-import { useEffect, useState } from "react";
-import { IExchange } from "../utils/types";
-import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-import { Autoplay } from "swiper/modules";
 
 export default function ExchangeRate() {
     const [uzbUsd, setUzbUsd] = useState<IExchange | null>(null)
@@ -32,7 +32,7 @@ export default function ExchangeRate() {
 
     return (
         <>
-            {/* <div className="hidden xl:flex flex-row gap-[20px] w-[378px]">
+            <div className="hidden xxl:flex flex-row gap-[20px] w-[378px]">
                 <div className="flex flex-row gap-[5px]">
                     <Image src={USDIcon} alt="USD" />
                     <span className="text-[24px] text-white font-normal">USD</span>
@@ -63,9 +63,9 @@ export default function ExchangeRate() {
                         alt=""
                     />
                 </div>
-            </div> */}
+            </div>
 
-            <div className="block h-[21px] xl:h-[30px]">
+            <div className="block xxl:hidden h-[21px] xl:h-[30px]">
                 <Swiper
                     className="h-full w-full"
                     direction={"vertical"}

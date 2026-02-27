@@ -27,7 +27,7 @@ export default function SwiperList({ list }: IProps) {
                     <Image src={swipperArrow} alt="" />
                 </button>
                 <Swiper
-                    className="rounded-[20px] overflow-hidden h-[200px] sm:h-[350px] lg:h-[500px] xl:h-[600px]"
+                    className="rounded-[20px] overflow-hidden h-[218px] sm:h-[350px] lg:h-[500px] xl:h-[600px]"
                     loop={true}
                     spaceBetween={10}
                     slidesPerView={1}

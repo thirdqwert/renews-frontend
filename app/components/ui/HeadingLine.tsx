@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Arrow from "../../public/images/Arrow 10.svg"
+import Arrow from "../../../public/images/Arrow 10.svg"
 import Link from "next/link";
 
 interface IProps {

@@ -1,6 +1,10 @@
 @import url(font.css);
 @import "tailwindcss";
 
+@theme {
+    --breakpoint-xxl: 1440px;
+}
+
 body {
     font-family: "Inter";
     font-weight: 400;

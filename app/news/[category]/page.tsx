@@ -1,8 +1,10 @@
+import { ICategory, INewsObject } from "@/app/utils/types"
+import { getCategories, getNews } from "@/app/utils/utilis"
 import CardList from "@/app/components/CardList"
 import CatSub from "@/app/components/CatSub"
 import InfiniteScroll from "@/app/components/InfiniteScroll"
-import { ICategory, INewsObject } from "@/app/utils/types"
-import { getCategories, getNews } from "@/app/utils/utilis"
+import Header from "@/app/components/Header"
+import Footer from "@/app/components/Footer"
 
 export const revalidate = 180
 
@@ -14,20 +16,28 @@ interface IProps {
 
 export default async function NewsCategory({ params }: IProps) {
     const { category } = await params
-    const news: INewsObject = await getNews(1, category, '', { next: { revalidate: 180 } })
+    const news: INewsObject = await getNews(1, category, '', { next: { revalidate: 180 } }, undefined)
     const categories: ICategory[] = await getCategories({ next: { revalidate: 180 } })
 
-    if (news.results.length == 0) return <div>Нету данных</div>
+    if (news.results.length == 0) return (
+        <>
+            <Header />
+            <div>Данные не найдены</div>
+        </>
+    )
 
     return (
         <>
+            <Header />
             <main className="py-[30px]">
                 <div className="container">
-                    <CatSub categories={categories} params={{categoryBy: category}} />
+                    <CatSub categories={categories} params={{ categoryBy: category }} />
                     <CardList list={news.results} />
+                    <div className="pb-[30px] md:pb-[50px]" />
                     <InfiniteScroll params={{ category: category }} />
                 </div>
             </main>
+            <Footer />
         </>
     )
 }

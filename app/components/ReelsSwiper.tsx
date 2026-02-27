@@ -2,10 +2,10 @@
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getReels } from "../utils/utilis";
 import { IReelsObject } from "../utils/types";
+import Image from "next/image";
 import swipperArrow from "../../public/images/swipperArrow.svg"
 import play from "../../public/images/play.svg"
 import 'swiper/css';
@@ -32,10 +32,10 @@ export default function ReelsSwiper() {
     return (
         reels ? (
             <div className="relative">
-                <button className="prev_vids hidden md:block absolute z-10 -left-[0] top-1/2 -translate-y-1/2 cursor-pointer">
+                <button className="prev_reels hidden md:block absolute z-10 -left-[0] top-1/2 -translate-y-1/2 cursor-pointer">
                     <Image src={swipperArrow} alt="" />
                 </button>
-                <button className="next_vids hidden md:block absolute z-10 -right-[0] rotate-180 top-1/2 -translate-y-1/2 cursor-pointer">
+                <button className="next_reels hidden md:block absolute z-10 -right-[0] rotate-180 top-1/2 -translate-y-1/2 cursor-pointer">
                     <Image src={swipperArrow} alt="" />
                 </button>
                 <div className="px-[0] md:px-[50px]">

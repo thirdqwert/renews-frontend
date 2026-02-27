@@ -1,6 +1,6 @@
-import Image from "next/image"
 import { INews } from "../utils/types"
 import { getDateString } from "../utils/utilis"
+import Image from "next/image"
 import Link from "next/link"
 
 interface IProps {
