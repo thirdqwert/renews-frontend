@@ -152,7 +152,7 @@ export const getReels = async (fetchParams: any | undefined): Promise<IReelsObje
 
 export const getVids = async (fetchParams: any | undefined): Promise<IVidsObject> => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youbevids/`, fetchParams)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids/`, fetchParams)
         const data = await res.json()
         return data
     } catch (error) {

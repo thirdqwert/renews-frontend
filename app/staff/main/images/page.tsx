@@ -5,9 +5,10 @@ import { getDateString } from "@/app/utils/utilis"
 import { getCookie } from "cookies-next"
 import Image from "next/image"
 import { SubmitEvent, useEffect, useState } from "react"
+import Pagination from "../../components/Paginations"
 
 export default function Images() {
-    const [images, setImages] = useState<IImageObject | null>(null)
+    const [products, setProducts] = useState<IImageObject | null>(null)
     const [error, setError] = useState(false)
     const [title, setTitle] = useState("")
     const [file, setFile] = useState<File | null>()
@@ -15,7 +16,7 @@ export default function Images() {
     const [deleteWindow, setDeleteWindow] = useState<number | null>(null)
     const token = getCookie("access_token")
 
-    const getImages = async (pageCount: number) => {
+    const getProducts = async (pageCount: number) => {
         try {
             const params = new URLSearchParams()
 
@@ -32,23 +33,21 @@ export default function Images() {
             )
 
             if (!res.ok) {
-                setImages(null)
+                setProducts(null)
                 setError(true)
                 return
             }
             const data = await res.json()
 
-            setImages(data)
+            setProducts(data)
         } catch (error) {
             throw error
         }
     }
 
 
-    const deleteImage = async (id: number) => {
+    const deleteProduct = async (id: number) => {
         try {
-            console.log(`${process.env.NEXT_PUBLIC_API}/images/${id}/`);
-
             await fetch(`${process.env.NEXT_PUBLIC_API}/images/${id}/`,
                 {
                     method: "delete",
@@ -59,13 +58,13 @@ export default function Images() {
                 }
             )
 
-            getImages(page)
+            getProducts(page)
         } catch (error) {
             throw error
         }
     }
 
-    const createImage = async (e: SubmitEvent<HTMLFormElement>) => {
+    const createProduct = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!file || !title) return
         try {
@@ -85,7 +84,7 @@ export default function Images() {
 
             setTitle("")
             setFile(null)
-            getImages(1)
+            getProducts(1)
         } catch (error) {
             throw error
         }
@@ -97,17 +96,16 @@ export default function Images() {
 
     useEffect(() => {
         const getData = async () => {
-            await getImages(page)
+            await getProducts(page)
         }
         getData()
     }, [page])
 
     return (
-        <div
-            className="py-[50px]">
+        <div className="py-[50px]">
             <div className="container">
                 <h2>Изображения</h2>
-                <form onSubmit={(e) => createImage(e)} className="my-[10px] p-[30px] w-full max-w-[600px] border border-gray-400 flex flex-col gap-[20px]">
+                <form onSubmit={(e) => createProduct(e)} className="my-[10px] p-[30px] w-full max-w-[600px] border border-gray-400 flex flex-col gap-[20px]">
                     <h2>Добавить Изображения</h2>
                     <input
                         type="text"
@@ -127,27 +125,24 @@ export default function Images() {
                 </form>
                 <div className="w-full flex flex-col gap-[20px] py-[50px]">
                     {error && <div>Данные не найдены</div>}
-                    {images && images.results?.map(image => (
-                        <div key={image.id} className="w-full flex flex-col gap-[20px] border border-gray-400 p-[20px]">
+                    {products && products.results?.map(product => (
+                        <div key={product.id} className="w-full flex flex-col gap-[20px] border border-gray-400 p-[20px]">
                             <div className="flex flex-row justify-between items-end gap-[10px] ">
                                 <div className="flex flex-col gap-[5px]">
-                                    <Image unoptimized width={0} height={0} src={image.image} alt="" className="w-[100px] h-[50px] object-cover mb-[10px]" />
-                                    <h3>Название: {image.title}</h3>
-                                    <h3>Дата создания: {getDateString(image.created_at)}</h3>
+                                    <Image unoptimized width={0} height={0} src={product.image} alt="" className="w-[100px] h-[50px] object-cover mb-[10px]" />
+                                    <h3>Название: {product.title}</h3>
+                                    <h3>Дата создания: {getDateString(product.created_at)}</h3>
                                 </div>
-                                <button onClick={() => handleCopy(image.image)} className="border border-gray-400 px-[10px] py-[5px] cursor-pointer">Скоприровать ссылку</button>
+                                <button onClick={() => handleCopy(product.image)} className="border border-gray-400 px-[10px] py-[5px] cursor-pointer">Скоприровать ссылку</button>
                             </div>
-                            <button onClick={() => setDeleteWindow(image.id)} className="w-max py-[5px] px-[20px] border border-gray-400 cursor-pointer">Удалить</button>
-                            {deleteWindow == image.id && <div className="flex flex-row gap-[20px]">
-                                <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => deleteImage(image.id)}>Да</span>
+                            <button onClick={() => setDeleteWindow(product.id)} className="w-max py-[5px] px-[20px] border border-gray-400 cursor-pointer">Удалить</button>
+                            {deleteWindow == product.id && <div className="flex flex-row gap-[20px]">
+                                <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => deleteProduct(product.id)}>Да</span>
                                 <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => setDeleteWindow(null)}>Нет</span>
                             </div>}
                         </div>
                     ))}
-                    <div className="flex flex-row gap-[10px]">
-                        {page > 1 && <span onClick={() => setPage(page - 1)} className="block py-[5px] px-[10px] border border-gray-400 cursor-pointer">Назад</span>}
-                        <span onClick={() => setPage(page + 1)} className="block py-[5px] px-[10px] border border-gray-400 cursor-pointer">Вперед</span>
-                    </div>
+                    <Pagination page={page} setPage={setPage}/>
                 </div>
             </div>
         </div>

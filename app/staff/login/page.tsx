@@ -3,7 +3,7 @@
 import { IToken } from "@/app/utils/types"
 import { setCookie } from "cookies-next"
 import { useRouter } from "next/navigation"
-import { SubmitEvent, useEffect, useState } from "react"
+import { SubmitEvent, useState } from "react"
 
 export default function Login() {
     const [login, setLogin] = useState("")
@@ -23,14 +23,13 @@ export default function Login() {
                 }
             )
             const data: IToken = await res.json()
+            if (!data.access) return
             setCookie("access_token", data.access)
             router.push("/staff/main/")
         } catch (error) {
             throw error
         }
     }
-
-
 
     return (
         <div className="w-full h-screen flex flex-row items-center justify-center">

@@ -4,9 +4,10 @@ import { IAudioObject } from "@/app/utils/types"
 import { getDateString } from "@/app/utils/utilis"
 import { getCookie } from "cookies-next"
 import { SubmitEvent, useEffect, useState } from "react"
+import Pagination from "../../components/Paginations"
 
 export default function Audios() {
-    const [audios, setAudios] = useState<IAudioObject | null>(null)
+    const [products, setProducts] = useState<IAudioObject | null>(null)
     const [title, setTitle] = useState("")
     const [file, setFile] = useState<File | null>()
     const [error, setError] = useState(false)
@@ -14,7 +15,7 @@ export default function Audios() {
     const [deleteWindow, setDeleteWindow] = useState<number | null>(null)
     const token = getCookie("access_token")
 
-    const getAudios = async (pageCount: number) => {
+    const getProducts = async (pageCount: number) => {
         try {
             const params = new URLSearchParams()
 
@@ -31,20 +32,20 @@ export default function Audios() {
             )
 
             if (!res.ok) {
-                setAudios(null)
+                setProducts(null)
                 setError(true)
                 return
             }
             const data = await res.json()
 
-            setAudios(data)
+            setProducts(data)
         } catch (error) {
             throw error
         }
     }
 
 
-    const deleteAudios = async (id: number) => {
+    const deleteProduct = async (id: number) => {
         try {
             await fetch(`${process.env.NEXT_PUBLIC_API}/audios/${id}/`,
                 {
@@ -56,13 +57,13 @@ export default function Audios() {
                 }
             )
 
-            getAudios(page)
+            getProducts(page)
         } catch (error) {
             throw error
         }
     }
 
-    const createAudio = async (e: SubmitEvent<HTMLFormElement>) => {
+    const createProduct = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!file || !title) return
         try {
@@ -82,7 +83,7 @@ export default function Audios() {
 
             setTitle("")
             setFile(null)
-            getAudios(1)
+            getProducts(1)
         } catch (error) {
             throw error
         }
@@ -94,7 +95,7 @@ export default function Audios() {
 
     useEffect(() => {
         const getData = async () => {
-            await getAudios(page)
+            await getProducts(page)
         }
         getData()
     }, [page])
@@ -104,7 +105,7 @@ export default function Audios() {
             className="py-[50px]">
             <div className="container">
                 <h2>Аудио</h2>
-                <form onSubmit={(e) => createAudio(e)} className="my-[10px] p-[30px] w-full max-w-[600px] border border-gray-400 flex flex-col gap-[20px]">
+                <form onSubmit={(e) => createProduct(e)} className="my-[10px] p-[30px] w-full max-w-[600px] border border-gray-400 flex flex-col gap-[20px]">
                     <h2>Добавить Аудио</h2>
                     <input
                         type="text"
@@ -124,30 +125,27 @@ export default function Audios() {
                 </form>
                 <div className="w-full flex flex-col gap-[20px] py-[50px]">
                     {error && <div>Данные не найдены</div>}
-                    {audios && audios.results?.map(audio => (
-                        <div key={audio.id} className="w-full flex flex-col gap-[20px] border border-gray-400 p-[20px]">
+                    {products && products.results?.map(product => (
+                        <div key={product.id} className="w-full flex flex-col gap-[20px] border border-gray-400 p-[20px]">
                             <div className="flex flex-row justify-between items-end gap-[10px] ">
                                 <div className="flex flex-col gap-[5px]">
                                     <audio controls>
-                                        <source src={audio.audio} type="audio/mpeg" />
+                                        <source src={product.audio} type="audio/mpeg" />
                                         Ваш браузер не поддерживает аудио.
                                     </audio>
-                                    <h3>Название: {audio.title}</h3>
-                                    <h3>Дата создания: {getDateString(audio.created_at)}</h3>
+                                    <h3>Название: {product.title}</h3>
+                                    <h3>Дата создания: {getDateString(product.created_at)}</h3>
                                 </div>
-                                <button onClick={() => handleCopy(audio.audio)} className="border border-gray-400 px-[10px] py-[5px] cursor-pointer">Скоприровать ссылку</button>
+                                <button onClick={() => handleCopy(product.audio)} className="border border-gray-400 px-[10px] py-[5px] cursor-pointer">Скоприровать ссылку</button>
                             </div>
-                            <button onClick={() => setDeleteWindow(audio.id)} className="w-max py-[5px] px-[20px] border border-gray-400 cursor-pointer">Удалить</button>
-                            {deleteWindow == audio.id && <div className="flex flex-row gap-[20px]">
-                                <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => deleteAudios(audio.id)}>Да</span>
+                            <button onClick={() => setDeleteWindow(product.id)} className="w-max py-[5px] px-[20px] border border-gray-400 cursor-pointer">Удалить</button>
+                            {deleteWindow == product.id && <div className="flex flex-row gap-[20px]">
+                                <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => deleteProduct(product.id)}>Да</span>
                                 <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => setDeleteWindow(null)}>Нет</span>
                             </div>}
                         </div>
                     ))}
-                    <div className="flex flex-row gap-[10px]">
-                        {page > 1 && <span onClick={() => setPage(page - 1)} className="block py-[5px] px-[10px] border border-gray-400 cursor-pointer">Назад</span>}
-                        <span onClick={() => setPage(page + 1)} className="block py-[5px] px-[10px] border border-gray-400 cursor-pointer">Вперед</span>
-                    </div>
+                    <Pagination page={page} setPage={setPage}/>
                 </div>
             </div>
         </div>
