@@ -15,6 +15,7 @@ export interface INews {
     desc: string,
     content: string,
     preview: string,
+    main_image: string,
     created_at: string,
     views: number,
     category: string,

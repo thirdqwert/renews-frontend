@@ -33,10 +33,10 @@ export default async function Home() {
                 <div className="container">
                     <section className="mb-[30px]">
                         <h2 className="text-[16px] md:text-[24px] xl:text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">Горячие Новости</h2>
-                        {culture_news && <SwiperList list={culture_news} />}
+                        {hot_news && <SwiperList list={hot_news} />}
                     </section>
                     <section className="pb-[30px] md:pb-[70px]">
-                        <h2 className="font-bold     text-[#222] text-center pb-[30px]">Новости</h2>
+                        <h2 className="font-bold md:text-[24px] xl:text-[30px] font-bold text-[#222] text-center pb-[30px]">Новости</h2>
                         {news && <CardList list={news} />}
                         <Link
                             href={'/news/'}
@@ -47,7 +47,7 @@ export default async function Home() {
                     <section className="pb-[30px]">
                         <HeadingLine link="/news/kultura" title="Культура" />
                         <div className="grid gap-x-[30px] gap-y-[30px] md:gap-y-[50px] grid-cols-1 sm:grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(320px,1fr))] grid-rows-[auto]">
-                            {politics_news.slice(0, 3).map(item => (
+                            {culture_news.slice(0, 3).map(item => (
                                 <Card key={item.id} item={item} />
                             ))}
                             {culture_news[3] && <div className="block lg:hidden">

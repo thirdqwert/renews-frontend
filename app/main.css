@@ -1,16 +1,80 @@
 @import url(font.css);
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
     --breakpoint-xxl: 1440px;
+}
+
+@layer base {
+    .tiptap h2 {
+        @apply text-xl font-bold;
+    }
+
+    .tiptap h3 {
+        @apply text-lg font-bold;
+    }
+
+    .tiptap h4 {
+        @apply text-sm font-bold;
+    }
+}
+
+
+
+.custom-audio {
+    background: #c7d0db;
+    padding: 18px;
+    border-radius: 12px;
+    max-width: 720px;
+    font-family: sans-serif;
+}
+
+.audio-header {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.audio-body {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.play-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.wave {
+    flex: 1;
+    height: 40px;
+    background: repeating-linear-gradient(to right,
+            #000,
+            #000 2px,
+            transparent 2px,
+            transparent 8px);
+    opacity: 0.6;
+}
+
+.audio-speed,
+.audio-time {
+    background: #3b5b82;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
 }
 
 body {
     font-family: "Inter";
     font-weight: 400;
     background: #e9e8e8;
-    word-break: break-all;
-    word-wrap: break-word;
 
 }
 
@@ -109,6 +173,12 @@ body {
     animation: rotation 1s linear infinite;
 }
 
+.tiptap_button {
+    border: 1px #99a1af solid;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
 @keyframes rotation {
     0% {
         transform: rotate(0deg);
@@ -117,4 +187,106 @@ body {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.tiptap blockquote::before,
+.tiptap blockquote::after {
+    content: '' !important;
+    font-style: normal !important;
+}
+
+.tiptap blockquote>*::before,
+.tiptap blockquote>*::after {
+    content: '' !important;
+
+}
+
+.tiptap blockquote {
+    content: '' !important;
+    font-style: normal !important;
+    padding: 18px 17px;
+}
+
+.tiptap blockquote>* {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: row !important;
+    content: '' !important;
+    font-style: normal !important;
+    margin: 0px !important;
+    padding-left: 35px !important;
+}
+
+@media (max-width: 1240px) {
+    .tiptap blockquote>* {
+        padding-left: 20px !important;
+    }
+}
+
+.tiptap blockquote>*::before {
+    position: absolute !important;
+    width: 2px !important;
+    border-radius: 10px !important;
+    background: black !important;
+    height: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+.tiptap blockquote>*>* {
+    content: '' !important;
+    font-style: normal !important;
+}
+
+
+
+.tiptap .custom-audio {
+    background: #c7d0db;
+    padding: 18px;
+    border-radius: 12px;
+    max-width: 400px;
+    font-family: sans-serif;
+}
+
+.tiptap .audio-body {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.tiptap .play-btn {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.tiptap .play-btn::before {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: #295480;
+}
+
+.tiptap .wave {
+    flex: 1;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    overflow: hidden;
+    flex-wrap: nowrap;
+    background: none;
 }

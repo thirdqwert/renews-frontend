@@ -45,7 +45,7 @@ export default function ReelsClient() {
 
             {reels ? (
 
-                <div className="h-[calc(100vh-74px-246px+200px)] relative w-[500px] py-[20px] mx-auto ">
+                <div className="h-[calc(100vh-74px-246px+200px)] relative max-w-[400px] py-[20px] mx-auto ">
                     <div className="flex flex-col gap-[20px] absolute top-1/2 -translate-y-1/2 z-10 -right-[100px]">
                         <button className="prev_reels_vertical flex justify-center items-center h-[70px] w-[70px] bg-[#343a40] rotate-180 cursor-pointer rounded-full select-none">
                             <Image src={arrowDown} alt="" />

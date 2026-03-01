@@ -114,14 +114,14 @@ export default function Images() {
                         onChange={(e) => setTitle(e.target.value)}
                         className="px-[20px] py-[10px] border border-gray-400 outline-none rounded-[2px]"
                     />
-                    <label htmlFor="imageInput" className="px-[20px] py-[10px] border border-gray-400 outline-none rounded-[2px]">Выбрать изображения</label>
+                    <label htmlFor="imageInput" className="px-[20px] py-[10px] border border-gray-400 outline-none rounded-[2px] cursor-pointer">Выбрать изображения</label>
                     <input
                         type="file"
                         onChange={(e) => setFile(e.target.files?.[0])}
                         id="imageInput"
                         className="hidden"
                     />
-                    <button className="border border-gray-400 p-[10px]">Создать</button>
+                    <button className="border border-gray-400 p-[10px] cursor-pointer">Создать</button>
                 </form>
                 <div className="w-full flex flex-col gap-[20px] py-[50px]">
                     {error && <div>Данные не найдены</div>}
