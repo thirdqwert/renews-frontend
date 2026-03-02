@@ -43,28 +43,32 @@ export default function Header() {
         <div className="relative">
             <header className="px-[20px] md:px-[50px] py-[10px] bg-[#343a40] relative z-20">
                 <nav className="flex flex-row justify-between items-center">
-                    <div className="flex flex-row items-center gap-[40px] xl:gap-[100px]">
+                    <div className="flex flex-row items-center gap-[40px]">
                         <Link href={"/"}>
                             <h1 className="md:text-[20px] xl:text-[36px] font-bold">
                                 <span className="text-white">RE</span><span className="text-[#92a8e0]">NEWS</span>
                             </h1>
                         </Link>
-                        <ul className="hidden lg:flex flex-row gap-[50px]">
-                            <li><Link className="md:text-[18px] xl:text-[24px] text-white font-medium" href={"/"} >Главная</Link></li>
-                            <li><Link className="md:text-[18px] xl:text-[24px] text-white font-medium" href={"/news/"} >Новости</Link></li>
-                            <li><Link className="md:text-[18px] xl:text-[24px] text-white font-medium" href={"/contacts/"} >Контакты</Link></li>
-                            <li
+                        <ul className="flex flex-row gap-[30px]">
+                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/"} >Новости Мира</Link></li>
+                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/"} >Новости Страны</Link></li>
+                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/proisshestviya/"} >Происшествия</Link></li>
+                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/sport/"} >Спорт</Link></li>
+                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/ekonomika/"} >Экономика</Link></li>
+                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/kultura/"} >Культура</Link></li>
+                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/nauka/"} >Наука</Link></li>
+                            {/* <li
                                 onClick={() => setIsOpen(!isOpen)}
                                 onMouseEnter={() => setIsOpen(true)}
                                 className="md:text-[18px] xl:text-[24px] text-white font-medium flex flex-row items-center gap-[10px] cursor-pointer select-none">
                                 <span>Категории</span>
                                 <Image src={arrowDown} alt="" />
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="flex flex-row items-center gap-[10px]">
-                        <Link href={"/news/search/"} className="pr-[10px] border-r border-white w-[30px] h-[20px]"><Image width={20} height={20} src={SearchIcon} alt="Поиск" /></Link>
-                        <ExchangeRate />
+                        <Link href={"/news/search/"} className="pr-[10px] w-[30px] h-[20px]"><Image width={20} height={20} src={SearchIcon} alt="Поиск" /></Link>
+                        {/* <ExchangeRate /> */}
                     </div>
                 </nav>
             </header>

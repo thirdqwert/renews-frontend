@@ -84,12 +84,15 @@ export default function CatSub({ categories, params, }: IProps) {
             </div> */}
             {categoryBy && (
                 <div className="relative max-w-[23.7%] w-full">
-                    <div className="hidden md:flex flex-col w-full flex-wrap gap-[10px] top-0 left-0">
+                    <div className="hidden md:flex flex-col w-full flex-wrap sticky top-0 left-0 bg-[#343a40] rounded-[20px]">
+                        <h3 className="font-bold md:text-[20px] xl:text-[25px] text-white pt-[11px] pb-[15px] px-[17px]">Все по теме</h3>
+                        <div className="w-[98%] mx-auto h-[1px] bg-[rgba(255,255,255,0.5)]"/>
+
                         {currentCategory && currentCategory.subcategories.map(subcategory => (
                             <Link
                                 href={`/news/${currentCategory.slug}/${subcategory.slug}`}
                                 key={subcategory.id}
-                                className={"block py-[6px] px-[20px] bg-[#343a40] text-white rounded-[20px] " + (subcategoryBy == subcategory.slug && "active_button")}
+                                className={"block py-[6px] px-[20px] text-white rounded-[20px] " + (subcategoryBy == subcategory.slug && "active_button")}
                             >
                                 {subcategory.title}
                             </Link>

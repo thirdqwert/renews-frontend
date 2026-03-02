@@ -28,7 +28,6 @@ export default async function Home() {
 
     return (
         <>
-            <Header />
             <main className="py-[30px]">
                 <div className="container">
                     <section className="mb-[30px]">
