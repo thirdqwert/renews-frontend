@@ -30,11 +30,13 @@ export default async function NewsCategory({ params }: IProps) {
         <>
             <Header />
             <main className="py-[30px]">
-                <div className="container">
+                <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-row gap-[32px]">
                     <CatSub categories={categories} params={{ categoryBy: category }} />
-                    <CardList list={news.results} />
-                    <div className="pb-[30px] md:pb-[50px]" />
-                    <InfiniteScroll params={{ category: category }} />
+                    <div className="flex flex-col">
+                        <CardList list={news.results} />
+                        <div className="pb-[30px] md:pb-[50px]" />
+                        <InfiniteScroll params={{ category: category }} />
+                    </div>
                 </div>
             </main>
             <Footer />

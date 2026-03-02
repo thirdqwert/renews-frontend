@@ -38,7 +38,6 @@ export default function CatSub({ categories, params, }: IProps) {
     }
     return (
         <>
-            <h3 className="lg:!hidden font-bold text-[30px] text-[#222] mb-[15px] vertical_line px-[20px]">Категории</h3>
             {/* <div className="relative px-[50px] hidden md:block">
                 <button className="prev p-5 absolute z-10 left-0 rotate-180 top-1/2 -translate-y-1/2 cursor-pointer">
                     <Image src={arrowDown} alt="" />
@@ -83,24 +82,9 @@ export default function CatSub({ categories, params, }: IProps) {
                     ))}
                 </Swiper>
             </div> */}
-            <div className="block lg:hidden">
-                <SelectUI
-                    options={categoriesOption}
-                    selectOption={selectCategory}
-                    selectedOption={{ value: currentCategory ? currentCategory.slug : "", label: currentCategory ? currentCategory.title : "Всё" }}
-                />
-            </div>
             {categoryBy && (
-                <div className="pt-[15px]">
-                    <h4 className="text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">Все по теме</h4>
-                    <div className="hidden md:flex flex-row flex-wrap gap-[10px]">
-                        <Link
-                            href={`/news/${categoryBy}/`}
-                            className={"block py-[6px] px-[20px] bg-[#343a40] text-white rounded-[20px] " + (subcategoryBy == undefined && "active_button")}
-                        >
-                            Всё
-                        </Link>
-
+                <div className="relative max-w-[23.7%] w-full">
+                    <div className="hidden md:flex flex-col w-full flex-wrap gap-[10px] top-0 left-0">
                         {currentCategory && currentCategory.subcategories.map(subcategory => (
                             <Link
                                 href={`/news/${currentCategory.slug}/${subcategory.slug}`}
@@ -110,21 +94,9 @@ export default function CatSub({ categories, params, }: IProps) {
                                 {subcategory.title}
                             </Link>
                         ))}
-
                     </div>
-                    <div className="block md:hidden">
-                        {
-                            currentCategory && subcategoriesOptions && <SelectUI
-                                options={subcategoriesOptions}
-                                selectOption={selectSubcategory}
-                                selectedOption={{ value: currentSubcategory ? currentSubcategory.slug : "", label: currentSubcategory ? currentSubcategory.title : "Всё" }}
-                            />
-                        }
-                    </div>
-
                 </div>
             )}
-            <div className="w-full h-[1px] bg-[#343a40] mt-[15px] mb-[65px]"/>
         </>
     )
 }
