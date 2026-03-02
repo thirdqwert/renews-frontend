@@ -50,6 +50,7 @@ export default function TipTap({ setContent }: IProps) {
 
         renderHTML({ HTMLAttributes }) {
             const src = HTMLAttributes.src ?? ''
+            const heading = HTMLAttributes.heading ?? ''
             return [
                 'div',
                 mergeAttributes(this.options.HTMLAttributes, {
@@ -59,6 +60,11 @@ export default function TipTap({ setContent }: IProps) {
                 }),
                 [
                     'div',
+                    { class: 'audio-header' },
+                    heading,
+                ],
+                [
+                    'div',
                     { class: 'audio-body' },
                     ['button', { class: 'play-btn' }, ''],
                     ['div', { class: 'wave' }],
@@ -66,15 +72,17 @@ export default function TipTap({ setContent }: IProps) {
                 ],
             ]
         },
-
+        // @ts-expect-error не стал менять корневые типы библеотеки
         addCommands() {
             return {
-                setAudio:
-                    (options) =>
+
+                insertAudio:
+                    (options: { src: string, heading: string }) =>
+                        // @ts-expect-error не стал менять корневые типы библеотеки
                         ({ commands }) => {
                             return commands.insertContent({
                                 type: this.name,
-                                attrs: { src: options.src },
+                                attrs: { src: options.src, heading: options.heading },
                             })
                         },
             }
@@ -111,7 +119,7 @@ export default function TipTap({ setContent }: IProps) {
             }),
             Highlight.configure({
                 HTMLAttributes: {
-                    class: "bg-[#a8dee3] p-[5px] rounded-[3px]",
+                    class: "bg-[#a8dee3] px-[5px] py-[1px] rounded-[3px]",
                 },
             }),
             Image.configure({
@@ -153,3 +161,9 @@ export default function TipTap({ setContent }: IProps) {
         )
     )
 }
+
+
+
+
+
+

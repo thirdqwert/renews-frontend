@@ -112,10 +112,10 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
                 <button
                     onClick={() => {
                         const url = prompt('Введите ссылку на аудио')
-
-                        if (!url) return
-
-                        editor.chain().focus().setAudio({ src: url }).run()
+                        const heading = prompt('Введите загаловок ждя аудио')
+                        if (!url && !heading) return
+                        // @ts-expect-error не стал менять корневые типы библеотеки
+                        editor.chain().focus().insertAudio({ src: url, heading: heading }).run()
                     }}
                 >
                     Вставить Audio

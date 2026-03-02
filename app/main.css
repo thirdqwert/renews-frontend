@@ -195,16 +195,14 @@ body {
     font-style: normal !important;
 }
 
-.tiptap blockquote>*::before,
 .tiptap blockquote>*::after {
     content: '' !important;
-
 }
 
 .tiptap blockquote {
     content: '' !important;
     font-style: normal !important;
-    padding: 18px 17px;
+    padding: 18px 12px;
 }
 
 .tiptap blockquote>* {
@@ -224,10 +222,11 @@ body {
 }
 
 .tiptap blockquote>*::before {
+    content: '' !important;
     position: absolute !important;
     width: 2px !important;
     border-radius: 10px !important;
-    background: black !important;
+    background: #295480 !important;
     height: 100%;
     left: 0;
     top: 0;
@@ -244,7 +243,7 @@ body {
 
 .tiptap .custom-audio {
     background: #c7d0db;
-    padding: 18px;
+    padding: 12px;
     border-radius: 12px;
     max-width: 400px;
     font-family: sans-serif;
@@ -260,6 +259,7 @@ body {
     position: relative;
     width: 48px;
     height: 48px;
+    margin-left: 10px;
     border-radius: 50%;
     border: none;
     background: white;
@@ -270,13 +270,33 @@ body {
     align-items: center !important;
 }
 
-.tiptap .play-btn::before {
+.tiptap .audio-header {
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-weight: 600;
+    padding: 12px;
+}
+
+.tiptap .audio-header::before {
+    content: '';
     position: absolute;
     width: 2px;
     height: 100%;
     top: 0;
     bottom: 0;
-    left: 0;
+    left: -10px;
+    background: #295480;
+}
+
+.tiptap .play-btn::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: -10px;
     background: #295480;
 }
 
@@ -289,4 +309,24 @@ body {
     overflow: hidden;
     flex-wrap: nowrap;
     background: none;
+}
+
+@media (max-width: 640px) {
+    .tiptap .custom-audio {
+        background: #c7d0db;
+        padding: 10px;
+        border-radius: 12px;
+        max-width: 400px;
+        font-family: sans-serif;
+    }
+
+    .tiptap .audio-header {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .tiptap .audio-time {
+        font-size: 10px;
+    }
+
 }

@@ -37,7 +37,7 @@ export default async function NewsDetail({ params }: IProps) {
             <Header />
             <main className="py-[30px]">
                 <div className="container">
-                    <article className="pb-[200px]">
+                    <article className="pb-[70px] md:pb-[100px] xl:pb-[200px]">
                         <BackButton />
                         <div className="flex flex-row gap-[20px] items-end">
                             <Link href={`/news/${news.categery_slug}`}><span className="text-[11px] md:text-[19px] lg:text-[24px] text-[#295480] font-medium">{news.category}</span></Link>
