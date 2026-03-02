@@ -106,9 +106,14 @@ body {
     padding: 0 15px;
 }
 
-.active_button {
+.active_category {
     background: #295480;
-    color: #f4f6f9;
+    color: white;
+}
+
+.active_subcategory {
+    background: white;
+    color: #343a40;
 }
 
 .swiper-pagination-bullet {
@@ -141,6 +146,23 @@ body {
     background: #343a40;
     height: 50%;
     width: 1px;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 0;
+}
+
+.vertical_line_blue {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.vertical_line_blue::before {
+    content: '';
+    position: absolute;
+    background: #295480;
+    height: 100%;
+    width: 2px;
     transform: translateY(-50%);
     top: 50%;
     left: 0;

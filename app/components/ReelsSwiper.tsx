@@ -10,7 +10,6 @@ import swipperArrow from "../../public/images/swipperArrow.svg"
 import play from "../../public/images/play.svg"
 import 'swiper/css';
 import 'swiper/css/navigation';
-import Link from "next/link";
 import Loader from "./Loader";
 
 
@@ -55,12 +54,12 @@ export default function ReelsSwiper() {
                         }}
                         modules={[Navigation]}
                     >
-                        {reels.results.map((reel, i) => (
+                        {reels.results.map(reel => (
                             <SwiperSlide key={reel.id}>
-                                <Link href={`/news/reels?current=${i}`} className="relative block h-[500px] rounded-[10px] overflow-hidden">
+                                <a href={reel.content} className="relative block h-[500px] rounded-[10px] overflow-hidden" target="_blank">
                                     <Image unoptimized width={0} height={0} src={reel.image} alt={reel.title} className="w-full h-full object-cover" />
                                     <Image src={play} alt="" className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2" />
-                                </Link>
+                                </a>
                             </SwiperSlide>
                         ))}
                     </Swiper>

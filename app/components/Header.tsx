@@ -50,13 +50,10 @@ export default function Header() {
                             </h1>
                         </Link>
                         <ul className="flex flex-row gap-[30px]">
-                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/"} >Новости Мира</Link></li>
-                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/"} >Новости Страны</Link></li>
-                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/proisshestviya/"} >Происшествия</Link></li>
-                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/sport/"} >Спорт</Link></li>
-                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/ekonomika/"} >Экономика</Link></li>
-                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/kultura/"} >Культура</Link></li>
-                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={"/news/nauka/"} >Наука</Link></li>
+                            <li><Link className="text-[13px] md:text-[18px] text-white font-medium" href={`/news/`} >Главная</Link></li>
+                            {categories && categories.map(category => (
+                                <li key={category.id}><Link className="text-[13px] md:text-[18px] text-white font-medium" href={`/news/${category.slug}`} >{category.title}</Link></li>
+                            ))}
                             {/* <li
                                 onClick={() => setIsOpen(!isOpen)}
                                 onMouseEnter={() => setIsOpen(true)}
@@ -68,7 +65,7 @@ export default function Header() {
                     </div>
                     <div className="flex flex-row items-center gap-[10px]">
                         <Link href={"/news/search/"} className="pr-[10px] w-[30px] h-[20px]"><Image width={20} height={20} src={SearchIcon} alt="Поиск" /></Link>
-                        {/* <ExchangeRate /> */}
+                        <ExchangeRate />
                     </div>
                 </nav>
             </header>

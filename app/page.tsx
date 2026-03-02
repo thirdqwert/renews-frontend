@@ -19,15 +19,16 @@ export default async function Home() {
     const data: INews[] = await getNewsAdmin(process.env.TOKEN)
 
     const hot_news = data && data.slice(0, 3)
-    const news = data && data.slice(0, 6) 
+    const news = data && data.slice(0, 6)
     const culture_news = data && data.filter(item => item.category == "Культура").slice(0, 4)
-    const politics_news = data && data.filter(item => item.category == "Политика").slice(0, 6) 
-    const sport_news = data && data.filter(item => item.category == "Спорт").slice(0, 4) 
+    const politics_news = data && data.filter(item => item.category == "Политика").slice(0, 6)
+    const sport_news = data && data.filter(item => item.category == "Спорт").slice(0, 4)
     const popular_news = data && data.sort((a, b) => b.views - a.views).slice(0, 3)
 
 
     return (
         <>
+            <Header />
             <main className="py-[30px]">
                 <div className="container">
                     <section className="mb-[30px]">

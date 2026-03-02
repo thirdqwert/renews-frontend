@@ -11,13 +11,17 @@ export const revalidate = 180
 export default async function News() {
     const news: INewsObject = await getNews(1, '', '', { next: { revalidate: 180 } }, undefined)
 
-    if (news.results.length == 0) return <div>Нету данных</div>
-
+    if (news.results.length == 0) return (
+        <>
+            <Header />
+            <div>Данные не найдены</div>
+        </>
+    )
 
     return (
         <>
             <Header />
-            <main className="py-[30px]">
+            <main className="py-[30px] min-h-screen">
                 <div className="container">
                     <CardList list={news.results} />
                     <div className="pb-[30px] md:pb-[50px]" />

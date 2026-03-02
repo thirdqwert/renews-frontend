@@ -28,9 +28,9 @@ export default async function NewsCategory({ params }: IProps) {
 
     return (
         <>
-            <Header />
-            <main className="py-[30px]">
-                <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-row gap-[32px]">
+            {/* <Header /> */}
+            <main className="py-[30px] min-h-screen">
+                <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
                     <CatSub categories={categories} params={{ categoryBy: category }} />
                     <div className="flex flex-col">
                         <CardList list={news.results} />
