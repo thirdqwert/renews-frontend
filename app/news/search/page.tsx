@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import CardList from "@/app/components/CardList";
 import Header from "@/app/components/Header";
@@ -8,70 +8,79 @@ import { getNews } from "@/app/utils/utilis";
 import { SubmitEvent, useEffect, useState } from "react";
 
 export default function Search() {
-    const [news, setNews] = useState<INews[]>([])
-    const [error, setError] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
+    const [news, setNews] = useState<INews[]>([]);
+    const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const [searchBy, setSearchBy] = useState("")
-    const [pageCount, setPageCount] = useState(1)
-    const [hasMore, setHasMore] = useState(true)
-    const [inputValue, setInputValue] = useState("")
+    const [searchBy, setSearchBy] = useState("");
+    const [pageCount, setPageCount] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [inputValue, setInputValue] = useState("");
 
     const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        setSearchBy(inputValue)
-    }
+        e.preventDefault();
+        setSearchBy(inputValue);
+    };
 
     useEffect(() => {
         const getData = async () => {
             if (hasMore) {
                 try {
-                    setIsLoading(true)
-                    const data: INewsObject | ErrorRes = await getNews(pageCount, undefined, undefined, undefined, searchBy)
+                    setIsLoading(true);
+                    const data: INewsObject | ErrorRes = await getNews(
+                        pageCount,
+                        undefined,
+                        undefined,
+                        undefined,
+                        searchBy,
+                    );
 
                     if ("statusText" in data) {
-                        setIsLoading(false)
-                        setHasMore(false)
-                        setError(true)
-                        return
+                        setIsLoading(false);
+                        setHasMore(false);
+                        setError(true);
+                        return;
                     }
 
-                    setIsLoading(false)
-                    setNews([...news, ...data.results])
+                    setIsLoading(false);
+                    setNews([...news, ...data.results]);
                 } catch (error) {
-                    throw error
+                    throw error;
                 }
             }
-        }
-        getData()
-
-    }, [pageCount])
-
+        };
+        getData();
+    }, [pageCount]);
 
     useEffect(() => {
         const getData = async () => {
             if (hasMore) {
                 try {
-                    setIsLoading(true)
-                    const data: INewsObject | ErrorRes = await getNews(1, undefined, undefined, undefined, searchBy)
+                    setIsLoading(true);
+                    const data: INewsObject | ErrorRes = await getNews(
+                        1,
+                        undefined,
+                        undefined,
+                        undefined,
+                        searchBy,
+                    );
 
                     if ("statusText" in data) {
-                        setIsLoading(false)
-                        setHasMore(false)
-                        setError(true)
-                        return
+                        setIsLoading(false);
+                        setHasMore(false);
+                        setError(true);
+                        return;
                     }
 
-                    setIsLoading(false)
-                    setNews(data.results)
+                    setIsLoading(false);
+                    setNews(data.results);
                 } catch (error) {
-                    throw error
+                    throw error;
                 }
             }
-        }
-        getData()
-
-    }, [searchBy])
+        };
+        getData();
+    }, [searchBy]);
 
     return (
         <>
@@ -92,13 +101,27 @@ export default function Search() {
                     </form>
                     <div>
                         {news && news.length > 0 && <CardList list={news} />}
-                        {<div className={"flex flex-row justify-center py-[30px] " + (isLoading ? "" : "hidden")}>
-                            <Loader />
-                        </div>}
-                        {hasMore && !isLoading && news && news.length > 0 && <button className="mx-auto my-[30px] w-max px-[10px] py-[10px] bg-[#343a40] text-white block w-full cursor-pointer rounded-[5px]" onClick={() => setPageCount(pageCount + 1)}>Показать ёще</button>}
+                        {
+                            <div
+                                className={
+                                    "flex flex-row justify-center py-[30px] " +
+                                    (isLoading ? "" : "hidden")
+                                }
+                            >
+                                <Loader />
+                            </div>
+                        }
+                        {hasMore && !isLoading && news && news.length > 0 && (
+                            <button
+                                className="mx-auto my-[30px] w-max px-[10px] py-[10px] bg-[#343a40] text-white block w-full cursor-pointer rounded-[5px]"
+                                onClick={() => setPageCount(pageCount + 1)}
+                            >
+                                Показать ёще
+                            </button>
+                        )}
                     </div>
                 </div>
             </main>
         </>
-    )
+    );
 }

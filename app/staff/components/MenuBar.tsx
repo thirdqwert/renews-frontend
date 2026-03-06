@@ -1,33 +1,39 @@
-import { Editor } from "@tiptap/react"
+import { Editor } from "@tiptap/react";
 
 export default function MenuBar({ editor }: { editor: Editor | null }) {
     if (!editor) {
-        return null
+        return null;
     }
 
     const setLink = () => {
-        const previousUrl = editor.getAttributes('link').href
-        const url = window.prompt('URL', previousUrl)
+        const previousUrl = editor.getAttributes("link").href;
+        const url = window.prompt("URL", previousUrl);
 
         if (url === null) {
-            return
+            return;
         }
 
-        if (url === '') {
-            editor.chain().focus().extendMarkRange('link').unsetLink().run()
+        if (url === "") {
+            editor.chain().focus().extendMarkRange("link").unsetLink().run();
 
-            return
+            return;
         }
 
-        editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
-
-    }
+        editor
+            .chain()
+            .focus()
+            .extendMarkRange("link")
+            .setLink({ href: url })
+            .run();
+    };
 
     return (
         <div className="pb-[20px]">
             <div className="flex flex-row flex-wrap gap-[10px] border-gray-400">
                 <button
-                    onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                    onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 2 }).run()
+                    }
                     className={`tiptap_button`}
                 >
                     H2
@@ -62,7 +68,9 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
                 </button>
 
                 <button
-                    onClick={() => editor.chain().focus().toggleHighlight().run()}
+                    onClick={() =>
+                        editor.chain().focus().toggleHighlight().run()
+                    }
                     className={`tiptap_button`}
                 >
                     Highlight
@@ -71,27 +79,31 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
                 <button onClick={setLink} className="tiptap_button">
                     Set link
                 </button>
-                <button onClick={() => editor.chain().focus().unsetLink().run()} className="tiptap_button">
+                <button
+                    onClick={() => editor.chain().focus().unsetLink().run()}
+                    className="tiptap_button"
+                >
                     Unset link
                 </button>
                 <button
                     className="tiptap_button"
                     onClick={() => {
-                        const url = prompt('Вставьте URL картинки:')
+                        const url = prompt("Вставьте URL картинки:");
                         if (url) {
-                            editor.chain().focus().setImage({ src: url }).run()
+                            editor.chain().focus().setImage({ src: url }).run();
                         }
                     }}
                 >
                     Вставить картинку
                 </button>
-                <button id="add"
+                <button
+                    id="add"
                     onClick={() => {
-                        const url = prompt('Вставить YouTube URL')
+                        const url = prompt("Вставить YouTube URL");
                         if (url) {
                             editor.commands.setYoutubeVideo({
                                 src: url,
-                            })
+                            });
                         }
                     }}
                     className="tiptap_button"
@@ -99,28 +111,39 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
                     Вставить YouTube video
                 </button>
                 <button
-                    onClick={() => editor.chain().focus().toggleBlockquote().run()} className="tiptap_button">
+                    onClick={() =>
+                        editor.chain().focus().toggleBlockquote().run()
+                    }
+                    className="tiptap_button"
+                >
                     Toggle blockquote
                 </button>
-                <button onClick={() => editor.chain().focus().setBlockquote().run()} className="tiptap_button">
+                <button
+                    onClick={() => editor.chain().focus().setBlockquote().run()}
+                    className="tiptap_button"
+                >
                     Set blockquote
                 </button>
                 <button
-                    onClick={() => editor.chain().focus().unsetBlockquote().run()} className="tiptap_button">
+                    onClick={() =>
+                        editor.chain().focus().unsetBlockquote().run()
+                    }
+                    className="tiptap_button"
+                >
                     Unset blockquote
                 </button>
                 <button
                     onClick={() => {
-                        const url = prompt('Введите ссылку на аудио')
-                        const heading = prompt('Введите загаловок ждя аудио')
-                        if (!url && !heading) return
+                        const url = prompt("Введите ссылку на аудио");
+                        const heading = prompt("Введите загаловок ждя аудио");
+                        if (!url && !heading) return;
                         // @ts-expect-error не стал менять корневые типы библеотеки
-                        editor.chain().focus().insertAudio({ src: url, heading: heading }).run()
+                        editor.chain().focus().insertAudio({ src: url, heading: heading }).run();
                     }}
                 >
                     Вставить Audio
                 </button>
             </div>
         </div>
-    )
+    );
 }

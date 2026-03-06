@@ -1,14 +1,13 @@
 import Image from "next/image";
-import mail from "../../public/images/email.svg"
-import phone from "../../public/images/phone.svg"
-import instagramm from "../../public/images/instagramm.svg"
-import telegram from "../../public/images/telegram.svg"
-import youtube from "../../public/images/youtube.svg"
-import facebook from "../../public/images/facebook.svg"
+import mail from "../../public/images/email.svg";
+import phone from "../../public/images/phone.svg";
+import instagramm from "../../public/images/instagramm.svg";
+import telegram from "../../public/images/telegram.svg";
+import youtube from "../../public/images/youtube.svg";
+import facebook from "../../public/images/facebook.svg";
 import Link from "next/link";
 
 export default async function Footer() {
-
     return (
         <footer className="bg-[#343a40] py-[30px]">
             <div className="container">
@@ -16,13 +15,35 @@ export default async function Footer() {
                     <div className="flex flex-col gap-[20px] md:gap-[30px]">
                         <Link href={"/"}>
                             <h3 className="text-[30px] md:text-[36px] font-bold">
-                                <span className="text-white">RE</span><span className="text-[#92a8e0]">NEWS</span>
+                                <span className="text-white">RE</span>
+                                <span className="text-[#92a8e0]">NEWS</span>
                             </h3>
                         </Link>
                         <ul className="flex flex-row gap-[20px] md:gap-[50px]">
-                            <li><Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/"} >Главная</Link></li>
-                            <li><Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/news/"} >Новости</Link></li>
-                            <li><Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/contacts/"} >Контакты</Link></li>
+                            <li>
+                                <Link
+                                    className="text-[16px] md:text-[24px] text-white font-medium"
+                                    href={"/"}
+                                >
+                                    Главная
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    className="text-[16px] md:text-[24px] text-white font-medium"
+                                    href={"/news/"}
+                                >
+                                    Новости
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    className="text-[16px] md:text-[24px] text-white font-medium"
+                                    href={"/contacts/"}
+                                >
+                                    Контакты
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="flex flex-col gap-[25px] mx-auto text-[14px] font-medium">
@@ -53,5 +74,5 @@ export default async function Footer() {
                 </nav>
             </div>
         </footer>
-    )
+    );
 }

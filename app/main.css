@@ -29,7 +29,6 @@ body {
     font-family: "Inter";
     font-weight: 400;
     background: #e9e8e8;
-
 }
 
 .short_desc {
@@ -95,7 +94,7 @@ body {
 }
 
 .vertical_line::before {
-    content: '';
+    content: "";
     position: absolute;
     background: #343a40;
     height: 50%;
@@ -112,7 +111,7 @@ body {
 }
 
 .vertical_line_blue::before {
-    content: '';
+    content: "";
     position: absolute;
     background: #295480;
     height: 100%;
@@ -123,7 +122,7 @@ body {
 }
 
 .category_title_line::before {
-    content: '';
+    content: "";
     position: absolute;
     background: white;
     height: 50%;
@@ -167,38 +166,38 @@ body {
 
 .tiptap blockquote::before,
 .tiptap blockquote::after {
-    content: '' !important;
+    content: "" !important;
     font-style: normal !important;
 }
 
-.tiptap blockquote>*::after {
-    content: '' !important;
+.tiptap blockquote > *::after {
+    content: "" !important;
 }
 
 .tiptap blockquote {
-    content: '' !important;
+    content: "" !important;
     font-style: normal !important;
     padding: 18px 12px;
 }
 
-.tiptap blockquote>* {
+.tiptap blockquote > * {
     position: relative !important;
     display: flex !important;
     flex-direction: row !important;
-    content: '' !important;
+    content: "" !important;
     font-style: normal !important;
     margin: 0px !important;
     padding-left: 35px !important;
 }
 
 @media (max-width: 1240px) {
-    .tiptap blockquote>* {
+    .tiptap blockquote > * {
         padding-left: 20px !important;
     }
 }
 
-.tiptap blockquote>*::before {
-    content: '' !important;
+.tiptap blockquote > *::before {
+    content: "" !important;
     position: absolute !important;
     width: 2px !important;
     border-radius: 10px !important;
@@ -209,9 +208,8 @@ body {
     bottom: 0;
 }
 
-
-.tiptap blockquote>*>* {
-    content: '' !important;
+.tiptap blockquote > * > * {
+    content: "" !important;
     font-style: normal !important;
 }
 
@@ -254,7 +252,7 @@ body {
 }
 
 .tiptap .audio-header::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 2px;
     height: 100%;
@@ -265,7 +263,7 @@ body {
 }
 
 .tiptap .play-btn::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 2px;
     height: 100%;
@@ -303,5 +301,4 @@ body {
     .tiptap .audio-time {
         font-size: 10px;
     }
-
 }

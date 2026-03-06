@@ -1,33 +1,74 @@
+import { getNews } from "../utils/utilis";
+import { INewsObject } from "../utils/types";
+import CardList from "../components/CardList";
+import InfiniteScroll from "../components/InfiniteScroll";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { Metadata } from "next";
 
-import { getNews } from "../utils/utilis"
-import { INewsObject } from "../utils/types"
-import CardList from "../components/CardList"
-import InfiniteScroll from "../components/InfiniteScroll"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
+export const metadata: Metadata = {
+    title: "Все новости Узбекистана",
 
-export const revalidate = 180
+    description:
+        "Читайте все последние новости Узбекистана: политика, спорт, культура и экономика. Обновляется каждый день.",
+
+    openGraph: {
+        title: "Все новости — Renews",
+        description: "Читайте все последние новости Узбекистана.",
+        url: "/news",
+        siteName: "Renews",
+        images: [
+            {
+                url: "/og-main.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Все новости — Renews",
+            },
+        ],
+        locale: "ru_RU",
+        type: "website",
+    },
+
+    alternates: {
+        canonical: "/news",
+    },
+};
+
+export const revalidate = 180;
 
 export default async function News() {
-    const news: INewsObject = await getNews(1, '', '', { next: { revalidate: 180 } }, undefined)
+    const news: INewsObject = await getNews(
+        1,
+        "",
+        "",
+        { next: { revalidate: 180 } },
+        undefined,
+    );
 
-    if (news.results.length == 0) return (
-        <>
-            <Header />
-            <main className="py-[30px] min-h-screen">
-                <div className="container">
-                    <div>Данные не найдены</div>
-                </div>
-            </main>
-            <Footer />
-        </>
-    )
+    if (news.results.length == 0)
+        return (
+            <>
+                <Header />
+                <main className="py-[30px] min-h-screen">
+                    <div className="container">
+                        <h1 className="text-[16px] md:text-[24px] xl:text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">
+                            Все Новости
+                        </h1>
+                        <div>Данные не найдены</div>
+                    </div>
+                </main>
+                <Footer />
+            </>
+        );
 
     return (
         <>
             <Header />
             <main className="py-[30px] min-h-screen">
                 <div className="container">
+                    <h1 className="text-[16px] md:text-[24px] xl:text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">
+                        Все Новости
+                    </h1>
                     <CardList list={news.results} />
                     <div className="pb-[30px] md:pb-[50px]" />
                     <InfiniteScroll params={{}} />
@@ -35,5 +76,5 @@ export default async function News() {
             </main>
             <Footer />
         </>
-    )
+    );
 }
