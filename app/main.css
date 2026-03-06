@@ -4,6 +4,11 @@
 
 @theme {
     --breakpoint-xxl: 1440px;
+    --breakpoint-ssm: 400px;
+    --breakpoint-4xl: 1160px;
+    --breakpoint-5xl: 1255px;
+    --breakpoint-6xl: 1530px;
+    --breakpoint-7xl: 1640px;
 }
 
 @layer base {
@@ -18,57 +23,6 @@
     .tiptap h4 {
         @apply text-sm font-bold;
     }
-}
-
-
-
-.custom-audio {
-    background: #c7d0db;
-    padding: 18px;
-    border-radius: 12px;
-    max-width: 720px;
-    font-family: sans-serif;
-}
-
-.audio-header {
-    font-weight: 600;
-    margin-bottom: 12px;
-}
-
-.audio-body {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.play-btn {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: none;
-    background: white;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.wave {
-    flex: 1;
-    height: 40px;
-    background: repeating-linear-gradient(to right,
-            #000,
-            #000 2px,
-            transparent 2px,
-            transparent 8px);
-    opacity: 0.6;
-}
-
-.audio-speed,
-.audio-time {
-    background: #3b5b82;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
 }
 
 body {
@@ -261,13 +215,12 @@ body {
     font-style: normal !important;
 }
 
-
-
 .tiptap .custom-audio {
     background: #c7d0db;
     padding: 12px;
     border-radius: 12px;
-    max-width: 400px;
+    max-width: 700px;
+    margin: 0 auto;
     font-family: sans-serif;
 }
 

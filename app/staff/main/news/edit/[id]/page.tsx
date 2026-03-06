@@ -1,17 +1,22 @@
 "use client"
 
-import { ICategory } from "@/app/utils/types";
-import { getCategories } from "@/app/utils/utilis";
-import { getCookie } from "cookies-next";
-import dynamic from "next/dynamic";
-import { SubmitEvent, useEffect, useState } from "react";
+import { ICategory, INews } from "@/app/utils/types"
+import { getCategories, getNewsDetail } from "@/app/utils/utilis"
+import { getCookie } from "cookies-next"
+import dynamic from "next/dynamic"
+import React, { SubmitEvent, useEffect, useState } from "react"
+
 
 const TipTap = dynamic(
-    () => import("../../../components/TipTap"),
+    () => import("../../../../components/TipTap"),
     { ssr: false }
 );
 
-export default function CreateNews() {
+
+export default function EditNews({ params }: any) {
+    // @ts-expect-error херня с некстом
+    const { id } = React.use(params)
+
     const [categories, setCategories] = useState<ICategory[] | null>(null)
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
     const [selectedSubcategory, setSelectedSubcategory] = useState<number | null>(null)
@@ -27,24 +32,24 @@ export default function CreateNews() {
 
 
 
-    const createProduct = async (e: SubmitEvent<HTMLFormElement>) => {
+    const editProduct = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (!file || !title || !shortTitle || !file || !smallFile || !content || !desc || !selectedCategory || !selectedSubcategory) return
         try {
 
             const formData = new FormData();
-            formData.append("title", title);
-            formData.append("short_title", shortTitle);
-            formData.append("main_image", file)
-            formData.append("preview", smallFile)
-            formData.append("content", content)
-            formData.append("desc", desc)
-            formData.append("category_choose", selectedCategory.toString())
-            formData.append("subcategory_choose", selectedSubcategory.toString())
-
-            await fetch(`${process.env.NEXT_PUBLIC_API}/news/`,
+            if (title) formData.append("title", title);
+            if (shortTitle) formData.append("short_title", shortTitle);
+            if (file) formData.append("main_image", file)
+            if (smallFile) formData.append("preview", smallFile)
+            if (content) formData.append("content", content)
+            if (selectedCategory) formData.append("desc", desc)
+            if (selectedCategory) formData.append("category_choose", selectedCategory.toString())
+            if (selectedSubcategory) formData.append("subcategory_choose", selectedSubcategory.toString())
+            console.log(formData.values());
+            
+            await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}/`,
                 {
-                    method: "POST",
+                    method: "PATCH",
                     headers: {
                         "Authorization": `Bearer ${token}`
                     },
@@ -68,8 +73,17 @@ export default function CreateNews() {
 
     useEffect(() => {
         const getData = async () => {
-            const data = await getCategories(undefined)
-            setCategories(data)
+            const [news_data, categories_data] = await Promise.all([
+                getNewsDetail(id, undefined),
+                getCategories(undefined)
+            ]);
+            console.log(news_data.content);
+
+            setCategories(categories_data)
+            setTitle(news_data.title)
+            setShortTitle(news_data.short_title)
+            setDesc(news_data.desc)
+            setContent(news_data.content)
         }
         getData()
     }, [])
@@ -79,7 +93,7 @@ export default function CreateNews() {
         <div>
             <div className="container">
                 <div className="py-[20px]">
-                    <form onSubmit={(e) => createProduct(e)} className="w-full flex flex-col gap-[20px] bg-white p-[20px] text-[#29547F]">
+                    <form onSubmit={(e) => editProduct(e)} className="w-full flex flex-col gap-[20px] bg-white p-[20px] text-[#29547F]">
                         <h2>Добавить Новость</h2>
                         <input
                             type="text"
@@ -101,7 +115,7 @@ export default function CreateNews() {
                             onChange={(e) => setDesc(e.target.value)}
                             className="px-[20px] py-[10px] border border-gray-400 outline-none rounded-[2px] h-[400px]"
                         />
-                        <TipTap setContent={setContent} content=""/>
+                        <TipTap setContent={setContent} content={content} />
                         {smallFile && <span>Первью введено</span>}
                         <label htmlFor="previewInput" className="px-[20px] py-[10px] border border-gray-400 outline-none rounded-[2px] cursor-pointer">Выбрать Первью</label>
                         <input

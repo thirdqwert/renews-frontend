@@ -15,13 +15,13 @@ export default function YouTubeVids() {
     const [content, setContent] = useState("")
     const [deleteWindow, setDeleteWindow] = useState<number | null>(null)
     const token = getCookie("access_token")
-    
+
     const getProducts = async (pageCount: number) => {
         try {
             const params = new URLSearchParams()
             if (pageCount) params.append("page", String(pageCount))
             const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids?${params.toString()}`)
-            
+
             if (!res.ok) {
                 setProducts(null)
                 setError(true)
@@ -40,7 +40,7 @@ export default function YouTubeVids() {
         try {
             await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids/${id}/`,
                 {
-                    method: "delete",
+                    method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
@@ -63,17 +63,16 @@ export default function YouTubeVids() {
             formData.append("image", file)
             formData.append("link", content)
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids/`,
+            await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids/`,
                 {
-                    method: "post",
+                    method: "POST",
                     headers: {
                         "Authorization": `Bearer ${token}`
                     },
                     body: formData
                 }
             )
-            console.log(await res.json());
-            
+
             setTitle("")
             setContent("")
             setFile(null)
@@ -86,20 +85,19 @@ export default function YouTubeVids() {
     const handleCopy = async (link: string) => {
         await navigator.clipboard.writeText(link);
     };
-    
+
     useEffect(() => {
         const getData = async () => {
             await getProducts(page)
         }
         getData()
     }, [page])
-    
+
     return (
         <div className="py-[50px]">
             <div className="container">
-                <h2>YouTube Vids</h2>
-                <form onSubmit={(e) => createProduct(e)} className="my-[10px] p-[30px] w-full max-w-[600px] border border-gray-400 flex flex-col gap-[20px]">
-                    <h2>Добавить Видео</h2>
+                <form onSubmit={(e) => createProduct(e)} className="my-[20px] p-[30px] w-full  text-[#29547F] bg-white flex flex-col gap-[20px]">
+                    <h2 className="text-center">Добавить Видео</h2>
                     <input
                         type="text"
                         value={title}
@@ -121,28 +119,28 @@ export default function YouTubeVids() {
                         id="imageInput"
                         className="hidden"
                     />
-                    <button className="border border-gray-400 p-[10px] cursor-pointer">Создать</button>
+                    <button className="text-white bg-[#29547F] p-[10px] cursor-pointer">Создать</button>
                 </form>
                 <div className="w-full flex flex-col gap-[20px] py-[50px]">
                     {error && <div>Данные не найдены</div>}
                     {products && products.results?.map(product => (
-                        <div key={product.id} className="w-full flex flex-col gap-[20px] border border-gray-400 p-[20px]">
+                        <div key={product.id} className="w-full flex flex-col gap-[20px] bg-white p-[20px] text-[#29547F]">
                             <div className="flex flex-row justify-between items-end gap-[10px] ">
                                 <div className="flex flex-col gap-[5px]">
                                     <Image unoptimized width={0} height={0} src={product.image} alt="" className="w-[100px] h-[50px] object-cover mb-[10px]" />
                                     <h3>Название: {product.title}</h3>
                                     <h3>Дата создания: {getDateString(product.created_at)}</h3>
                                 </div>
-                                <button onClick={() => handleCopy(product.link)} className="border border-gray-400 px-[10px] py-[5px] cursor-pointer">Скоприровать ссылку</button>
+                                <button onClick={() => handleCopy(product.link)} className="px-[10px] py-[5px] cursor-pointer text-white bg-[#29547F]">Скоприровать ссылку</button>
                             </div>
-                            <button onClick={() => setDeleteWindow(product.id)} className="w-max py-[5px] px-[20px] border border-gray-400 cursor-pointer">Удалить</button>
+                            <button onClick={() => setDeleteWindow(product.id)} className="w-max py-[5px] px-[20px] text-white bg-red-500 cursor-pointer">Удалить</button>
                             {deleteWindow == product.id && <div className="flex flex-row gap-[20px]">
-                                <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => deleteProduct(product.id)}>Да</span>
-                                <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => setDeleteWindow(null)}>Нет</span>
+                                <span className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center" onClick={() => deleteProduct(product.id)}>Да</span>
+                                <span className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center" onClick={() => setDeleteWindow(null)}>Нет</span>
                             </div>}
                         </div>
                     ))}
-                    <Pagination page={page} setPage={setPage}/>
+                    <Pagination page={page} setPage={setPage} />
                 </div>
             </div>
         </div>

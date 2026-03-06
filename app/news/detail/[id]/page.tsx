@@ -13,16 +13,17 @@ export const revalidate = 180
 
 interface IProps {
     params: {
-        id: number
+        id: string
     }
 }
 
 export default async function NewsDetail({ params }: IProps) {
     const { id } = await params
-
-
-    const footer_news: INewsObject = await getNews(1, '', '', { next: { revalidate: 180 } }, undefined)
-    const news: INews | ErrorRes = await getNewsDetail(id, { next: { revalidate: 180 } })
+    
+    const [footer_news, news] = await Promise.all([
+        getNews(1, '', '', { next: { revalidate: 180 } }, undefined),
+        getNewsDetail(id, { next: { revalidate: 180 } })
+    ]);
 
     if ("statusText" in news) return (
         <>
@@ -61,7 +62,7 @@ export default async function NewsDetail({ params }: IProps) {
                         />
                         <p className="text-[12px] md:text-[20px] lg:text-[25px] text-[#495057] font-medium">{news.desc}</p>
                         <br />
-                        <DetailContent content={news.content}/>
+                        <DetailContent content={news.content} />
                     </article>
                     <HeadingLine title="Лента новостей" link="/news/" />
                     <HorizontalCardList list={footer_news.results.slice(0, 3)} />

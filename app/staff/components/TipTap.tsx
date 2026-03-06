@@ -6,13 +6,13 @@ import Highlight from '@tiptap/extension-highlight'
 import StarterKit from '@tiptap/starter-kit'
 import Youtube from '@tiptap/extension-youtube'
 import Image from '@tiptap/extension-image'
-import Audio from '@tiptap/extension-audio'
 import MenuBar from './MenuBar'
 
 interface IProps {
-    setContent: (content: string) => void
+    setContent: (content: string) => void,
+    content: string
 }
-export default function TipTap({ setContent }: IProps) {
+export default function TipTap({ setContent, content }: IProps) {
     const AudioNode = Node.create({
         name: 'audio',
 
@@ -139,8 +139,9 @@ export default function TipTap({ setContent }: IProps) {
         editorProps: {
             attributes: {
                 class: "min-h-[700px] border border-gray-400 p-[20px] tiptap max-w-none [&_ol]:list-decimal [&_ul]:list-disc"
-            }
-        }
+            },
+        },
+        content: content
     })
 
     const saveHtml = () => {

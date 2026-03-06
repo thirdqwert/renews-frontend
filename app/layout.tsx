@@ -37,7 +37,7 @@ export default function RootLayout({
             if (wave.innerHTML.trim()) return;
 
             let bars = "";
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 140; i++) {
                 const height = Math.floor(Math.random() * 28) + 4;
                 bars += \`<span style="display:inline-block;width:2px;min-width:2px;height:\${height}px;background:#1e293b;border-radius:2px;opacity:0.4;flex-shrink:0;"></span>\`;
             }

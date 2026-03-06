@@ -32,23 +32,24 @@ export default function Login() {
     }
 
     return (
-        <div className="w-full h-screen flex flex-row items-center justify-center">
-            <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-[20px] max-w-[500px] w-full border border-gray-400 py-[50px] px-[10px] rounded-[10px]">
+        <div className="w-full h-screen flex flex-row items-center justify-center bg-[#8ecee0]">
+            <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-[20px] max-w-[500px] w-full bg-white py-[50px] px-[10px]">
+                <h3 className="text-center font-bold text-[24px] text-gray-500">Sign In</h3>
                 <input
                     type="text"
                     value={login}
                     onChange={(e) => setLogin(e.target.value)}
                     placeholder="Login"
-                    className="px-[20px] py-[5px] border border-gray-400 outline-none rounded-[2px]"
+                    className="px-[20px] py-[5px] text-gray-500 border border-gray-500 outline-none rounded-[2px]"
                 />
                 <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
-                    className="px-[20px] py-[5px] border border-gray-400 outline-none rounded-[2px]"
+                    className="px-[20px] py-[5px] text-gray-500 border border-gray-500 outline-none rounded-[2px]"
                 />
-                <button type="submit" className="w-max mx-auto px-[20px] py-[5px] border border-gray-400">Sign in</button>
+                <button type="submit" className="w-max mx-auto text-gray-500 px-[20px] py-[5px] border border-gray-500">Sign in</button>
             </form>
         </div>
     )

@@ -58,7 +58,7 @@ export const getNews = async (
     }
 }
 
-export const getNewsDetail = async (id: number, fetchParams: any | undefined): Promise<INews | any> => {
+export const getNewsDetail = async (id: string, fetchParams: any | undefined): Promise<INews | any> => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}`, fetchParams)
 

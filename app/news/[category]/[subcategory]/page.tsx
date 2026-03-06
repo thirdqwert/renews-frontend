@@ -17,18 +17,29 @@ interface IProps {
 
 export default async function NewsSubcategory({ params }: IProps) {
     const { category, subcategory } = await params
-    const news: INewsObject = await getNews(1, category, subcategory, { next: { revalidate: 180 } }, undefined)
-    const categories: ICategory[] = await getCategories({ next: { revalidate: 180 } })
+    const [news, categories] = await Promise.all([
+        getNews(1, category, subcategory, { next: { revalidate: 180 } }, undefined),
+        getCategories({ next: { revalidate: 180 } })
+    ]);
 
     if (news.results.length == 0) return (
         <>
             <Header />
-            <div>Данные не найдены</div>
+            <main className="py-[30px] min-h-screen">
+                <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
+                    <CatSub categories={categories} params={{ categoryBy: category, subcategoryBy: subcategory }} />
+                    <div className="flex flex-col">
+                        <div>Данные не найдены</div>
+
+                    </div>
+                </div>
+            </main>
+            <Footer />
         </>
     )
     return (
         <>
-            {/* <Header /> */}
+            <Header />
             <main className="py-[30px] min-h-screen">
                 <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
                     <CatSub categories={categories} params={{ categoryBy: category, subcategoryBy: subcategory }} />

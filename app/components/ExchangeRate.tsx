@@ -16,56 +16,62 @@ export default function ExchangeRate() {
 
     useEffect(() => {
         const getData = async () => {
-            const [usdRes, rubRes] = await Promise.all([
-                fetch("https://cbu.uz/ru/arkhiv-kursov-valyut/json/USD/"),
-                fetch("https://cbu.uz/ru/arkhiv-kursov-valyut/json/RUB/")
-            ])
-            const [usdData, rubData] = await Promise.all([
-                usdRes.json(),
-                rubRes.json()
-            ])
-            setUzbUsd(usdData[0])
-            setUzbRub(rubData[0])
+            try {
+                const [usdRes, rubRes] = await Promise.all([
+                    fetch("https://cbu.uz/ru/arkhiv-kursov-valyut/json/USD/"),
+                    fetch("https://cbu.uz/ru/arkhiv-kursov-valyut/json/RUB/")
+                ])
+                const [usdData, rubData] = await Promise.all([
+                    usdRes.json(),
+                    rubRes.json()
+                ])
+                setUzbUsd(usdData[0])
+                setUzbRub(rubData[0])
+            } catch (error) {
+                console.log(error);
+            }
+
         }
         getData()
     }, [])
 
     return (
         <>
-            <div className="hidden xxl:flex flex-row gap-[20px] w-[378px]">
-                <div className="flex flex-row gap-[5px]">
-                    <Image src={USDIcon} alt="USD" />
-                    <span className="text-[24px] text-white font-normal">USD</span>
+            {/* для маленький экранов */}
+            <div className="flex ssm:hidden flex-row gap-[10px] justify-end">
+                <div className="flex flex-row gap-[5px]  rounded-[5px]">
+                    <Image src={USDIcon} alt="USD" className="h-[17px] w-[17px]" />
+                    <span className="text-[14px] text-white font-medium">USD</span>
                     <span
-                        className="text-[24px] text-white font-normal">
+                        className="text-[14px] text-white font-medium">
                         {uzbUsd ? uzbUsd.Rate : 0}
                     </span>
                     <Image
-                        width={13}
-                        height={18}
+                        width={10}
+                        height={14}
                         className="object-contain"
                         src={uzbUsd && uzbUsd.Diff[0] == "-" ? redDown : greenTop}
                         alt=""
                     />
                 </div>
-                <div className="flex flex-row gap-[5px]">
-                    <Image src={RUBIcon} alt="RUB" />
-                    <span className="text-[24px] text-white font-normal">RUB</span>
+                <div className="flex flex-row gap-[5px]  rounded-[5px]">
+                    <Image src={RUBIcon} alt="RUB" className="h-[17px] w-[17px]" />
+                    <span className="text-[14px] text-white font-medium">RUB</span>
                     <span
-                        className="text-[24px] text-white font-normal">
+                        className="text-[14px] text-white font-medium">
                         {uzbRub ? uzbRub.Rate : 0}
                     </span>
                     <Image
-                        width={13}
-                        height={18}
+                        width={10}
+                        height={14}
                         className="object-contain"
                         src={uzbRub && uzbRub.Diff[0] == "-" ? redDown : greenTop}
                         alt=""
                     />
                 </div>
             </div>
-
-            <div className="block xxl:hidden h-[21px] xl:h-[30px]">
+            {/* для больших экранов */}
+            <div className="hidden ssm:block h-[21px] xl:h-[30px] w-max">
                 <Swiper
                     className="h-full w-full"
                     direction={"vertical"}
@@ -73,36 +79,31 @@ export default function ExchangeRate() {
                     modules={[Autoplay]}
                     autoplay={{ delay: 3000, disableOnInteraction: false }}
                 >
-
                     <SwiperSlide>
-                        <div className="flex flex-row gap-[5px]">
-                            <Image src={USDIcon} alt="USD" />
-                            <span className="md:text-[16px] xl:text-[24px] text-white font-normal">USD</span>
+                        <div className="flex flex-row gap-[5px] items-center">
+                            <Image src={USDIcon} alt="USD" className="w-[17px] h-[17px] md:w-[23px] md:h-[23px]" />
+                            <span className="text-[14px] md:text-[16px] xl:text-[24px] text-white font-normal">USD</span>
                             <span
-                                className="md:text-[16px] xl:text-[24px] text-white font-normal">
+                                className="text-[14px] md:text-[16px] xl:text-[24px] text-white font-normal">
                                 {uzbUsd ? uzbUsd.Rate : 0}
                             </span>
                             <Image
-                                width={13}
-                                height={18}
-                                className="object-contain"
+                                className="object-contain w-[10px] h-[14px] md:w-[11px] lg:h-[15px] xl:w-[14px] xl:h-[19px]"
                                 src={uzbUsd && uzbUsd.Diff[0] == "-" ? redDown : greenTop}
                                 alt=""
                             />
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <div className="flex flex-row gap-[5px]">
-                            <Image src={RUBIcon} alt="RUB" />
-                            <span className="md:text-[16px] xl:text-[24px] text-white font-normal">RUB</span>
+                        <div className="flex flex-row gap-[5px] items-center">
+                            <Image src={RUBIcon} alt="RUB" className="w-[17px] h-[17px] md:w-[23px] md:h-[23px]" />
+                            <span className="text-[14px] md:text-[16px] xl:text-[24px] text-white font-normal">RUB</span>
                             <span
-                                className="md:text-[16px] xl:text-[24px] text-white font-normal">
+                                className="text-[14px] md:text-[16px] xl:text-[24px] text-white font-normal">
                                 {uzbRub ? uzbRub.Rate : 0}
                             </span>
                             <Image
-                                width={13}
-                                height={18}
-                                className="object-contain"
+                                className="object-contain w-[10px] h-[14px] md:w-[11px] lg:h-[15px] xl:w-[14px] xl:h-[19px]"
                                 src={uzbRub && uzbRub.Diff[0] == "-" ? redDown : greenTop}
                                 alt=""
                             />
@@ -111,6 +112,5 @@ export default function ExchangeRate() {
                 </Swiper>
             </div>
         </>
-
     )
 }

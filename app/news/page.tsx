@@ -14,7 +14,12 @@ export default async function News() {
     if (news.results.length == 0) return (
         <>
             <Header />
-            <div>Данные не найдены</div>
+            <main className="py-[30px] min-h-screen">
+                <div className="container">
+                    <div>Данные не найдены</div>
+                </div>
+            </main>
+            <Footer />
         </>
     )
 

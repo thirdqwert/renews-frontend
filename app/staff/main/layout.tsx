@@ -16,7 +16,7 @@ export default function StaffLayout({
     useEffect(() => {
         const token = getCookie("access_token")
         if (!token) {
-            router.push("login/")
+            router.push("/staff/login/")
         }
 
     }, [])
@@ -24,13 +24,21 @@ export default function StaffLayout({
     return (
 
         <>
-
-            <header className="py-[20px]">
+            <header className="py-[20px] bg-white">
                 <div className="container">
-                    <Link href={"/staff/main"} className="py-[10px] px-[20px] border border-gray-400">Главная</Link>
+                    <nav className="flex flex-orw gap-[20px]">
+                        <Link href={"/staff/main"} className="text-[#29547F] font-medium">Главная</Link>
+                        <Link href={"/staff/main/images"} className="text-[#29547F] font-medium">Изображения</Link>
+                        <Link href={"/staff/main/audios"} className="text-[#29547F] font-medium">Аудио</Link>
+                        <Link href={"/staff/main/news"} className="text-[#29547F] font-medium">Новости</Link>
+                        <Link href={"/staff/main/reels"} className="text-[#29547F] font-medium">Reels</Link>
+                        <Link href={"/staff/main/youtubevids"} className="text-[#29547F] font-medium">YouTubeVids</Link>
+                    </nav>
                 </div>
             </header>
-            {children}
+            <main className="bg-[#8ecee0]">
+                {children}
+            </main>
         </>
     )
 }

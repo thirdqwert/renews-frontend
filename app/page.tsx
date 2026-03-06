@@ -21,7 +21,7 @@ export default async function Home() {
     const hot_news = data && data.slice(0, 3)
     const news = data && data.slice(0, 6)
     const culture_news = data && data.filter(item => item.category == "Культура").slice(0, 4)
-    const politics_news = data && data.filter(item => item.category == "Политика").slice(0, 6)
+    const politics_news = data && data.filter(item => item.category == "Новости страны").slice(0, 6)
     const sport_news = data && data.filter(item => item.category == "Спорт").slice(0, 4)
     const popular_news = data && data.sort((a, b) => b.views - a.views).slice(0, 3)
 
@@ -67,7 +67,7 @@ export default async function Home() {
                 </section>
                 <div className="container">
                     <section className="pb-[30px] md:pb-[70px] pt-[30px]">
-                        <HeadingLine link="/news/politika" title="Политика" />
+                        <HeadingLine link="/news/novosti-strany" title="Новости страны" />
                         <div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 grid-rows-[auto] gap-x-[20px] gap-y-[25px] mb-[30px]">
                                 <div className="sm:col-span-2 xl:row-span-2">

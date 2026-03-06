@@ -24,7 +24,7 @@ export default function News() {
 
             const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?${params.toString()}`,
                 {
-                    method: "get",
+                    method: "GET",
                     headers: {
                         "Content-Type": "application/json",
                     }
@@ -51,7 +51,7 @@ export default function News() {
         try {
             await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}/`,
                 {
-                    method: "delete",
+                    method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
@@ -77,12 +77,13 @@ export default function News() {
     return (
         <div>
             <div className="container">
-                <h2>Новости</h2>
-                <Link href={"news/create/"} className="mt-[30px] border border-gray-400 p-[10px] block w-max">Добавить новость</Link>
-                <div className="w-full flex flex-col gap-[20px] py-[50px]">
+                <div className="py-[25]">
+                    <Link href={"news/create"} className="block ml-auto w-max py-[10px] px-[10px] text-[#29547F] bg-white">Добавить Новость</Link>
+                </div>
+                <div className="w-full flex flex-col gap-[20px] py-[25px]">
                     {error && <div>Данные не найдены</div>}
                     {products && products.results?.map(product => (
-                        <div key={product.id} className="w-full flex flex-col gap-[20px] border border-gray-400 p-[20px]">
+                        <div key={product.id} className="w-full flex flex-col gap-[20px] bg-white p-[20px] text-[#29547F]">
                             <div className="flex flex-row justify-between items-end gap-[10px] ">
                                 <div className="flex flex-col gap-[5px]">
                                     <Image unoptimized width={0} height={0} src={product.preview} alt="" className="w-[100px] h-[50px] object-cover mb-[10px]" />
@@ -90,10 +91,13 @@ export default function News() {
                                     <h3>Дата создания: {getDateString(product.created_at)}</h3>
                                 </div>
                             </div>
-                            <button onClick={() => setDeleteWindow(product.id)} className="w-max py-[5px] px-[20px] border border-gray-400 cursor-pointer">Удалить</button>
+                            <div className="flex flex-row gap-[20px]">
+                                <button onClick={() => setDeleteWindow(product.id)} className="w-max py-[5px] px-[20px] text-white bg-red-500 cursor-pointer">Удалить</button>
+                                <Link href={`news/edit/${product.id}`} className="w-max py-[5px] px-[20px] text-white bg-[#29547F]">Изменить</Link>
+                            </div>
                             {deleteWindow == product.id && <div className="flex flex-row gap-[20px]">
-                                <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => deleteProduct(product.id)}>Да</span>
-                                <span className="border border-gray-400 p-[10px] cursor-pointer" onClick={() => setDeleteWindow(null)}>Нет</span>
+                                <span className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center" onClick={() => deleteProduct(product.id)}>Да</span>
+                                <span className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center" onClick={() => setDeleteWindow(null)}>Нет</span>
                             </div>}
                         </div>
                     ))}
