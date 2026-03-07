@@ -22,9 +22,7 @@ export default function CatSub({ categories, params }: IProps) {
     const { categoryBy, subcategoryBy } = params;
     const pathname = usePathname();
     const news = pathname.split("/")[1];
-    const currentCategory =
-        categoryBy &&
-        categories.find((category) => category.slug == categoryBy);
+    const currentCategory = categoryBy && categories.find((category) => category.slug == categoryBy);
 
     return (
         <>
@@ -58,9 +56,7 @@ export default function CatSub({ categories, params }: IProps) {
                                 <h2
                                     className={
                                         "block py-[3px] px-[10px] bg-[#29547f] font-medium text-white text-[15px] md:text-[17px] rounded-[20px] " +
-                                        (news == "news" &&
-                                            subcategoryBy == undefined &&
-                                            "active_subcategory")
+                                        (news == "news" && subcategoryBy == undefined && "active_subcategory")
                                     }
                                 >
                                     Всё
@@ -69,17 +65,12 @@ export default function CatSub({ categories, params }: IProps) {
                         </SwiperSlide>
                         {currentCategory &&
                             currentCategory.subcategories.map((subcategory) => (
-                                <SwiperSlide
-                                    key={subcategory.id}
-                                    className="w-max"
-                                >
+                                <SwiperSlide key={subcategory.id} className="w-max">
                                     <Link
                                         href={`/news/${currentCategory.slug}/${subcategory.slug}/`}
                                         className={
                                             "block py-[3px] px-[10px] bg-[#29547f] font-medium text-white text-[15px] md:text-[17px] rounded-[20px] " +
-                                            (subcategoryBy ==
-                                                subcategory.slug &&
-                                                "active_subcategory")
+                                            (subcategoryBy == subcategory.slug && "active_subcategory")
                                         }
                                     >
                                         {subcategory.title}
@@ -98,32 +89,24 @@ export default function CatSub({ categories, params }: IProps) {
                         <div className="w-[98%] mx-auto h-[1px] bg-[rgba(255,255,255,0.5)]" />
                         <div className="lg:py-[20px] xl:py-[15px]">
                             {currentCategory &&
-                                currentCategory.subcategories.map(
-                                    (subcategory) => (
-                                        <Link
-                                            href={`/news/${currentCategory.slug}/${subcategory.slug}`}
-                                            key={subcategory.id}
-                                            className={
-                                                "relative block overflow-hidden py-[6px] px-[20px] text-white lg:text-[15px] xl:text-[20px] font-medium px-[25px] py-[8px] " +
-                                                (subcategoryBy ==
-                                                    subcategory.slug &&
-                                                    "active_category")
-                                            }
-                                        >
-                                            <span
-                                                className="absolute w-[16px] h-full top-0 bottom-0 left-[-8px] bg-[#4490dd] rounded-[20px]"
-                                                style={{
-                                                    display:
-                                                        subcategoryBy ==
-                                                        subcategory.slug
-                                                            ? "block"
-                                                            : "none",
-                                                }}
-                                            />
-                                            {subcategory.title}
-                                        </Link>
-                                    ),
-                                )}
+                                currentCategory.subcategories.map((subcategory) => (
+                                    <Link
+                                        href={`/news/${currentCategory.slug}/${subcategory.slug}`}
+                                        key={subcategory.id}
+                                        className={
+                                            "relative block overflow-hidden py-[6px] px-[20px] text-white lg:text-[15px] xl:text-[20px] font-medium px-[25px] py-[8px] " +
+                                            (subcategoryBy == subcategory.slug && "active_category")
+                                        }
+                                    >
+                                        <span
+                                            className="absolute w-[16px] h-full top-0 bottom-0 left-[-8px] bg-[#4490dd] rounded-[20px]"
+                                            style={{
+                                                display: subcategoryBy == subcategory.slug ? "block" : "none",
+                                            }}
+                                        />
+                                        {subcategory.title}
+                                    </Link>
+                                ))}
                         </div>
                         <div className="w-[98%] mx-auto h-[1px] bg-[rgba(255,255,255,0.5)]" />
                         <Link

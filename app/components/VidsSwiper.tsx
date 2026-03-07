@@ -63,7 +63,7 @@ export default function VidsSwiper() {
                             >
                                 <div className="relative rounded-[20px] overflow-hidden">
                                     <Image
-                                        unoptimized
+                                        unoptimized={process.env.NEXT_PUBLIC_DEV === "dev"}
                                         width={0}
                                         height={0}
                                         src={vid.image}

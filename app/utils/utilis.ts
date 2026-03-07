@@ -1,12 +1,4 @@
-import {
-    ErrorRes,
-    ICategory,
-    INews,
-    INewsObject,
-    IReelsObject,
-    IToken,
-    IVidsObject,
-} from "./types";
+import { ErrorRes, ICategory, INews, INewsObject, IReelsObject, IToken, IVidsObject } from "./types";
 // // добавть обработчкие ошибок
 //   if (!res.ok) {
 //     throw new Error("Failed to fetch news")
@@ -30,14 +22,9 @@ export const getAdmin = async () => {
     }
 };
 
-export const getCategories = async (
-    fetchParams: any | undefined,
-): Promise<ICategory[]> => {
+export const getCategories = async (fetchParams: any | undefined): Promise<ICategory[]> => {
     try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/categories/`,
-            fetchParams,
-        );
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories/`, fetchParams);
         const categories = await res.json();
         return categories;
     } catch (error) {
@@ -76,15 +63,9 @@ export const getNews = async (
     }
 };
 
-export const getNewsDetail = async (
-    id: string,
-    fetchParams: any | undefined,
-): Promise<INews | any> => {
+export const getNewsDetail = async (id: string, fetchParams: any | undefined): Promise<INews | any> => {
     try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/news/${id}`,
-            fetchParams,
-        );
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}`, fetchParams);
 
         if (!res.ok) {
             return res;
@@ -161,14 +142,9 @@ export const getDateString = (created_at: string) => {
     return date;
 };
 
-export const getReels = async (
-    fetchParams: any | undefined,
-): Promise<IReelsObject> => {
+export const getReels = async (fetchParams: any | undefined): Promise<IReelsObject> => {
     try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/reels/`,
-            fetchParams,
-        );
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/reels/`, fetchParams);
         const data = await res.json();
         return data;
     } catch (error) {
@@ -176,14 +152,9 @@ export const getReels = async (
     }
 };
 
-export const getVids = async (
-    fetchParams: any | undefined,
-): Promise<IVidsObject> => {
+export const getVids = async (fetchParams: any | undefined): Promise<IVidsObject> => {
     try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/youtubevids/`,
-            fetchParams,
-        );
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids/`, fetchParams);
         const data = await res.json();
         return data;
     } catch (error) {

@@ -21,16 +21,13 @@ export default function Audios() {
 
             if (pageCount) params.append("page", String(pageCount));
 
-            const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/audios?${params.toString()}`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/audios?${params.toString()}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
-            );
+            });
 
             if (!res.ok) {
                 setProducts(null);
@@ -123,9 +120,7 @@ export default function Audios() {
                         id="audioInput"
                         className="hidden"
                     />
-                    <button className="text-white bg-[#29547F] p-[10px] cursor-pointer">
-                        Создать
-                    </button>
+                    <button className="text-white bg-[#29547F] p-[10px] cursor-pointer">Создать</button>
                 </form>
                 <div className="w-full flex flex-col gap-[20px] py-[50px]">
                     {error && <div>Данные не найдены</div>}
@@ -138,22 +133,14 @@ export default function Audios() {
                                 <div className="flex flex-row justify-between items-end gap-[10px] ">
                                     <div className="flex flex-col gap-[5px]">
                                         <audio controls>
-                                            <source
-                                                src={product.audio}
-                                                type="audio/mpeg"
-                                            />
+                                            <source src={product.audio} type="audio/mpeg" />
                                             Ваш браузер не поддерживает аудио.
                                         </audio>
                                         <h3>Название: {product.title}</h3>
-                                        <h3>
-                                            Дата создания:{" "}
-                                            {getDateString(product.created_at)}
-                                        </h3>
+                                        <h3>Дата создания: {getDateString(product.created_at)}</h3>
                                     </div>
                                     <button
-                                        onClick={() =>
-                                            handleCopy(product.audio)
-                                        }
+                                        onClick={() => handleCopy(product.audio)}
                                         className="px-[10px] py-[5px] cursor-pointer text-white bg-[#29547F]"
                                     >
                                         Скоприровать ссылку
@@ -169,17 +156,13 @@ export default function Audios() {
                                     <div className="flex flex-row gap-[20px]">
                                         <span
                                             className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center"
-                                            onClick={() =>
-                                                deleteProduct(product.id)
-                                            }
+                                            onClick={() => deleteProduct(product.id)}
                                         >
                                             Да
                                         </span>
                                         <span
                                             className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center"
-                                            onClick={() =>
-                                                setDeleteWindow(null)
-                                            }
+                                            onClick={() => setDeleteWindow(null)}
                                         >
                                             Нет
                                         </span>

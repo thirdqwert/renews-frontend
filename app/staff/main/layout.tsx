@@ -24,40 +24,22 @@ export default function StaffLayout({
             <header className="py-[20px] bg-white">
                 <div className="container">
                     <nav className="flex flex-orw gap-[20px]">
-                        <Link
-                            href={"/staff/main"}
-                            className="text-[#29547F] font-medium"
-                        >
+                        <Link href={"/staff/main"} className="text-[#29547F] font-medium">
                             Главная
                         </Link>
-                        <Link
-                            href={"/staff/main/images"}
-                            className="text-[#29547F] font-medium"
-                        >
+                        <Link href={"/staff/main/images"} className="text-[#29547F] font-medium">
                             Изображения
                         </Link>
-                        <Link
-                            href={"/staff/main/audios"}
-                            className="text-[#29547F] font-medium"
-                        >
+                        <Link href={"/staff/main/audios"} className="text-[#29547F] font-medium">
                             Аудио
                         </Link>
-                        <Link
-                            href={"/staff/main/news"}
-                            className="text-[#29547F] font-medium"
-                        >
+                        <Link href={"/staff/main/news"} className="text-[#29547F] font-medium">
                             Новости
                         </Link>
-                        <Link
-                            href={"/staff/main/reels"}
-                            className="text-[#29547F] font-medium"
-                        >
+                        <Link href={"/staff/main/reels"} className="text-[#29547F] font-medium">
                             Reels
                         </Link>
-                        <Link
-                            href={"/staff/main/youtubevids"}
-                            className="text-[#29547F] font-medium"
-                        >
+                        <Link href={"/staff/main/youtubevids"} className="text-[#29547F] font-medium">
                             YouTubeVids
                         </Link>
                     </nav>

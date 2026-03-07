@@ -21,10 +21,7 @@ export default function ExchangeRate() {
                     fetch("https://cbu.uz/ru/arkhiv-kursov-valyut/json/USD/"),
                     fetch("https://cbu.uz/ru/arkhiv-kursov-valyut/json/RUB/"),
                 ]);
-                const [usdData, rubData] = await Promise.all([
-                    usdRes.json(),
-                    rubRes.json(),
-                ]);
+                const [usdData, rubData] = await Promise.all([usdRes.json(), rubRes.json()]);
                 setUzbUsd(usdData[0]);
                 setUzbRub(rubData[0]);
             } catch (error) {
@@ -39,46 +36,26 @@ export default function ExchangeRate() {
             {/* для маленький экранов */}
             <div className="flex ssm:hidden flex-row gap-[10px] justify-end">
                 <div className="flex flex-row gap-[5px]  rounded-[5px]">
-                    <Image
-                        src={USDIcon}
-                        alt="USD"
-                        className="h-[17px] w-[17px]"
-                    />
-                    <span className="text-[14px] text-white font-medium">
-                        USD
-                    </span>
-                    <span className="text-[14px] text-white font-medium">
-                        {uzbUsd ? uzbUsd.Rate : 0}
-                    </span>
+                    <Image src={USDIcon} alt="USD" className="h-[17px] w-[17px]" />
+                    <span className="text-[14px] text-white font-medium">USD</span>
+                    <span className="text-[14px] text-white font-medium">{uzbUsd ? uzbUsd.Rate : 0}</span>
                     <Image
                         width={10}
                         height={14}
                         className="object-contain"
-                        src={
-                            uzbUsd && uzbUsd.Diff[0] == "-" ? redDown : greenTop
-                        }
+                        src={uzbUsd && uzbUsd.Diff[0] == "-" ? redDown : greenTop}
                         alt=""
                     />
                 </div>
                 <div className="flex flex-row gap-[5px]  rounded-[5px]">
-                    <Image
-                        src={RUBIcon}
-                        alt="RUB"
-                        className="h-[17px] w-[17px]"
-                    />
-                    <span className="text-[14px] text-white font-medium">
-                        RUB
-                    </span>
-                    <span className="text-[14px] text-white font-medium">
-                        {uzbRub ? uzbRub.Rate : 0}
-                    </span>
+                    <Image src={RUBIcon} alt="RUB" className="h-[17px] w-[17px]" />
+                    <span className="text-[14px] text-white font-medium">RUB</span>
+                    <span className="text-[14px] text-white font-medium">{uzbRub ? uzbRub.Rate : 0}</span>
                     <Image
                         width={10}
                         height={14}
                         className="object-contain"
-                        src={
-                            uzbRub && uzbRub.Diff[0] == "-" ? redDown : greenTop
-                        }
+                        src={uzbRub && uzbRub.Diff[0] == "-" ? redDown : greenTop}
                         alt=""
                     />
                 </div>
@@ -94,11 +71,7 @@ export default function ExchangeRate() {
                 >
                     <SwiperSlide>
                         <div className="flex flex-row gap-[5px] items-center">
-                            <Image
-                                src={USDIcon}
-                                alt="USD"
-                                className="w-[17px] h-[17px] md:w-[23px] md:h-[23px]"
-                            />
+                            <Image src={USDIcon} alt="USD" className="w-[17px] h-[17px] md:w-[23px] md:h-[23px]" />
                             <span className="text-[14px] md:text-[16px] xl:text-[24px] text-white font-normal">
                                 USD
                             </span>
@@ -107,22 +80,14 @@ export default function ExchangeRate() {
                             </span>
                             <Image
                                 className="object-contain w-[10px] h-[14px] md:w-[11px] lg:h-[15px] xl:w-[14px] xl:h-[19px]"
-                                src={
-                                    uzbUsd && uzbUsd.Diff[0] == "-"
-                                        ? redDown
-                                        : greenTop
-                                }
+                                src={uzbUsd && uzbUsd.Diff[0] == "-" ? redDown : greenTop}
                                 alt=""
                             />
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="flex flex-row gap-[5px] items-center">
-                            <Image
-                                src={RUBIcon}
-                                alt="RUB"
-                                className="w-[17px] h-[17px] md:w-[23px] md:h-[23px]"
-                            />
+                            <Image src={RUBIcon} alt="RUB" className="w-[17px] h-[17px] md:w-[23px] md:h-[23px]" />
                             <span className="text-[14px] md:text-[16px] xl:text-[24px] text-white font-normal">
                                 RUB
                             </span>
@@ -131,11 +96,7 @@ export default function ExchangeRate() {
                             </span>
                             <Image
                                 className="object-contain w-[10px] h-[14px] md:w-[11px] lg:h-[15px] xl:w-[14px] xl:h-[19px]"
-                                src={
-                                    uzbRub && uzbRub.Diff[0] == "-"
-                                        ? redDown
-                                        : greenTop
-                                }
+                                src={uzbRub && uzbRub.Diff[0] == "-" ? redDown : greenTop}
                                 alt=""
                             />
                         </div>

@@ -8,8 +8,7 @@ export const metadata: Metadata = {
         template: "%s | Renews",
         default: "Renews — Новости Узбекистана и мира",
     },
-    description:
-        "Renews — актуальные новости Узбекистана: политика, спорт, экономика, технологии и культура.",
+    description: "Renews — актуальные новости Узбекистана: политика, спорт, экономика, технологии и культура.",
 
     alternates: {
         canonical: "https://renews.uz",
@@ -36,7 +35,7 @@ export default function RootLayout({
                             "@context": "https://schema.org",
                             "@type": "WebSite",
                             name: "Renews",
-                            url: "https://renews.uz",
+                            url: process.env.NEXT_PUBLIC_SITE_URL,
                             inLanguage: "ru",
                         }),
                     }}

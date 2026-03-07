@@ -16,7 +16,7 @@ export default function Card({ item }: IProps) {
                         {item.category}
                     </span>
                     <Image
-                        unoptimized
+                        unoptimized={process.env.NEXT_PUBLIC_DEV === "dev"}
                         width={0}
                         height={0}
                         className="w-full h-[218px] object-cover"
@@ -34,9 +34,7 @@ export default function Card({ item }: IProps) {
                     <h3 className="mb-[10px] text-[#212529] text-[14px] md:text-[16px] lg:text-[20px] font-bold short_title">
                         {item.title}
                     </h3>
-                    <p className="text-[#495057] text-[13px] md:text-[17px] font-medium short_desc">
-                        {item.desc}
-                    </p>
+                    <p className="text-[#495057] text-[13px] md:text-[17px] font-medium short_desc">{item.desc}</p>
                 </div>
             </article>
         </Link>

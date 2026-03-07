@@ -27,13 +27,7 @@ export default function InfiniteScroll({ params }: IProps) {
             if (inView && hasMore) {
                 try {
                     setIsLoading(true);
-                    const data = await getNews(
-                        page,
-                        category,
-                        subcategory,
-                        undefined,
-                        undefined,
-                    );
+                    const data = await getNews(page, category, subcategory, undefined, undefined);
 
                     if (data.statusText == "Not Found") {
                         setHasMore(false);
@@ -56,12 +50,7 @@ export default function InfiniteScroll({ params }: IProps) {
         <>
             {list && <CardList list={list} />}
             {
-                <div
-                    className={
-                        "flex flex-row justify-center py-[30px] " +
-                        (isLoading ? "" : "hidden")
-                    }
-                >
+                <div className={"flex flex-row justify-center py-[30px] " + (isLoading ? "" : "hidden")}>
                     <Loader />
                 </div>
             }

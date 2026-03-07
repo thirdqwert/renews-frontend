@@ -19,9 +19,10 @@ export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     const categories: ICategory[] = await getCategories({
         next: { revalidate: 180 },
     });
-    const currentCategory = categories.find(item => item.slug == category);
-    const currentSubcategory = currentCategory && currentCategory.subcategories.find(item => item.slug == subcategory);
-    const subcategoryName = currentSubcategory?.title
+    const currentCategory = categories.find((item) => item.slug == category);
+    const currentSubcategory =
+        currentCategory && currentCategory.subcategories.find((item) => item.slug == subcategory);
+    const subcategoryName = currentSubcategory?.title;
     return {
         title: `${subcategoryName} — Новости Узбекистана`,
         description: `Читайте последние новости раздела "${subcategoryName}" на Renews. Актуальные события Узбекистана и мира.`,
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: IProps): Promise<Metadata> {
             description: `Последние новости раздела "${subcategoryName}".`,
             url: `/news/${currentSubcategory?.slug}`,
             siteName: "Renews",
-            images: [{ url: "/og-main.jpg" }],
+            images: [{ url: "/images/og-main.jpg" }],
             locale: "ru_RU",
             type: "website",
         },
@@ -47,13 +48,7 @@ export const revalidate = 180;
 export default async function NewsSubcategory({ params }: IProps) {
     const { category, subcategory } = await params;
     const [news, categories] = await Promise.all([
-        getNews(
-            1,
-            category,
-            subcategory,
-            { next: { revalidate: 180 } },
-            undefined,
-        ),
+        getNews(1, category, subcategory, { next: { revalidate: 180 } }, undefined),
         getCategories({ next: { revalidate: 180 } }),
     ]);
 

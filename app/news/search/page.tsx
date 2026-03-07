@@ -3,9 +3,11 @@
 import CardList from "@/app/components/CardList";
 import Header from "@/app/components/Header";
 import Loader from "@/app/components/Loader";
+import searchIcon from "../../../public/images/searchBlack.svg";
 import { ErrorRes, INews, INewsObject } from "@/app/utils/types";
 import { getNews } from "@/app/utils/utilis";
 import { SubmitEvent, useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Search() {
     const [news, setNews] = useState<INews[]>([]);
@@ -57,13 +59,7 @@ export default function Search() {
             if (hasMore) {
                 try {
                     setIsLoading(true);
-                    const data: INewsObject | ErrorRes = await getNews(
-                        1,
-                        undefined,
-                        undefined,
-                        undefined,
-                        searchBy,
-                    );
+                    const data: INewsObject | ErrorRes = await getNews(1, undefined, undefined, undefined, searchBy);
 
                     if ("statusText" in data) {
                         setIsLoading(false);
@@ -89,25 +85,23 @@ export default function Search() {
                 <div className="container">
                     <form
                         onSubmit={(e) => handleSubmit(e)}
-                        className="mb-[65px]"
+                        className="mb-[65px] flex flex-row border-y-[10px] border-x-[15px] border-[#343A40] bg-[#343A40] rounded-[15px]"
                     >
                         <input
                             type="text"
                             placeholder="Поиск..."
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
-                            className="outline-0 block w-full py-[10px] md:py-[20px] px-[10px] md:px-[20px] border-b border-[#495057] text-[16px] md:text-[20px] text-[#495057]"
+                            className="outline-0 block w-full py-[8px] px-[10px] text-[16px] md:text-[20px] text-[#495057] rounded-tl-[15px] rounded-bl-[15px] bg-white"
                         />
+                        <button className="cursor-pointer px-[20px] rounded-tr-[15px] rounded-br-[15px] bg-white" type="submit">
+                            <Image src={searchIcon} alt="" />
+                        </button>
                     </form>
                     <div>
                         {news && news.length > 0 && <CardList list={news} />}
                         {
-                            <div
-                                className={
-                                    "flex flex-row justify-center py-[30px] " +
-                                    (isLoading ? "" : "hidden")
-                                }
-                            >
+                            <div className={"flex flex-row justify-center py-[30px] " + (isLoading ? "" : "hidden")}>
                                 <Loader />
                             </div>
                         }

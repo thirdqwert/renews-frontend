@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         siteName: "Renews",
         images: [
             {
-                url: "/og-main.jpg", // положи картинку 1200x630px в папку /public
+                url: "/images/og-main.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Renews — Новости Узбекистана",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Renews — Новости Узбекистана",
         description: "Горячие новости, политика, спорт и культура Узбекистана.",
-        images: ["/og-main.jpg"],
+        images: ["/images/og-main.jpg"],
     },
 
     alternates: {
@@ -54,15 +54,10 @@ export default async function Home() {
 
     const hot_news = data && data.slice(0, 3);
     const news = data && data.slice(0, 6);
-    const culture_news =
-        data && data.filter((item) => item.category == "Культура").slice(0, 4);
-    const politics_news =
-        data &&
-        data.filter((item) => item.category == "Новости страны").slice(0, 6);
-    const sport_news =
-        data && data.filter((item) => item.category == "Спорт").slice(0, 4);
-    const popular_news =
-        data && data.sort((a, b) => b.views - a.views).slice(0, 3);
+    const culture_news = data && data.filter((item) => item.category == "Культура").slice(0, 4);
+    const politics_news = data && data.filter((item) => item.category == "Новости страны").slice(0, 6);
+    const sport_news = data && data.filter((item) => item.category == "Спорт").slice(0, 4);
+    const popular_news = data && data.sort((a, b) => b.views - a.views).slice(0, 3);
 
     return (
         <>
@@ -103,64 +98,38 @@ export default async function Home() {
                 </div>
                 <section className="bg-[#343a40] py-[15px] md:py-[30px] h-[379px] md:h-[450px] xl:h-[468px]">
                     <div className="container" style={{ height: "100%" }}>
-                        <Link
-                            href={""}
-                            className="block border-b border-white pb-[10px] mb-[20px] md:mb-[30px]"
-                        >
-                            <h3 className="font-bold text-[17px] md:text-[30px] text-white leading-tight">
-                                Видео
-                            </h3>
+                        <Link href={""} className="block border-b border-white pb-[10px] mb-[20px] md:mb-[30px]">
+                            <h3 className="font-bold text-[17px] md:text-[30px] text-white leading-tight">Видео</h3>
                         </Link>
                         <VidsSwiper />
                     </div>
                 </section>
                 <div className="container">
                     <section className="pb-[30px] md:pb-[70px] pt-[30px]">
-                        <HeadingLine
-                            link="/news/novosti-strany"
-                            title="Новости страны"
-                        />
+                        <HeadingLine link="/news/novosti-strany" title="Новости страны" />
                         <div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 grid-rows-[auto] gap-x-[20px] gap-y-[25px] mb-[30px]">
                                 <div className="sm:col-span-2 xl:row-span-2">
                                     {politics_news[0] && (
-                                        <Link
-                                            href={`news/detail/${politics_news[0].id}/`}
-                                        >
+                                        <Link href={`news/detail/${politics_news[0].id}/`}>
                                             <article className="w-full">
                                                 <div className="relative rounded-[10px] overflow-hidden mb-[5px] md:mb-[10px]">
                                                     <span className="absolute block top-0 left-0 text-white bg-[#295480] rounded-br-[20px] font-medium text-[12px] md:text-[17px] px-[32px] py-[4px]">
-                                                        {
-                                                            politics_news[0]
-                                                                .category
-                                                        }
+                                                        {politics_news[0].category}
                                                     </span>
                                                     <Image
-                                                        unoptimized
+                                                        unoptimized={process.env.NEXT_PUBLIC_DEV === "dev"}
                                                         width={0}
                                                         height={0}
                                                         className="w-full h-[218px] sm:h-[500px] object-cover"
-                                                        src={
-                                                            politics_news[0]
-                                                                .preview
-                                                        }
-                                                        alt={
-                                                            politics_news[0]
-                                                                .title
-                                                        }
+                                                        src={politics_news[0].preview}
+                                                        alt={politics_news[0].title}
                                                     />
                                                     <time
-                                                        dateTime={
-                                                            politics_news[0].created_at.split(
-                                                                "T",
-                                                            )[0]
-                                                        }
+                                                        dateTime={politics_news[0].created_at.split("T")[0]}
                                                         className="absolute bottom-0 right-0 text-white bg-[#295480] rounded-tl-[20px] font-medium text-[12px] md:text-[17px] px-[10px] py-[4px]"
                                                     >
-                                                        {getDateString(
-                                                            politics_news[0]
-                                                                .created_at,
-                                                        )}
+                                                        {getDateString(politics_news[0].created_at)}
                                                     </time>
                                                 </div>
                                                 <div className="flex flex-col">
@@ -187,11 +156,9 @@ export default async function Home() {
                                 )}
                             </div>
                             <div className="xl:grid gap-x-[30px] gap-y-[50px] hidden grid-cols-[repeat(auto-fill,minmax(320px,1fr))] grid-rows-[auto] ">
-                                {politics_news
-                                    .slice(3, 7)
-                                    .map((item, index) => (
-                                        <Card key={item.id} item={item} />
-                                    ))}
+                                {politics_news.slice(3, 7).map((item, index) => (
+                                    <Card key={item.id} item={item} />
+                                ))}
                             </div>
                         </div>
                     </section>
@@ -223,13 +190,8 @@ export default async function Home() {
                 </div>
                 <section className="bg-[#343a40] py-[30px] h-[630px]">
                     <div className="container" style={{ height: "100%" }}>
-                        <Link
-                            href={""}
-                            className="block border-b border-white pb-[10px] mb-[20px]"
-                        >
-                            <h3 className="font-bold text-[30px] text-white leading-tight">
-                                Reels
-                            </h3>
+                        <Link href={""} className="block border-b border-white pb-[10px] mb-[20px]">
+                            <h3 className="font-bold text-[30px] text-white leading-tight">Reels</h3>
                         </Link>
                         <ReelsSwiper />
                     </div>
@@ -239,9 +201,7 @@ export default async function Home() {
                         <h2 className="text-[16px] md:text-[24px] xl:text-[30px] font-bold text-center pb-[50px] text-[#222]">
                             Популярное за неделю
                         </h2>
-                        {popular_news && (
-                            <HorizontalCardList list={popular_news} />
-                        )}
+                        {popular_news && <HorizontalCardList list={popular_news} />}
                     </section>
                     <section className="pt-[100px]">
                         <HeadingLine title="Лента Новостей" link="/news/" />

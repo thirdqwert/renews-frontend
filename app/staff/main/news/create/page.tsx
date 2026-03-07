@@ -12,9 +12,7 @@ const TipTap = dynamic(() => import("../../../components/TipTap"), {
 
 export default function CreateNews() {
     const [categories, setCategories] = useState<ICategory[] | null>(null);
-    const [selectedCategory, setSelectedCategory] = useState<number | null>(
-        null,
-    );
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState<number | null>(null);
     const [title, setTitle] = useState("");
     const [shortTitle, setShortTitle] = useState("");
@@ -25,16 +23,7 @@ export default function CreateNews() {
 
     const createProduct = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (
-            !file ||
-            !title ||
-            !shortTitle ||
-            !file ||
-            !content ||
-            !desc ||
-            !selectedCategory ||
-            !selectedSubcategory
-        )
+        if (!file || !title || !shortTitle || !file || !content || !desc || !selectedCategory || !selectedSubcategory)
             return;
         try {
             const formData = new FormData();
@@ -45,10 +34,7 @@ export default function CreateNews() {
             formData.append("content", content);
             formData.append("desc", desc);
             formData.append("category_choose", selectedCategory.toString());
-            formData.append(
-                "subcategory_choose",
-                selectedSubcategory.toString(),
-            );
+            formData.append("subcategory_choose", selectedSubcategory.toString());
 
             await fetch(`${process.env.NEXT_PUBLIC_API}/news/`, {
                 method: "POST",
@@ -126,20 +112,12 @@ export default function CreateNews() {
                         <div className="flex flex-row flex-wrap w-full gap-[10px]">
                             {categories?.map((category) => (
                                 <div
-                                    onClick={() =>
-                                        setSelectedCategory(category.id)
-                                    }
+                                    onClick={() => setSelectedCategory(category.id)}
                                     key={category.id}
                                     className="p-[10px] border border-gray-400 cursor-pointer"
                                     style={{
-                                        background:
-                                            category.id == selectedCategory
-                                                ? "black"
-                                                : "",
-                                        color:
-                                            category.id == selectedCategory
-                                                ? "white"
-                                                : "",
+                                        background: category.id == selectedCategory ? "black" : "",
+                                        color: category.id == selectedCategory ? "white" : "",
                                     }}
                                 >
                                     {category.title}
@@ -150,45 +128,26 @@ export default function CreateNews() {
                             {selectedCategory &&
                                 categories?.map((category) => {
                                     if (selectedCategory == category.id)
-                                        return category.subcategories.map(
-                                            (subcategory) => (
-                                                <div
-                                                    onClick={() =>
-                                                        setSelectedSubcategory(
-                                                            subcategory.id,
-                                                        )
-                                                    }
-                                                    key={subcategory.id}
-                                                    className="p-[10px] border border-gray-400 cursor-pointer"
-                                                    style={{
-                                                        background:
-                                                            subcategory.id ==
-                                                            selectedSubcategory
-                                                                ? "black"
-                                                                : "",
-                                                        color:
-                                                            subcategory.id ==
-                                                            selectedSubcategory
-                                                                ? "white"
-                                                                : "",
-                                                    }}
-                                                >
-                                                    {subcategory.title}
-                                                </div>
-                                            ),
-                                        );
+                                        return category.subcategories.map((subcategory) => (
+                                            <div
+                                                onClick={() => setSelectedSubcategory(subcategory.id)}
+                                                key={subcategory.id}
+                                                className="p-[10px] border border-gray-400 cursor-pointer"
+                                                style={{
+                                                    background: subcategory.id == selectedSubcategory ? "black" : "",
+                                                    color: subcategory.id == selectedSubcategory ? "white" : "",
+                                                }}
+                                            >
+                                                {subcategory.title}
+                                            </div>
+                                        ));
                                 })}
                         </div>
-                        <button className="border border-gray-400 p-[10px] cursor-pointer">
-                            Создать
-                        </button>
+                        <button className="border border-gray-400 p-[10px] cursor-pointer">Создать</button>
                     </form>
                     <div className="py-[30px]">
                         {content && (
-                            <div
-                                className="border tiptap bg-[#e9e8e8]"
-                                dangerouslySetInnerHTML={{ __html: content }}
-                            />
+                            <div className="border tiptap bg-[#e9e8e8]" dangerouslySetInnerHTML={{ __html: content }} />
                         )}
                     </div>
                 </div>

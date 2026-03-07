@@ -8,10 +8,7 @@ interface IProps {
 export default function HorizontalCardList({ list }: IProps) {
     return (
         <div className="flex flex-col gap-[30px]">
-            {list &&
-                list.map((item) => (
-                    <HorizontalCard key={item.id} item={item} />
-                ))}
+            {list && list.map((item) => <HorizontalCard key={item.id} item={item} />)}
         </div>
     );
 }

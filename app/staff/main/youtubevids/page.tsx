@@ -20,9 +20,7 @@ export default function YouTubeVids() {
         try {
             const params = new URLSearchParams();
             if (pageCount) params.append("page", String(pageCount));
-            const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/youtubevids?${params.toString()}`,
-            );
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids?${params.toString()}`);
 
             if (!res.ok) {
                 setProducts(null);
@@ -125,9 +123,7 @@ export default function YouTubeVids() {
                         id="imageInput"
                         className="hidden"
                     />
-                    <button className="text-white bg-[#29547F] p-[10px] cursor-pointer">
-                        Создать
-                    </button>
+                    <button className="text-white bg-[#29547F] p-[10px] cursor-pointer">Создать</button>
                 </form>
                 <div className="w-full flex flex-col gap-[20px] py-[50px]">
                     {error && <div>Данные не найдены</div>}
@@ -140,7 +136,7 @@ export default function YouTubeVids() {
                                 <div className="flex flex-row justify-between items-end gap-[10px] ">
                                     <div className="flex flex-col gap-[5px]">
                                         <Image
-                                            unoptimized
+                                            unoptimized={process.env.NEXT_PUBLIC_DEV === "dev"}
                                             width={0}
                                             height={0}
                                             src={product.image}
@@ -148,10 +144,7 @@ export default function YouTubeVids() {
                                             className="w-[100px] h-[50px] object-cover mb-[10px]"
                                         />
                                         <h3>Название: {product.title}</h3>
-                                        <h3>
-                                            Дата создания:{" "}
-                                            {getDateString(product.created_at)}
-                                        </h3>
+                                        <h3>Дата создания: {getDateString(product.created_at)}</h3>
                                     </div>
                                     <button
                                         onClick={() => handleCopy(product.link)}
@@ -170,17 +163,13 @@ export default function YouTubeVids() {
                                     <div className="flex flex-row gap-[20px]">
                                         <span
                                             className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center"
-                                            onClick={() =>
-                                                deleteProduct(product.id)
-                                            }
+                                            onClick={() => deleteProduct(product.id)}
                                         >
                                             Да
                                         </span>
                                         <span
                                             className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center"
-                                            onClick={() =>
-                                                setDeleteWindow(null)
-                                            }
+                                            onClick={() => setDeleteWindow(null)}
                                         >
                                             Нет
                                         </span>

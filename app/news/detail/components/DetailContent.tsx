@@ -5,7 +5,5 @@ interface IProps {
 }
 
 export default function DetailContent({ content }: IProps) {
-    return (
-        <div dangerouslySetInnerHTML={{ __html: content }} className="tiptap" />
-    );
+    return <div dangerouslySetInnerHTML={{ __html: content }} className="tiptap" />;
 }

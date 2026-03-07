@@ -21,15 +21,12 @@ export default function News() {
 
             if (pageCount) params.append("page", String(pageCount));
 
-            const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/news?${params.toString()}`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?${params.toString()}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
                 },
-            );
+            });
 
             if (!res.ok) {
                 setProducts(null);
@@ -90,7 +87,7 @@ export default function News() {
                                 <div className="flex flex-row justify-between items-end gap-[10px] ">
                                     <div className="flex flex-col gap-[5px]">
                                         <Image
-                                            unoptimized
+                                            unoptimized={process.env.NEXT_PUBLIC_DEV === "dev"}
                                             width={0}
                                             height={0}
                                             src={product.preview}
@@ -98,17 +95,12 @@ export default function News() {
                                             className="w-[100px] h-[50px] object-cover mb-[10px]"
                                         />
                                         <h3>Название: {product.title}</h3>
-                                        <h3>
-                                            Дата создания:{" "}
-                                            {getDateString(product.created_at)}
-                                        </h3>
+                                        <h3>Дата создания: {getDateString(product.created_at)}</h3>
                                     </div>
                                 </div>
                                 <div className="flex flex-row gap-[20px]">
                                     <button
-                                        onClick={() =>
-                                            setDeleteWindow(product.id)
-                                        }
+                                        onClick={() => setDeleteWindow(product.id)}
                                         className="w-max py-[5px] px-[20px] text-white bg-red-500 cursor-pointer"
                                     >
                                         Удалить
@@ -124,17 +116,13 @@ export default function News() {
                                     <div className="flex flex-row gap-[20px]">
                                         <span
                                             className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center"
-                                            onClick={() =>
-                                                deleteProduct(product.id)
-                                            }
+                                            onClick={() => deleteProduct(product.id)}
                                         >
                                             Да
                                         </span>
                                         <span
                                             className="border border-gray-400 py-[5px] cursor-pointer w-[100px] text-center"
-                                            onClick={() =>
-                                                setDeleteWindow(null)
-                                            }
+                                            onClick={() => setDeleteWindow(null)}
                                         >
                                             Нет
                                         </span>

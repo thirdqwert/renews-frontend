@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         siteName: "Renews",
         images: [
             {
-                url: "/og-main.jpg",
+                url: "/images/og-main.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Все новости — Renews",
@@ -37,13 +37,7 @@ export const metadata: Metadata = {
 export const revalidate = 180;
 
 export default async function News() {
-    const news: INewsObject = await getNews(
-        1,
-        "",
-        "",
-        { next: { revalidate: 180 } },
-        undefined,
-    );
+    const news: INewsObject = await getNews(1, "", "", { next: { revalidate: 180 } }, undefined);
 
     if (news.results.length == 0)
         return (

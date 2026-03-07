@@ -72,7 +72,6 @@ export default async function NewsDetail({ params }: IProps) {
         getNews(1, "", "", { next: { revalidate: 180 } }, undefined),
         getNewsDetail(id, { next: { revalidate: 180 } }),
     ]);
-
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
@@ -84,15 +83,15 @@ export default async function NewsDetail({ params }: IProps) {
         author: {
             "@type": "Organization",
             name: "Renews",
-            url: "https://renews.uz",
+            url: process.env.NEXT_PUBLIC_SITE_URL,
         },
         publisher: {
             "@type": "Organization",
             name: "Renews",
-            url: "https://renews.uz",
+            url: process.env.NEXT_PUBLIC_SITE_URL,
             logo: {
                 "@type": "ImageObject",
-                url: "https://renews.uz/logo.png",
+                url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/logo.png`,
             },
         },
         mainEntityOfPage: {
@@ -140,7 +139,7 @@ export default async function NewsDetail({ params }: IProps) {
                             {news.title}
                         </h1>
                         <Image
-                            unoptimized
+                            unoptimized={process.env.NEXT_PUBLIC_DEV === "dev"}
                             width={0}
                             height={0}
                             src={news.main_image}
@@ -154,9 +153,7 @@ export default async function NewsDetail({ params }: IProps) {
                         <DetailContent content={news.content} />
                     </article>
                     <HeadingLine title="Лента новостей" link="/news/" />
-                    <HorizontalCardList
-                        list={footer_news.results.slice(0, 3)}
-                    />
+                    <HorizontalCardList list={footer_news.results.slice(0, 3)} />
                 </div>
             </main>
             <Footer />

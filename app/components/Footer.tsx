@@ -21,26 +21,17 @@ export default async function Footer() {
                         </Link>
                         <ul className="flex flex-row gap-[20px] md:gap-[50px]">
                             <li>
-                                <Link
-                                    className="text-[16px] md:text-[24px] text-white font-medium"
-                                    href={"/"}
-                                >
+                                <Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/"}>
                                     Главная
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    className="text-[16px] md:text-[24px] text-white font-medium"
-                                    href={"/news/"}
-                                >
+                                <Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/news/"}>
                                     Новости
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    className="text-[16px] md:text-[24px] text-white font-medium"
-                                    href={"/contacts/"}
-                                >
+                                <Link className="text-[16px] md:text-[24px] text-white font-medium" href={"/contacts/"}>
                                     Контакты
                                 </Link>
                             </li>

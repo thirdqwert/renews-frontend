@@ -60,7 +60,7 @@ export default function ReelsSwiper() {
                                 target="_blank"
                             >
                                 <Image
-                                    unoptimized
+                                    unoptimized={process.env.NEXT_PUBLIC_DEV === "dev"}
                                     width={0}
                                     height={0}
                                     src={reel.image}

@@ -35,9 +35,7 @@ export default function Login() {
                 onSubmit={(e) => handleSubmit(e)}
                 className="flex flex-col gap-[20px] max-w-[500px] w-full bg-white py-[50px] px-[10px]"
             >
-                <h3 className="text-center font-bold text-[24px] text-gray-500">
-                    Sign In
-                </h3>
+                <h3 className="text-center font-bold text-[24px] text-gray-500">Sign In</h3>
                 <input
                     type="text"
                     value={login}
@@ -52,10 +50,7 @@ export default function Login() {
                     placeholder="Password"
                     className="px-[20px] py-[5px] text-gray-500 border border-gray-500 outline-none rounded-[2px]"
                 />
-                <button
-                    type="submit"
-                    className="w-max mx-auto text-gray-500 px-[20px] py-[5px] border border-gray-500"
-                >
+                <button type="submit" className="w-max mx-auto text-gray-500 px-[20px] py-[5px] border border-gray-500">
                     Sign in
                 </button>
             </form>

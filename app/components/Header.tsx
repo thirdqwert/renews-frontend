@@ -38,22 +38,18 @@ export default function Header() {
     const [categories, setCategories] = useState<ICategory[]>([]);
     const [moreCategoriesIsOpen, setMoreCategoriesIsOpen] = useState(false);
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-    const [subCategoryIsOpenHeader, setSubCategoryIsOpenHeader] = useState<
-        null | string
-    >(null);
+    const [subCategoryIsOpenHeader, setSubCategoryIsOpenHeader] = useState<null | string>(null);
     const params = useParams();
     const pathname = usePathname();
     const news = pathname.split("/")[1];
     const categoryBy = params.category;
     const subcategoryBy = params.subcategory;
-    const [subcategoryIsOpenSidebar, setSubcategoryIsOpenSidebar] = useState<
-        string | null
-    >(categoryBy?.toString() || null);
+    const [subcategoryIsOpenSidebar, setSubcategoryIsOpenSidebar] = useState<string | null>(
+        categoryBy?.toString() || null,
+    );
 
     const subCategoriesListHTML = (slug: string) => {
-        const currentCateogry = categories.find(
-            (category) => category.slug == slug,
-        );
+        const currentCateogry = categories.find((category) => category.slug == slug);
 
         if (currentCateogry) {
             return (
@@ -115,10 +111,7 @@ export default function Header() {
                 <nav className="flex flex-row justify-between items-center">
                     <div className="flex flex-row items-center gap-[40px]">
                         <Link href="/">
-                            <div
-                                aria-label="Renews"
-                                className="md:text-[20px] xl:text-[36px] font-bold"
-                            >
+                            <div aria-label="Renews" className="md:text-[20px] xl:text-[36px] font-bold">
                                 <span className="text-white">RE</span>
                                 <span className="text-[#92a8e0]">NEWS</span>
                             </div>
@@ -128,9 +121,7 @@ export default function Header() {
                                 <li
                                     key={item.slug || "home"}
                                     className={item.breakpoint}
-                                    onMouseEnter={() =>
-                                        setSubCategoryIsOpenHeader(item.slug)
-                                    }
+                                    onMouseEnter={() => setSubCategoryIsOpenHeader(item.slug)}
                                 >
                                     <Link
                                         href={`/news/${item.slug}`}
@@ -139,31 +130,20 @@ export default function Header() {
                                         {item.name}
                                     </Link>
 
-                                    {subCategoryIsOpenHeader === item.slug &&
-                                        subCategoriesListHTML(item.slug)}
+                                    {subCategoryIsOpenHeader === item.slug && subCategoriesListHTML(item.slug)}
                                 </li>
                             ))}
                             <li
-                                onClick={() =>
-                                    setMoreCategoriesIsOpen(
-                                        !moreCategoriesIsOpen,
-                                    )
-                                }
-                                onMouseEnter={() =>
-                                    setSubCategoryIsOpenHeader(null)
-                                }
+                                onClick={() => setMoreCategoriesIsOpen(!moreCategoriesIsOpen)}
+                                onMouseEnter={() => setSubCategoryIsOpenHeader(null)}
                                 className="relative cursor-pointer flex flex-row gap-[5px]"
                             >
-                                <span className="text-[13px] md:text-[18px] text-white font-medium">
-                                    Ёще
-                                </span>
+                                <span className="text-[13px] md:text-[18px] text-white font-medium">Ёще</span>
                                 <Image src={arrowDown} alt="" />
                                 {moreCategoriesIsOpen && (
                                     <div
                                         className="fixed inset-0 z-40"
-                                        onClick={() =>
-                                            setMoreCategoriesIsOpen(false)
-                                        }
+                                        onClick={() => setMoreCategoriesIsOpen(false)}
                                     />
                                 )}
                                 {moreCategoriesIsOpen && (
@@ -204,16 +184,8 @@ export default function Header() {
                         </ul>
                     </div>
                     <div className="flex flex-row items-center gap-[10px]">
-                        <Link
-                            href={"/news/search/"}
-                            className="pr-[0px] md:pr-[10px] md:w-[30px] h-[20px] order-1"
-                        >
-                            <Image
-                                width={20}
-                                height={20}
-                                src={SearchIcon}
-                                alt="Поиск"
-                            />
+                        <Link href={"/news/search/"} className="pr-[0px] md:pr-[10px] md:w-[30px] h-[20px] order-1">
+                            <Image width={20} height={20} src={SearchIcon} alt="Поиск" />
                         </Link>
                         <div className="hidden ssm:block">
                             <ExchangeRate />
@@ -262,70 +234,41 @@ export default function Header() {
                     </div>
                 </div>
                 <div className="">
-                    <h3 className="text-[15px] text-[#9a8f8f] font-medium pl-[30px] pt-[8px]">
-                        Навигация
-                    </h3>
+                    <h3 className="text-[15px] text-[#9a8f8f] font-medium pl-[30px] pt-[8px]">Навигация</h3>
                     <div className="pl-[30px]">
                         <Link
                             href={"/"}
                             className="flex flex-row gap-[17px] items-center py-[15px]"
                             onClick={() => setSidebarIsOpen(false)}
                         >
-                            <Image
-                                src={homeIcon}
-                                alt=""
-                                className="w-[22px] object-scale-down"
-                            />
-                            <span className="text-[16px] font-medium text-[#212529]">
-                                Главная
-                            </span>
+                            <Image src={homeIcon} alt="" className="w-[22px] object-scale-down" />
+                            <span className="text-[16px] font-medium text-[#212529]">Главная</span>
                         </Link>
                         <Link
                             href={"/news/"}
                             className="flex flex-row gap-[17px] items-center py-[15px]"
                             onClick={() => setSidebarIsOpen(false)}
                         >
-                            <Image
-                                src={newsIcon}
-                                alt=""
-                                className="w-[22px] object-scale-down"
-                            />
-                            <span className="text-[16px] font-medium text-[#212529]">
-                                Новости
-                            </span>
+                            <Image src={newsIcon} alt="" className="w-[22px] object-scale-down" />
+                            <span className="text-[16px] font-medium text-[#212529]">Новости</span>
                         </Link>
                         <Link
                             href={"/contacts/"}
                             className="flex flex-row gap-[17px] items-center py-[15px]"
                             onClick={() => setSidebarIsOpen(false)}
                         >
-                            <Image
-                                src={contactsIcon}
-                                alt=""
-                                className="w-[22px] object-scale-down"
-                            />
-                            <span className="text-[16px] font-medium text-[#212529]">
-                                Контакты
-                            </span>
+                            <Image src={contactsIcon} alt="" className="w-[22px] object-scale-down" />
+                            <span className="text-[16px] font-medium text-[#212529]">Контакты</span>
                         </Link>
                     </div>
-                    <h3 className="text-[15px] text-[#9a8f8f] font-medium pl-[30px]">
-                        Категории
-                    </h3>
+                    <h3 className="text-[15px] text-[#9a8f8f] font-medium pl-[30px]">Категории</h3>
                     <ul className="pt-[27px]">
                         {categories &&
                             categories.map((category) => (
-                                <div
-                                    key={category.id}
-                                    className="py-[10px] pl-[30px] cursor-pointer pr-[14px]"
-                                >
+                                <div key={category.id} className="py-[10px] pl-[30px] cursor-pointer pr-[14px]">
                                     <li
                                         className="flex flex-row justify-between items-center"
-                                        onClick={() =>
-                                            setSubcategoryIsOpenSidebar(
-                                                category.slug,
-                                            )
-                                        }
+                                        onClick={() => setSubcategoryIsOpenSidebar(category.slug)}
                                     >
                                         <Link
                                             className="text-[18px] text-[#212529] font-medium"
@@ -334,51 +277,35 @@ export default function Header() {
                                             {category.title}
                                         </Link>
                                         <Image
-                                            src={
-                                                subcategoryIsOpenSidebar ==
-                                                category.slug
-                                                    ? blueArrowDown
-                                                    : arrowRight
-                                            }
+                                            src={subcategoryIsOpenSidebar == category.slug ? blueArrowDown : arrowRight}
                                             alt=""
                                         />
                                     </li>
-                                    {subcategoryIsOpenSidebar ==
-                                        category.slug && (
+                                    {subcategoryIsOpenSidebar == category.slug && (
                                         <ul className="vertical_line_blue flex !flex-col mt-[15px]">
-                                            {category.subcategories.map(
-                                                (subcategory) => {
-                                                    if (
-                                                        category.title !=
-                                                        "Реклама"
-                                                    )
-                                                        return (
-                                                            <Link
-                                                                key={
-                                                                    subcategory.id
-                                                                }
-                                                                href={`/news/${category.slug}/${subcategory.slug}/`}
-                                                                className="flex flex-row items-center gap-[10px] px-[10px] py-[10px]"
-                                                            >
-                                                                <span
-                                                                    className="h-[10px] min-w-[10px] rounded-full"
-                                                                    style={{
-                                                                        background:
-                                                                            subcategory.slug ==
-                                                                            subcategoryBy
-                                                                                ? "#29547f"
-                                                                                : "#a8a0a0",
-                                                                    }}
-                                                                />
-                                                                <span className="text-[18px] text-[#212529] font-medium">
-                                                                    {
-                                                                        subcategory.title
-                                                                    }
-                                                                </span>
-                                                            </Link>
-                                                        );
-                                                },
-                                            )}
+                                            {category.subcategories.map((subcategory) => {
+                                                if (category.title != "Реклама")
+                                                    return (
+                                                        <Link
+                                                            key={subcategory.id}
+                                                            href={`/news/${category.slug}/${subcategory.slug}/`}
+                                                            className="flex flex-row items-center gap-[10px] px-[10px] py-[10px]"
+                                                        >
+                                                            <span
+                                                                className="h-[10px] min-w-[10px] rounded-full"
+                                                                style={{
+                                                                    background:
+                                                                        subcategory.slug == subcategoryBy
+                                                                            ? "#29547f"
+                                                                            : "#a8a0a0",
+                                                                }}
+                                                            />
+                                                            <span className="text-[18px] text-[#212529] font-medium">
+                                                                {subcategory.title}
+                                                            </span>
+                                                        </Link>
+                                                    );
+                                            })}
                                         </ul>
                                     )}
                                 </div>

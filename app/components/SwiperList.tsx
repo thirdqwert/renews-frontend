@@ -37,13 +37,10 @@ export default function SwiperList({ list }: IProps) {
                     autoplay={{ delay: 5000, disableOnInteraction: false }}
                 >
                     {list.map((item) => (
-                        <SwiperSlide
-                            key={item.id}
-                            className="rounded-[20px] overflow-hidden relative"
-                        >
+                        <SwiperSlide key={item.id} className="rounded-[20px] overflow-hidden relative">
                             <Link href={`/news/detail/${item.id}`}>
                                 <Image
-                                    unoptimized
+                                    unoptimized={process.env.NEXT_PUBLIC_DEV === "dev"}
                                     width={0}
                                     height={0}
                                     className="block h-full w-full align-middle object-cover"
@@ -67,9 +64,7 @@ export default function SwiperList({ list }: IProps) {
                                         </span>
                                         <time
                                             className="text-[9px] md:text-[16px] lg:text-[20px] text-white font-medium"
-                                            dateTime={
-                                                item.created_at.split("T")[0]
-                                            }
+                                            dateTime={item.created_at.split("T")[0]}
                                         >
                                             {getDateString(item.created_at)}
                                         </time>

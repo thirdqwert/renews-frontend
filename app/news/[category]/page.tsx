@@ -15,9 +15,9 @@ interface IProps {
 
 export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     const { category } = await params;
-    const categories:ICategory[] = await getCategories({ next: { revalidate: 180 } });
-    const currentCategory =  categories.find((item) => item.slug == category); 
-    const categoryName = currentCategory?.title
+    const categories: ICategory[] = await getCategories({ next: { revalidate: 180 } });
+    const currentCategory = categories.find((item) => item.slug == category);
+    const categoryName = currentCategory?.title;
     return {
         title: `${categoryName} — Новости Узбекистана`,
         description: `Читайте последние новости раздела "${categoryName}" на Renews. Актуальные события Узбекистана и мира.`,
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: IProps): Promise<Metadata> {
             description: `Последние новости раздела "${categoryName}".`,
             url: `/news/${currentCategory?.slug}`,
             siteName: "Renews",
-            images: [{ url: "/og-main.jpg" }],
+            images: [{ url: "/images/og-main.jpg" }],
             locale: "ru_RU",
             type: "website",
         },
@@ -53,10 +53,7 @@ export default async function NewsCategory({ params }: IProps) {
                 <Header />
                 <main className="py-[30px] min-h-screen">
                     <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
-                        <CatSub
-                            categories={categories}
-                            params={{ categoryBy: category }}
-                        />
+                        <CatSub categories={categories} params={{ categoryBy: category }} />
                         <div className="flex flex-col">
                             <div>Данные не найдены</div>
                         </div>
@@ -71,10 +68,7 @@ export default async function NewsCategory({ params }: IProps) {
             <Header />
             <main className="py-[30px] min-h-screen">
                 <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
-                    <CatSub
-                        categories={categories}
-                        params={{ categoryBy: category }}
-                    />
+                    <CatSub categories={categories} params={{ categoryBy: category }} />
                     <div className="flex flex-col">
                         <CardList list={news.results} />
                         <div className="pb-[30px] md:pb-[50px]" />
