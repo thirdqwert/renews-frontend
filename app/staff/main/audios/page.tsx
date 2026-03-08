@@ -21,7 +21,7 @@ export default function Audios() {
 
             if (pageCount) params.append("page", String(pageCount));
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/audios?${params.toString()}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/audios/?${params.toString()}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

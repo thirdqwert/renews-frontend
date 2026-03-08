@@ -47,7 +47,7 @@ export const getNews = async (
         if (searchBy) params.append("searchBy", searchBy);
 
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/news?page=${pageCount}&${params.toString()}`,
+            `${process.env.NEXT_PUBLIC_API}/news/?page=${pageCount}&${params.toString()}`,
             fetchParams,
         );
 
@@ -65,7 +65,7 @@ export const getNews = async (
 
 export const getNewsDetail = async (id: string, fetchParams: any | undefined): Promise<INews | any> => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}`, fetchParams);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}/`, fetchParams);
 
         if (!res.ok) {
             return res;

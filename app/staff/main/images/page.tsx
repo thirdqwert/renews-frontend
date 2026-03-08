@@ -22,7 +22,7 @@ export default function Images() {
 
             if (pageCount) params.append("page", String(pageCount));
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/images?${params.toString()}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/images/?${params.toString()}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

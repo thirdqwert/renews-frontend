@@ -21,7 +21,7 @@ export default function News() {
 
             if (pageCount) params.append("page", String(pageCount));
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news?${params.toString()}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/news/?${params.toString()}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

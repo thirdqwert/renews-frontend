@@ -60,7 +60,7 @@ export default function Header() {
                 // </div>
                 <div
                     onMouseLeave={() => setSubCategoryIsOpenHeader(null)}
-                    className="flex flex-col absolute lg:top-[45px] xl:top-[64px] left-0 right-0 w-full bg-[#343a40] py-[10px] px-[70px] rounded-b-[50px]"
+                    className="flex flex-col absolute lg:top-[45px] xl:top-[64px] left-1/2 -translate-x-1/2 w-full max-w-[1820px] bg-[#343a40] py-[10px] px-[70px] rounded-b-[50px]"
                 >
                     <button className="prev_header p-[20px] absolute z-10 left-[20px] rotate-90 top-1/2 -translate-y-1/2 cursor-pointer">
                         <Image src={arrowDown} alt="" />
@@ -108,7 +108,7 @@ export default function Header() {
         <div className="relative">
             {/* Header */}
             <header className="px-[20px] md:px-[50px] py-[15px] md:py-[25px] lg:py-[10px] bg-[#343a40] relative z-20">
-                <nav className="flex flex-row justify-between items-center">
+                <nav className="flex flex-row justify-between items-center max-w-[1820px] mx-auto">
                     <div className="flex flex-row items-center gap-[40px]">
                         <Link href="/">
                             <div aria-label="Renews" className="md:text-[20px] xl:text-[36px] font-bold">

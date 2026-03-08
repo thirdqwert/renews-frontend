@@ -116,7 +116,7 @@ export default function CreateNews() {
                                     key={category.id}
                                     className="p-[10px] border border-gray-400 cursor-pointer"
                                     style={{
-                                        background: category.id == selectedCategory ? "black" : "",
+                                        background: category.id == selectedCategory ? "#29547F" : "",
                                         color: category.id == selectedCategory ? "white" : "",
                                     }}
                                 >
@@ -134,7 +134,7 @@ export default function CreateNews() {
                                                 key={subcategory.id}
                                                 className="p-[10px] border border-gray-400 cursor-pointer"
                                                 style={{
-                                                    background: subcategory.id == selectedSubcategory ? "black" : "",
+                                                    background: subcategory.id == selectedSubcategory ? "#29547F" : "",
                                                     color: subcategory.id == selectedSubcategory ? "white" : "",
                                                 }}
                                             >

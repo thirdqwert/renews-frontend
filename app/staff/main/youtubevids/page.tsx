@@ -20,7 +20,7 @@ export default function YouTubeVids() {
         try {
             const params = new URLSearchParams();
             if (pageCount) params.append("page", String(pageCount));
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids?${params.toString()}`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids/?${params.toString()}`);
 
             if (!res.ok) {
                 setProducts(null);
