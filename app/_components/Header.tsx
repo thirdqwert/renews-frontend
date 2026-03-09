@@ -276,6 +276,7 @@ export default function Header() {
                                         <Link
                                             className="text-[18px] text-[#212529] font-medium"
                                             href={`/news/${category.slug}/`}
+                                            onClick={() => setSidebarIsOpen(false)}
                                         >
                                             {category.title}
                                         </Link>
@@ -293,6 +294,7 @@ export default function Header() {
                                                             key={subcategory.id}
                                                             href={`/news/${category.slug}/${subcategory.slug}/`}
                                                             className="flex flex-row items-center gap-[10px] px-[10px] py-[10px]"
+                                                            onClick={() => setSidebarIsOpen(false)}
                                                         >
                                                             <span
                                                                 className="h-[10px] min-w-[10px] rounded-full"
