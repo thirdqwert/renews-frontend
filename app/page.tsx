@@ -1,17 +1,15 @@
 import { Metadata } from "next";
-import { INews } from "./utils/types";
-import { getDateString, getNewsAdmin } from "./utils/utilis";
+import { INews } from "./_utils/types";
+import { getDateString, getNewsAdmin } from "./_utils/utilis";
 import Link from "next/link";
-import CardList from "./components/CardList";
-import HeadingLine from "./components/ui/HeadingLine";
-import Card from "./components/Card";
+import CardList from "./_components/CardList";
+import HeadingLine from "./_components/ui/HeadingLine";
+import Card from "./_components/Card";
 import Image from "next/image";
-import HorizontalCardList from "./components/HorizontalCardList";
-import SwiperList from "./components/SwiperList";
-import ReelsSwiper from "./components/ReelsSwiper";
-import VidsSwiper from "./components/VidsSwiper";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import HorizontalCardList from "./_components/HorizontalCardList";
+import SwiperList from "./_components/SwiperList";
+import ReelsSwiper from "./_components/ReelsSwiper";
+import VidsSwiper from "./_components/VidsSwiper";
 
 export const metadata: Metadata = {
     title: "Главная — Последние новости Узбекистана",
@@ -61,7 +59,6 @@ export default async function Home() {
 
     return (
         <>
-            <Header />
             <main className="py-[30px]">
                 <div className="container">
                     <section className="mb-[30px]">
@@ -96,7 +93,7 @@ export default async function Home() {
                         </div>
                     </section>
                 </div>
-                <section className="bg-[#343a40] py-[15px] md:py-[30px] h-[379px] md:h-[450px] xl:h-[468px]">
+                <section className="bg-[#343a40] py-[15px] md:py-[30px]">
                     <div className="container" style={{ height: "100%" }}>
                         <Link href={""} className="block border-b border-white pb-[10px] mb-[20px] md:mb-[30px]">
                             <h3 className="font-bold text-[17px] md:text-[30px] text-white leading-tight">Видео</h3>
@@ -188,8 +185,8 @@ export default async function Home() {
                         </div>
                     </section>
                 </div>
-                <section className="bg-[#343a40] py-[30px] h-[630px]">
-                    <div className="container" style={{ height: "100%" }}>
+                <section className="bg-[#343a40] py-[30px]">
+                    <div className="container" >
                         <Link href={""} className="block border-b border-white pb-[10px] mb-[20px]">
                             <h3 className="font-bold text-[30px] text-white leading-tight">Reels</h3>
                         </Link>
@@ -215,7 +212,6 @@ export default async function Home() {
                     </section>
                 </div>
             </main>
-            <Footer />
         </>
     );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { IToken } from "@/app/utils/types";
+import { IToken } from "@/app/_utils/types";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { SubmitEvent, useState } from "react";

@@ -1,11 +1,8 @@
 import Link from "next/link";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 
 export default async function Contacts() {
     return (
         <>
-            <Header />
             <main className="py-[30px] min-h-screen">
                 <div className="container">
                     <h1 className="text-[16px] md:text-[24px] xl:text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line px-[20px]">
@@ -84,7 +81,6 @@ export default async function Contacts() {
                     </div>
                 </div>
             </main>
-            <Footer />
         </>
     );
 }

@@ -3,8 +3,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
-import { getDateString, getVids } from "../utils/utilis";
-import { IVidsObject } from "../utils/types";
+import { getDateString, getVids } from "../_utils/utilis";
+import { IVidsObject } from "../_utils/types";
 import Image from "next/image";
 import swipperArrow from "../../public/images/swipperArrow.svg";
 import play from "../../public/images/play.svg";
@@ -76,7 +76,7 @@ export default function VidsSwiper() {
                                         className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2"
                                     />
                                 </div>
-                                <h3 className="text-white text-[14px] md:text-[19px] font-bold short_desc">
+                                <h3 className="text-white text-[14px] md:text-[19px] font-bold short_title">
                                     {vid.title}
                                 </h3>
                                 <time
@@ -92,7 +92,7 @@ export default function VidsSwiper() {
             </div>
         </div>
     ) : (
-        <div className="flex flex-row items-center justify-center h-full w-full">
+        <div className="flex flex-row items-center justify-center h-[331px] w-full">
             <Loader />
         </div>
     );

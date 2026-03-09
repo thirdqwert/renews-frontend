@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./main.css";
 import Script from "next/script";
+import Header from "./_components/Header";
+import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://renews.uz"),
@@ -27,7 +29,10 @@ export default function RootLayout({
     return (
         <html lang="ru">
             <body className="leading-tight">
+                <Header />
                 {children}
+                <Footer />
+
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{

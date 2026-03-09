@@ -1,14 +1,12 @@
-import { getDateString, getNews, getNewsDetail } from "@/app/utils/utilis";
+import { getDateString, getNews, getNewsDetail } from "@/app/_utils/utilis";
 import Image from "next/image";
 import Link from "next/link";
-import BackButton from "@/app/components/BackButton";
-import HeadingLine from "@/app/components/ui/HeadingLine";
-import HorizontalCardList from "@/app/components/HorizontalCardList";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import DetailContent from "../components/DetailContent";
+import BackButton from "@/app/_components/BackButton";
+import HeadingLine from "@/app/_components/ui/HeadingLine";
+import HorizontalCardList from "@/app/_components/HorizontalCardList";
+import DetailContent from "../_components/DetailContent";
 import { Metadata } from "next";
-import { INews } from "@/app/utils/types";
+import { INews } from "@/app/_utils/types";
 
 interface IProps {
     params: {
@@ -103,7 +101,6 @@ export default async function NewsDetail({ params }: IProps) {
     if ("statusText" in news)
         return (
             <>
-                <Header />
                 <div>Данные не найдены</div>
             </>
         );
@@ -117,7 +114,6 @@ export default async function NewsDetail({ params }: IProps) {
                 }}
             />
 
-            <Header />
             <main className="py-[30px]">
                 <div className="container">
                     <article className="pb-[70px] md:pb-[100px] xl:pb-[200px]">
@@ -156,7 +152,6 @@ export default async function NewsDetail({ params }: IProps) {
                     <HorizontalCardList list={footer_news.results.slice(0, 3)} />
                 </div>
             </main>
-            <Footer />
         </>
     );
 }

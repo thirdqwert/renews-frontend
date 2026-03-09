@@ -1,11 +1,10 @@
 "use client";
 
-import CardList from "@/app/components/CardList";
-import Header from "@/app/components/Header";
-import Loader from "@/app/components/Loader";
+import CardList from "@/app/_components/CardList";
+import Loader from "@/app/_components/Loader";
 import searchIcon from "../../../public/images/searchBlack.svg";
-import { ErrorRes, INews, INewsObject } from "@/app/utils/types";
-import { getNews } from "@/app/utils/utilis";
+import { ErrorRes, INews, INewsObject } from "@/app/_utils/types";
+import { getNews } from "@/app/_utils/utilis";
 import { SubmitEvent, useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -80,8 +79,7 @@ export default function Search() {
 
     return (
         <>
-            <Header />
-            <main className="py-[30px]">
+            <main className="py-[30px] min-h-screen">
                 <div className="container">
                     <form
                         onSubmit={(e) => handleSubmit(e)}
@@ -94,7 +92,10 @@ export default function Search() {
                             onChange={(e) => setInputValue(e.target.value)}
                             className="outline-0 block w-full py-[8px] px-[10px] text-[16px] md:text-[20px] text-[#495057] rounded-tl-[15px] rounded-bl-[15px] bg-white"
                         />
-                        <button className="cursor-pointer px-[20px] rounded-tr-[15px] rounded-br-[15px] bg-white" type="submit">
+                        <button
+                            className="cursor-pointer px-[20px] rounded-tr-[15px] rounded-br-[15px] bg-white"
+                            type="submit"
+                        >
                             <Image src={searchIcon} alt="" />
                         </button>
                     </form>

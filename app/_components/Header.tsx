@@ -1,8 +1,8 @@
 "use client";
 import { useParams, usePathname } from "next/navigation";
-import { getCategories } from "../utils/utilis";
+import { getCategories } from "../_utils/utilis";
 import { useEffect, useState } from "react";
-import { ICategory } from "../utils/types";
+import { ICategory } from "../_utils/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import Link from "next/link";
@@ -121,7 +121,10 @@ export default function Header() {
                                 <li
                                     key={item.slug || "home"}
                                     className={item.breakpoint}
-                                    onMouseEnter={() => setSubCategoryIsOpenHeader(item.slug)}
+                                    onMouseEnter={() => {
+                                        setSubCategoryIsOpenHeader(item.slug);
+                                        setMoreCategoriesIsOpen(false);
+                                    }}
                                 >
                                     <Link
                                         href={`/news/${item.slug}`}
@@ -134,20 +137,20 @@ export default function Header() {
                                 </li>
                             ))}
                             <li
-                                onClick={() => setMoreCategoriesIsOpen(!moreCategoriesIsOpen)}
-                                onMouseEnter={() => setSubCategoryIsOpenHeader(null)}
+                                // onClick={() => setMoreCategoriesIsOpen(!moreCategoriesIsOpen)}
+                                onMouseEnter={() => {
+                                    setSubCategoryIsOpenHeader(null);
+                                    setMoreCategoriesIsOpen(true);
+                                }}
                                 className="relative cursor-pointer flex flex-row gap-[5px]"
                             >
                                 <span className="text-[13px] md:text-[18px] text-white font-medium">Ёще</span>
                                 <Image src={arrowDown} alt="" />
                                 {moreCategoriesIsOpen && (
                                     <div
-                                        className="fixed inset-0 z-40"
-                                        onClick={() => setMoreCategoriesIsOpen(false)}
-                                    />
-                                )}
-                                {moreCategoriesIsOpen && (
-                                    <div className="absolute z-50 lg:top-[34px] xl:top-[40px] bg-[#343a40] w-[200px] flex flex-col pb-[10px] rounded-b-[10px]">
+                                        className="absolute z-50 lg:top-[34px] xl:top-[40px] bg-[#343a40] w-[200px] flex flex-col pb-[10px] rounded-b-[10px]"
+                                        onMouseLeave={() => setMoreCategoriesIsOpen(false)}
+                                    >
                                         <Link
                                             href="/news/nauka"
                                             className="text-[13px] md:text-[18px] text-white font-medium py-[5px] px-[10px] hover:bg-[#295480] hover:text-white"

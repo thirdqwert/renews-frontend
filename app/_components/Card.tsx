@@ -1,5 +1,5 @@
-import { INews } from "../utils/types";
-import { getDateString } from "../utils/utilis";
+import { INews } from "../_utils/types";
+import { getDateString } from "../_utils/utilis";
 import Image from "next/image";
 import Link from "next/link";
 

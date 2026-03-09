@@ -1,7 +1,7 @@
 "use client";
 
-import { ICategory } from "@/app/utils/types";
-import { getCategories } from "@/app/utils/utilis";
+import { ICategory } from "@/app/_utils/types";
+import { getCategories } from "@/app/_utils/utilis";
 import { getCookie } from "cookies-next";
 import dynamic from "next/dynamic";
 import { SubmitEvent, useEffect, useState } from "react";

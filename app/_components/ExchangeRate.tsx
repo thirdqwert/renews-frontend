@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { IExchange } from "../utils/types";
+import { IExchange } from "../_utils/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import Image from "next/image";

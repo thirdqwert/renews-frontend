@@ -1,7 +1,7 @@
 "use client";
 
-import { ICategory, INews } from "@/app/utils/types";
-import { getCategories, getNewsDetail } from "@/app/utils/utilis";
+import { ICategory, INews } from "@/app/_utils/types";
+import { getCategories, getNewsDetail } from "@/app/_utils/utilis";
 import { getCookie } from "cookies-next";
 import dynamic from "next/dynamic";
 import React, { SubmitEvent, useEffect, useState } from "react";

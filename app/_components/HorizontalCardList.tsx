@@ -1,4 +1,4 @@
-import { INews } from "../utils/types";
+import { INews } from "../_utils/types";
 import HorizontalCard from "./HorizontalCard";
 
 interface IProps {

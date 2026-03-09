@@ -1,8 +1,8 @@
 "use client";
 
 import Pagination from "@/app/staff/components/Paginations";
-import { INewsObject } from "@/app/utils/types";
-import { getDateString } from "@/app/utils/utilis";
+import { INewsObject } from "@/app/_utils/types";
+import { getDateString } from "@/app/_utils/utilis";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";

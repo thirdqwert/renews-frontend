@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { getNews } from "../utils/utilis";
-import { INews } from "../utils/types";
+import { getNews } from "../_utils/utilis";
+import { INews } from "../_utils/types";
 import CardList from "./CardList";
 import Loader from "./Loader";
 

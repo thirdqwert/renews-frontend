@@ -1,8 +1,8 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { INews } from "../utils/types";
+import { INews } from "../_utils/types";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { getDateString } from "../utils/utilis";
+import { getDateString } from "../_utils/utilis";
 import Image from "next/image";
 import Link from "next/link";
 import swipperArrow from "../../public/images/swipperArrow.svg";

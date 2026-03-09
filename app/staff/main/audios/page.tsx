@@ -1,7 +1,7 @@
 "use client";
 
-import { IAudioObject } from "@/app/utils/types";
-import { getDateString } from "@/app/utils/utilis";
+import { IAudioObject } from "@/app/_utils/types";
+import { getDateString } from "@/app/_utils/utilis";
 import { getCookie } from "cookies-next";
 import { SubmitEvent, useEffect, useState } from "react";
 import Pagination from "../../components/Paginations";

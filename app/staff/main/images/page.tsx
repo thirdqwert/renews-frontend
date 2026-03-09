@@ -1,7 +1,7 @@
 "use client";
 
-import { IImageObject } from "@/app/utils/types";
-import { getDateString } from "@/app/utils/utilis";
+import { IImageObject } from "@/app/_utils/types";
+import { getDateString } from "@/app/_utils/utilis";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
 import { SubmitEvent, useEffect, useState } from "react";

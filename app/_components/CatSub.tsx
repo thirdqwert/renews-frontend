@@ -1,6 +1,6 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ICategory } from "../utils/types";
+import { ICategory } from "../_utils/types";
 import { Navigation } from "swiper/modules";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
