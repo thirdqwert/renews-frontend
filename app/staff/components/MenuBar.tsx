@@ -100,6 +100,7 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
                         // @ts-expect-error не стал менять корневые типы библеотеки
                         editor.chain().focus().insertAudio({ src: url, heading: heading }).run();
                     }}
+                    className="tiptap_button"
                 >
                     Вставить Audio
                 </button>
