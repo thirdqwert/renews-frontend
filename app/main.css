@@ -251,6 +251,15 @@ body {
     padding: 12px;
 }
 
+.tiptap .audio-time {
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    padding: 8px 10px;
+    background: #295480;
+}
+
 .tiptap .audio-header::before {
     content: "";
     position: absolute;
