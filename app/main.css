@@ -286,11 +286,9 @@ body {
 
 @media (max-width: 640px) {
     .tiptap .custom-audio {
-        background: #c7d0db;
         padding: 10px;
         border-radius: 12px;
         max-width: 400px;
-        font-family: sans-serif;
     }
 
     .tiptap .audio-header {
