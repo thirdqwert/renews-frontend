@@ -5,11 +5,13 @@ import { getDateString } from "@/app/_utils/utilis";
 import { getCookie } from "cookies-next";
 import { SubmitEvent, useEffect, useState } from "react";
 import Pagination from "../../components/Paginations";
+import Loader from "@/app/_components/Loader";
 
 export default function Audios() {
     const [products, setProducts] = useState<IAudioObject | null>(null);
     const [title, setTitle] = useState("");
     const [file, setFile] = useState<File | null>();
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const [page, setPage] = useState(1);
     const [deleteWindow, setDeleteWindow] = useState<number | null>(null);
@@ -44,6 +46,7 @@ export default function Audios() {
 
     const deleteProduct = async (id: number) => {
         try {
+            setIsLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_API}/audios/${id}/`, {
                 method: "DELETE",
                 headers: {
@@ -51,7 +54,7 @@ export default function Audios() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+            setIsLoading(false);
             getProducts(page);
         } catch (error) {
             throw error;
@@ -65,7 +68,7 @@ export default function Audios() {
             const formData = new FormData();
             formData.append("title", title);
             formData.append("audio", file);
-
+            setIsLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_API}/audios/`, {
                 method: "POST",
                 headers: {
@@ -73,7 +76,7 @@ export default function Audios() {
                 },
                 body: formData,
             });
-
+            setIsLoading(false);
             setTitle("");
             setFile(null);
             getProducts(1);
@@ -95,6 +98,11 @@ export default function Audios() {
 
     return (
         <div className="py-[50px]">
+            {isLoading && (
+                <div className="fixed inset-0 z-999 flex items-center justify-center">
+                    <Loader />
+                </div>
+            )}
             <div className="container">
                 <form
                     onSubmit={(e) => createProduct(e)}

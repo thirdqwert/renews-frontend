@@ -29,9 +29,7 @@ export default function RootLayout({
     return (
         <html lang="ru">
             <body className="leading-tight">
-                <Header />
                 {children}
-                <Footer />
 
                 <script
                     type="application/ld+json"

@@ -7,7 +7,7 @@ import youtube from "../../public/images/youtube.svg";
 import facebook from "../../public/images/facebook.svg";
 import Link from "next/link";
 
-export default async function Footer() {
+export default function Footer() {
     return (
         <footer className="bg-[#343a40] py-[30px]">
             <div className="container">

@@ -5,10 +5,12 @@ import { getCookie } from "cookies-next";
 import Image from "next/image";
 import { SubmitEvent, useEffect, useState } from "react";
 import Pagination from "../../components/Paginations";
+import Loader from "@/app/_components/Loader";
 
 export default function YouTubeVids() {
     const [products, setProducts] = useState<IVidsObject | null>(null);
     const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [title, setTitle] = useState("");
     const [file, setFile] = useState<File | null>();
@@ -38,6 +40,7 @@ export default function YouTubeVids() {
 
     const deleteProduct = async (id: number) => {
         try {
+            setIsLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids/${id}/`, {
                 method: "DELETE",
                 headers: {
@@ -45,7 +48,7 @@ export default function YouTubeVids() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+            setIsLoading(false);
             getProducts(page);
         } catch (error) {
             throw error;
@@ -60,7 +63,7 @@ export default function YouTubeVids() {
             formData.append("title", title);
             formData.append("image", file);
             formData.append("link", content);
-
+            setIsLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_API}/youtubevids/`, {
                 method: "POST",
                 headers: {
@@ -68,7 +71,7 @@ export default function YouTubeVids() {
                 },
                 body: formData,
             });
-
+            setIsLoading(false);
             setTitle("");
             setContent("");
             setFile(null);
@@ -91,6 +94,11 @@ export default function YouTubeVids() {
 
     return (
         <div className="py-[50px]">
+            {isLoading && (
+                <div className="fixed inset-0 z-999 flex items-center justify-center">
+                    <Loader />
+                </div>
+            )}
             <div className="container">
                 <form
                     onSubmit={(e) => createProduct(e)}

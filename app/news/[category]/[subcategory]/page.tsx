@@ -4,6 +4,8 @@ import CardList from "@/app/_components/CardList";
 import CatSub from "@/app/_components/CatSub";
 import InfiniteScroll from "@/app/_components/InfiniteScroll";
 import { Metadata } from "next";
+import Header from "@/app/_components/Header";
+import Footer from "@/app/_components/Footer";
 
 interface IProps {
     params: {
@@ -53,6 +55,7 @@ export default async function NewsSubcategory({ params }: IProps) {
     if (news.results.length == 0)
         return (
             <>
+                <Header />
                 <main className="py-[30px] min-h-screen">
                     <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
                         <CatSub
@@ -67,10 +70,12 @@ export default async function NewsSubcategory({ params }: IProps) {
                         </div>
                     </div>
                 </main>
+                <Footer />
             </>
         );
     return (
         <>
+            <Header />
             <main className="py-[30px] min-h-screen">
                 <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
                     <CatSub
@@ -92,6 +97,7 @@ export default async function NewsSubcategory({ params }: IProps) {
                     </div>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }

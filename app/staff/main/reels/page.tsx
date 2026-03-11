@@ -5,10 +5,12 @@ import { getCookie } from "cookies-next";
 import Image from "next/image";
 import { SubmitEvent, useEffect, useState } from "react";
 import Pagination from "../../components/Paginations";
+import Loader from "@/app/_components/Loader";
 
 export default function Reels() {
     const [products, setProducts] = useState<IReelsObject | null>(null);
     const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [title, setTitle] = useState("");
     const [file, setFile] = useState<File | null>();
@@ -38,6 +40,7 @@ export default function Reels() {
 
     const deleteProduct = async (id: number) => {
         try {
+            setIsLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_API}/reels/${id}/`, {
                 method: "DELETE",
                 headers: {
@@ -45,7 +48,7 @@ export default function Reels() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+            setIsLoading(false);
             getProducts(page);
         } catch (error) {
             throw error;
@@ -59,7 +62,8 @@ export default function Reels() {
             const formData = new FormData();
             formData.append("title", title);
             formData.append("image", file);
-            formData.append("link", content);
+            formData.append("content", content);
+            setIsLoading(true);
 
             await fetch(`${process.env.NEXT_PUBLIC_API}/reels/`, {
                 method: "POST",
@@ -68,7 +72,7 @@ export default function Reels() {
                 },
                 body: formData,
             });
-
+            setIsLoading(false);
             setTitle("");
             setContent("");
             setFile(null);
@@ -91,6 +95,11 @@ export default function Reels() {
 
     return (
         <div className="py-[50px]">
+            {isLoading && (
+                <div className="fixed inset-0 z-999 flex items-center justify-center">
+                    <Loader />
+                </div>
+            )}
             <div className="container">
                 <form
                     onSubmit={(e) => createProduct(e)}

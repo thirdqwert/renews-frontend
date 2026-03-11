@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/app/_components/Loader";
 import { ICategory, INews } from "@/app/_utils/types";
 import { getCategories, getNewsDetail } from "@/app/_utils/utilis";
 import { getCookie } from "cookies-next";
@@ -21,8 +22,8 @@ export default function EditNews({ params }: any) {
     const [shortTitle, setShortTitle] = useState("");
     const [desc, setDesc] = useState("");
     const [content, setContent] = useState("");
-    const [smallFile, setSmallFile] = useState<File | null>();
     const [file, setFile] = useState<File | null>();
+    const [isLoading, setIsLoading] = useState(false);
     const token = getCookie("access_token");
 
     const editProduct = async (e: SubmitEvent<HTMLFormElement>) => {
@@ -32,13 +33,11 @@ export default function EditNews({ params }: any) {
             if (title) formData.append("title", title);
             if (shortTitle) formData.append("short_title", shortTitle);
             if (file) formData.append("main_image", file);
-            if (smallFile) formData.append("preview", smallFile);
             if (content) formData.append("content", content);
             if (selectedCategory) formData.append("desc", desc);
             if (selectedCategory) formData.append("category_choose", selectedCategory.toString());
             if (selectedSubcategory) formData.append("subcategory_choose", selectedSubcategory.toString());
-            console.log(formData.values());
-
+            setIsLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}/`, {
                 method: "PATCH",
                 headers: {
@@ -46,7 +45,7 @@ export default function EditNews({ params }: any) {
                 },
                 body: formData,
             });
-
+            setIsLoading(false);
             setTitle("");
             setShortTitle("");
             setFile(null);
@@ -54,7 +53,6 @@ export default function EditNews({ params }: any) {
             setDesc("");
             setSelectedCategory(null);
             setSelectedSubcategory(null);
-            setSmallFile(null);
             setFile(null);
         } catch (error) {
             throw error;
@@ -67,8 +65,6 @@ export default function EditNews({ params }: any) {
                 getNewsDetail(id, undefined),
                 getCategories(undefined),
             ]);
-            console.log(news_data.content);
-
             setCategories(categories_data);
             setTitle(news_data.title);
             setShortTitle(news_data.short_title);
@@ -80,6 +76,11 @@ export default function EditNews({ params }: any) {
 
     return (
         <div>
+            {isLoading && (
+                <div className="fixed inset-0 z-999 flex items-center justify-center">
+                    <Loader />
+                </div>
+            )}
             <div className="container">
                 <div className="py-[20px]">
                     <form
@@ -108,19 +109,7 @@ export default function EditNews({ params }: any) {
                             className="px-[20px] py-[10px] border border-gray-400 outline-none rounded-[2px] h-[400px]"
                         />
                         <TipTap setContent={setContent} content={content} />
-                        {smallFile && <span>Первью введено</span>}
-                        <label
-                            htmlFor="previewInput"
-                            className="px-[20px] py-[10px] border border-gray-400 outline-none rounded-[2px] cursor-pointer"
-                        >
-                            Выбрать Первью
-                        </label>
-                        <input
-                            type="file"
-                            onChange={(e) => setSmallFile(e.target.files?.[0])}
-                            id="previewInput"
-                            className="hidden"
-                        />
+
                         {file && <span>Главное изображение введено</span>}
                         <label
                             htmlFor="imageInput"
@@ -173,7 +162,7 @@ export default function EditNews({ params }: any) {
                     </form>
                     <div className="py-[30px]">
                         {content && (
-                            <div className="border tiptap bg-[#e9e8e8]" dangerouslySetInnerHTML={{ __html: content }} />
+                            <div className="tiptap bg-[#e9e8e8]" dangerouslySetInnerHTML={{ __html: content }} />
                         )}
                     </div>
                 </div>

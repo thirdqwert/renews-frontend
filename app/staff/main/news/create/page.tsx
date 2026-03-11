@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/app/_components/Loader";
 import { ICategory } from "@/app/_utils/types";
 import { getCategories } from "@/app/_utils/utilis";
 import { getCookie } from "cookies-next";
@@ -19,6 +20,7 @@ export default function CreateNews() {
     const [desc, setDesc] = useState("");
     const [content, setContent] = useState("");
     const [file, setFile] = useState<File | null>();
+    const [isLoading, setIsLoading] = useState(false);
     const token = getCookie("access_token");
 
     const createProduct = async (e: SubmitEvent<HTMLFormElement>) => {
@@ -35,7 +37,7 @@ export default function CreateNews() {
             formData.append("desc", desc);
             formData.append("category_choose", selectedCategory.toString());
             formData.append("subcategory_choose", selectedSubcategory.toString());
-
+            setIsLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_API}/news/`, {
                 method: "POST",
                 headers: {
@@ -43,7 +45,7 @@ export default function CreateNews() {
                 },
                 body: formData,
             });
-
+            setIsLoading(false);
             setTitle("");
             setShortTitle("");
             setFile(null);
@@ -67,6 +69,11 @@ export default function CreateNews() {
 
     return (
         <div>
+            {isLoading && (
+                <div className="fixed inset-0 z-999 flex items-center justify-center">
+                    <Loader />
+                </div>
+            )}
             <div className="container">
                 <div className="py-[20px]">
                     <form
@@ -147,7 +154,7 @@ export default function CreateNews() {
                     </form>
                     <div className="py-[30px]">
                         {content && (
-                            <div className="border tiptap bg-[#e9e8e8]" dangerouslySetInnerHTML={{ __html: content }} />
+                            <div className="tiptap bg-[#e9e8e8]" dangerouslySetInnerHTML={{ __html: content }} />
                         )}
                     </div>
                 </div>

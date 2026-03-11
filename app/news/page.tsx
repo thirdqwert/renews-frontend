@@ -3,6 +3,8 @@ import { INewsObject } from "../_utils/types";
 import CardList from "../_components/CardList";
 import InfiniteScroll from "../_components/InfiniteScroll";
 import { Metadata } from "next";
+import Header from "../_components/Header";
+import Footer from "../_components/Footer";
 
 export const metadata: Metadata = {
     title: "Все новости Узбекистана",
@@ -40,6 +42,7 @@ export default async function News() {
     if (news.results.length == 0)
         return (
             <>
+                <Header />
                 <main className="py-[30px] min-h-screen">
                     <div className="container">
                         <h1 className="text-[16px] md:text-[24px] xl:text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">
@@ -48,11 +51,13 @@ export default async function News() {
                         <div>Данные не найдены</div>
                     </div>
                 </main>
+                <Footer />
             </>
         );
 
     return (
         <>
+            <Header />
             <main className="py-[30px] min-h-screen">
                 <div className="container">
                     <h1 className="text-[16px] md:text-[24px] xl:text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">
@@ -63,6 +68,7 @@ export default async function News() {
                     <InfiniteScroll params={{}} />
                 </div>
             </main>
+            <Footer />
         </>
     );
 }

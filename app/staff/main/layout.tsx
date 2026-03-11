@@ -45,7 +45,7 @@ export default function StaffLayout({
                     </nav>
                 </div>
             </header>
-            <main className="bg-[#8ecee0]">{children}</main>
+            <main className="bg-[#8ecee0] min-h-screen">{children}</main>
         </>
     );
 }

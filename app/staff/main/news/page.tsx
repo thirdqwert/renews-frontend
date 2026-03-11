@@ -7,12 +7,14 @@ import { getCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Loader from "@/app/_components/Loader";
 
 export default function News() {
     const [products, setProducts] = useState<INewsObject | null>(null);
     const [error, setError] = useState(false);
     const [page, setPage] = useState(1);
     const [deleteWindow, setDeleteWindow] = useState<number | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const token = getCookie("access_token");
 
     const getProducts = async (pageCount: number) => {
@@ -44,6 +46,7 @@ export default function News() {
 
     const deleteProduct = async (id: number) => {
         try {
+            setIsLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_API}/news/${id}/`, {
                 method: "DELETE",
                 headers: {
@@ -51,7 +54,7 @@ export default function News() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+            setIsLoading(false);
             getProducts(page);
         } catch (error) {
             throw error;
@@ -67,6 +70,11 @@ export default function News() {
 
     return (
         <div>
+            {isLoading && (
+                <div className="fixed inset-0 z-999 flex items-center justify-center">
+                    <Loader />
+                </div>
+            )}
             <div className="container">
                 <div className="py-[25]">
                     <Link

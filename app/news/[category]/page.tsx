@@ -4,6 +4,8 @@ import CatSub from "@/app/_components/CatSub";
 import InfiniteScroll from "@/app/_components/InfiniteScroll";
 import { Metadata } from "next";
 import { ICategory } from "@/app/_utils/types";
+import Header from "@/app/_components/Header";
+import Footer from "@/app/_components/Footer";
 
 interface IProps {
     params: {
@@ -48,6 +50,7 @@ export default async function NewsCategory({ params }: IProps) {
     if (news.results.length == 0)
         return (
             <>
+                <Header />
                 <main className="py-[30px] min-h-screen">
                     <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
                         <CatSub categories={categories} params={{ categoryBy: category }} />
@@ -56,11 +59,13 @@ export default async function NewsCategory({ params }: IProps) {
                         </div>
                     </div>
                 </main>
+                <Footer />
             </>
         );
 
     return (
         <>
+            <Header />
             <main className="py-[30px] min-h-screen">
                 <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
                     <CatSub categories={categories} params={{ categoryBy: category }} />
@@ -71,6 +76,7 @@ export default async function NewsCategory({ params }: IProps) {
                     </div>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }

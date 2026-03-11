@@ -7,6 +7,8 @@ import { ErrorRes, INews, INewsObject } from "@/app/_utils/types";
 import { getNews } from "@/app/_utils/utilis";
 import { SubmitEvent, useEffect, useState } from "react";
 import Image from "next/image";
+import Footer from "@/app/_components/Footer";
+import Header from "@/app/_components/Header";
 
 export default function Search() {
     const [news, setNews] = useState<INews[]>([]);
@@ -79,6 +81,7 @@ export default function Search() {
 
     return (
         <>
+            <Header />
             <main className="py-[30px] min-h-screen">
                 <div className="container">
                     <form
@@ -117,6 +120,7 @@ export default function Search() {
                     </div>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }

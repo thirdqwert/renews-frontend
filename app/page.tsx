@@ -10,6 +10,8 @@ import HorizontalCardList from "./_components/HorizontalCardList";
 import SwiperList from "./_components/SwiperList";
 import ReelsSwiper from "./_components/ReelsSwiper";
 import VidsSwiper from "./_components/VidsSwiper";
+import Header from "./_components/Header";
+import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
     title: "Главная — Последние новости Узбекистана",
@@ -59,6 +61,7 @@ export default async function Home() {
 
     return (
         <>
+        <Header />
             <main className="py-[30px]">
                 <div className="container">
                     <section className="mb-[30px]">
@@ -212,6 +215,7 @@ export default async function Home() {
                     </section>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }
