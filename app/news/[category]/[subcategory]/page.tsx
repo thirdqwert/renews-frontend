@@ -17,7 +17,7 @@ interface IProps {
 export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     const { category, subcategory } = await params;
     const categories: ICategory[] = await getCategories({
-        next: { revalidate: 180 },
+        next: { revalidate: 60 },
     });
     const currentCategory = categories.find((item) => item.slug == category);
     const currentSubcategory =
@@ -43,13 +43,13 @@ export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     };
 }
 
-export const revalidate = 180;
+export const revalidate = 60;
 
 export default async function NewsSubcategory({ params }: IProps) {
     const { category, subcategory } = await params;
     const [news, categories] = await Promise.all([
-        getNews(1, category, subcategory, { next: { revalidate: 180 } }, undefined),
-        getCategories({ next: { revalidate: 180 } }),
+        getNews(1, category, subcategory, { next: { revalidate: 60 } }, undefined),
+        getCategories({ next: { revalidate: 60 } }),
     ]);
 
     if (news.results.length == 0)
@@ -65,9 +65,6 @@ export default async function NewsSubcategory({ params }: IProps) {
                                 subcategoryBy: subcategory,
                             }}
                         />
-                        <div className="flex flex-col">
-                            <div>Данные не найдены</div>
-                        </div>
                     </div>
                 </main>
                 <Footer />

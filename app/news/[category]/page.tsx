@@ -15,7 +15,7 @@ interface IProps {
 
 export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     const { category } = await params;
-    const categories: ICategory[] = await getCategories({ next: { revalidate: 180 } });
+    const categories: ICategory[] = await getCategories({ next: { revalidate: 60 } });
     const currentCategory = categories.find((item) => item.slug == category);
     const categoryName = currentCategory?.title;
     return {
@@ -38,13 +38,13 @@ export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     };
 }
 
-export const revalidate = 180;
+export const revalidate = 60;
 
 export default async function NewsCategory({ params }: IProps) {
     const { category } = await params;
     const [news, categories] = await Promise.all([
-        getNews(1, category, "", { next: { revalidate: 180 } }, undefined),
-        getCategories({ next: { revalidate: 180 } }),
+        getNews(1, category, "", { next: { revalidate: 60 } }, undefined),
+        getCategories({ next: { revalidate: 60 } }),
     ]);
 
     if (news.results.length == 0)
@@ -54,9 +54,6 @@ export default async function NewsCategory({ params }: IProps) {
                 <main className="py-[30px] min-h-screen">
                     <div className="max-w-[1760px] w-full mx-auto px-[15px] flex flex-col lg:flex-row gap-[32px]">
                         <CatSub categories={categories} params={{ categoryBy: category }} />
-                        <div className="flex flex-col">
-                            <div>Данные не найдены</div>
-                        </div>
                     </div>
                 </main>
                 <Footer />

@@ -18,7 +18,7 @@ interface IProps {
 
 export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     const { id } = await params;
-    const news: INews = await getNewsDetail(id, { next: { revalidate: 180 } });
+    const news: INews = await getNewsDetail(id, { next: { revalidate: 60 } });
 
     if ("statusText" in news) {
         return {
@@ -63,14 +63,14 @@ export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     };
 }
 
-export const revalidate = 180;
+export const revalidate = 60;
 
 export default async function NewsDetail({ params }: IProps) {
     const { id } = await params;
 
     const [footer_news, news] = await Promise.all([
-        getNews(1, "", "", { next: { revalidate: 180 } }, undefined),
-        getNewsDetail(id, { next: { revalidate: 180 } }),
+        getNews(1, "", "", { next: { revalidate: 60 } }, undefined),
+        getNewsDetail(id, { next: { revalidate: 60 } }),
     ]);
     const jsonLd = {
         "@context": "https://schema.org",

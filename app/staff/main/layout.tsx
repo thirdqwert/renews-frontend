@@ -21,7 +21,7 @@ export default function StaffLayout({
 
     return (
         <>
-            <header className="py-[20px] bg-white">
+            <header className="py-[20px] bg-white font-mono">
                 <div className="container">
                     <nav className="flex flex-orw gap-[20px]">
                         <Link href={"/staff/main"} className="text-[#29547F] font-medium">
@@ -45,7 +45,7 @@ export default function StaffLayout({
                     </nav>
                 </div>
             </header>
-            <main className="bg-[#8ecee0] min-h-screen">{children}</main>
+            <main className="bg-[#343a40] min-h-screen font-mono">{children}</main>
         </>
     );
 }

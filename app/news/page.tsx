@@ -34,10 +34,10 @@ export const metadata: Metadata = {
     },
 };
 
-export const revalidate = 180;
+export const revalidate = 60;
 
 export default async function News() {
-    const news: INewsObject = await getNews(1, "", "", { next: { revalidate: 180 } }, undefined);
+    const news: INewsObject = await getNews(1, "", "", { next: { revalidate: 60 } }, undefined);
 
     if (news.results.length == 0)
         return (
@@ -48,7 +48,6 @@ export default async function News() {
                         <h1 className="text-[16px] md:text-[24px] xl:text-[30px] font-bold relative flex flex-row text-[#343a40] vertical_line my-[20px] px-[20px]">
                             Все Новости
                         </h1>
-                        <div>Данные не найдены</div>
                     </div>
                 </main>
                 <Footer />
