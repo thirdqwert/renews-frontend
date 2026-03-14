@@ -38,7 +38,7 @@ export default function ExchangeRate() {
                 <div className="flex flex-row gap-[5px]  rounded-[5px]">
                     <Image src={USDIcon} alt="USD" className="h-[17px] w-[17px]" />
                     <span className="text-[14px] text-white font-medium">USD</span>
-                    <span className="text-[14px] text-white font-medium">{uzbUsd ? uzbUsd.Rate : 0}</span>
+                    <span className="text-[14px] text-white font-medium">{uzbUsd ? uzbUsd.Rate.split('.')[0] : 0}</span>
                     <Image
                         width={10}
                         height={14}
@@ -50,7 +50,7 @@ export default function ExchangeRate() {
                 <div className="flex flex-row gap-[5px]  rounded-[5px]">
                     <Image src={RUBIcon} alt="RUB" className="h-[17px] w-[17px]" />
                     <span className="text-[14px] text-white font-medium">RUB</span>
-                    <span className="text-[14px] text-white font-medium">{uzbRub ? uzbRub.Rate : 0}</span>
+                    <span className="text-[14px] text-white font-medium">{uzbRub ? uzbRub.Rate.split('.')[0] : 0}</span>
                     <Image
                         width={10}
                         height={14}
@@ -76,7 +76,7 @@ export default function ExchangeRate() {
                                 USD
                             </span>
                             <span className="text-[14px] md:text-[16px] xl:text-[24px] text-white font-normal">
-                                {uzbUsd ? uzbUsd.Rate : 0}
+                                {uzbUsd ? uzbUsd.Rate.split('.')[0] : 0}
                             </span>
                             <Image
                                 className="object-contain w-[10px] h-[14px] md:w-[11px] lg:h-[15px] xl:w-[14px] xl:h-[19px]"
@@ -92,7 +92,7 @@ export default function ExchangeRate() {
                                 RUB
                             </span>
                             <span className="text-[14px] md:text-[16px] xl:text-[24px] text-white font-normal">
-                                {uzbRub ? uzbRub.Rate : 0}
+                                {uzbRub ? uzbRub.Rate.split('.')[0] : 0}
                             </span>
                             <Image
                                 className="object-contain w-[10px] h-[14px] md:w-[11px] lg:h-[15px] xl:w-[14px] xl:h-[19px]"

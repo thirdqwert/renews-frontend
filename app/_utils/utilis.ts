@@ -121,7 +121,7 @@ export const getNewsAdmin = async (access: string | undefined) => {
 // }
 
 export const getDateString = (created_at: string) => {
-    const months: { [key: string]: string } = {
+    const months: any = {
         "01": "январь",
         "02": "февраль",
         "03": "март",
