@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
     try {
-        const news: INews[] = await getNewsAdmin(process.env.TOKEN);
+        const news: INews[] = await getNewsAdmin();
         const dynamicPages: MetadataRoute.Sitemap = news.map((item) => ({
             url: `${BASE_URL}/news/detail/${item.id}`,
             lastModified: new Date(item.created_at),

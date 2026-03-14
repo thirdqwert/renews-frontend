@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function Home() {
-    const data: INews[] = await getNewsAdmin(process.env.TOKEN);
+    const data: INews[] = await getNewsAdmin();
 
     const hot_news = data && data.slice(0, 3);
     const news = data && data.slice(0, 6);
